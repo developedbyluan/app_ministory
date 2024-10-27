@@ -17,9 +17,9 @@ export default function EnterAppButton({
 
   return (
     <motion.button
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1.5 }}
+      transition={{ duration: 1, delay: 2 }}
       className="flex items-center px-6 py-3 bg-white text-black rounded-full text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
       onClick={() => handleNavigateTo(destinationRoute)}
     >
