@@ -2,28 +2,20 @@
 
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
-export default function EnterAppButton({
-  destinationRoute,
-}: {
-  destinationRoute: string;
-}) {
-  const router = useRouter();
-
-  function handleNavigateTo(destination: string) {
-    router.push(destination);
-  }
-
+export default function EnterAppButton({ hrefValue }: { hrefValue: string }) {
   return (
-    <motion.button
+    <motion.div
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1, delay: 2 }}
       className="flex items-center px-6 py-3 bg-white text-black rounded-full text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
-      onClick={() => handleNavigateTo(destinationRoute)}
     >
-      English <ChevronRight className="ml-2 w-5 h-5" />
-    </motion.button>
+      <Link href={hrefValue || "/"} className="flex items-center">
+        <span>English</span>
+        <ChevronRight className="ml-2 w-5 h-5" />
+      </Link>
+    </motion.div>
   );
 }
