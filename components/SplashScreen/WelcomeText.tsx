@@ -20,7 +20,7 @@ export default function WelcomeText() {
         style={{ marginTop: "0.25rem" }}
         className="mb-8 text-center text-lg"
       >
-        Learn Languages Effortlessly
+        Learn English Effortlessly
       </motion.p>
     </>
   );
