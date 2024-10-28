@@ -11,6 +11,8 @@ import LessonsList from "@/components/UploadAudio/LessonsList";
 
 import { useFileUpload } from "@/hooks/useFileUpload";
 import { useToast } from "@/hooks/use-toast";
+import { useDataContext } from "@/contexts/DataContext";
+import { useRouter } from "next/navigation";
 
 // TODO: Load lessonsData (list of available lessons) from a database instead of dummy data
 import { lessons as lessonsData } from "@/data/lessons";
@@ -18,10 +20,13 @@ import { lessons as lessonsData } from "@/data/lessons";
 export default function UploadAudioPage() {
   const [showLessons, setShowLessons] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   const { error, success, handleFileChange, file } = useFileUpload();
 
   const { toast } = useToast();
+
+  const { setAudioFile } = useDataContext();
 
   useEffect(() => {
     if (error) {
@@ -33,13 +38,9 @@ export default function UploadAudioPage() {
 
     if (!file || !success) return;
 
-    // TODO: assign audio file uploaded to a context api
-    // TODO: redirect user to the next page
-    console.log(file);
-    console.log(
-      "set file to mp3 context.then(push to /story if 1st time, else /practice)"
-    );
-  }, [error, success, file, toast]);
+    setAudioFile(file);
+    router.push("/story-player");
+  }, [error, success, file, toast, setAudioFile, router]);
 
   function handleUploadAudioButtonClick() {
     const fileInput = fileInputRef.current;
