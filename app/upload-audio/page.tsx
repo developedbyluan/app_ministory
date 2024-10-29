@@ -14,6 +14,8 @@ import { useToast } from "@/hooks/use-toast";
 import { useDataContext } from "@/contexts/DataContext";
 import { useRouter } from "next/navigation";
 
+import { set } from "idb-keyval";
+
 // TODO: Load lessonsData (list of available lessons) from a database instead of dummy data
 import { lessons as lessonsData } from "@/data/lessons";
 
@@ -39,6 +41,8 @@ export default function UploadAudioPage() {
     if (!file || !success) return;
 
     setAudioFile(file);
+    set(`${file.name}`, file);
+
     router.push("/story-player");
   }, [error, success, file, toast, setAudioFile, router]);
 
