@@ -14,7 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useDataContext } from "@/contexts/DataContext";
 import { useRouter } from "next/navigation";
 
-import { set } from "idb-keyval";
+import { set, createStore } from "idb-keyval";
 
 // TODO: Load lessonsData (list of available lessons) from a database instead of dummy data
 import { lessons as lessonsData } from "@/data/lessons";
@@ -40,10 +40,24 @@ export default function UploadAudioPage() {
 
     if (!file || !success) return;
 
-    setAudioFile(file);
-    set(`${file.name}`, file);
+    const fileNameAsUrl = file.name
+      .split(".")[0]
+      .replace(/\s+/g, "-")
+      .toLowerCase();
 
-    router.push("/story-player");
+    const customStore = createStore("msa--english", "mp3");
+    set(fileNameAsUrl, file, customStore)
+      .then(() => {
+        setAudioFile(file);
+
+        router.push(`/story-player?audio=${fileNameAsUrl}`);
+      })
+      .catch((error) => {
+        toast({
+          variant: "destructive",
+          description: `Error saving file to IndexedDB: ${error}`,
+        });
+      });
   }, [error, success, file, toast, setAudioFile, router]);
 
   function handleUploadAudioButtonClick() {
