@@ -1,29 +1,40 @@
 "use client";
 
-// import { useDataContext } from "@/contexts/DataContext";
+import { useDataContext } from "@/contexts/DataContext";
 import { useEffect, useState } from "react";
-import { get } from "idb-keyval";
+import { createStore, get } from "idb-keyval";
+import { useSearchParams } from "next/navigation";
 
 export default function StoryPlayerPage() {
-  // const { audioFile } = useDataContext();
+  const searchParams = useSearchParams();
+  const { audioFile, setAudioFile } = useDataContext();
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
 
-  // useEffect(() => {
-  //   if (audioFile) {
-  //     setAudioUrl(URL.createObjectURL(audioFile));
-  //   }
-  // }, [audioFile]);
-
   useEffect(() => {
-    get("Day of the Dead MS.mp3").then((file) => {
-      setAudioUrl(URL.createObjectURL(file));
+    const audioName = searchParams.get("audio");
+
+    if (!audioName) {
+      throw new Error("No audio name provided");
+    }
+
+    if (audioFile) {
+      setAudioUrl(URL.createObjectURL(audioFile));
+      return;
+    }
+
+    const customStore = createStore("msa--english", "mp3");
+
+    get(audioName, customStore).then((file) => {
+      if (!file) {
+        throw new Error("No audio file found");
+      }
+      setAudioFile(file);
     });
-  }, []);
+  }, [audioFile, searchParams, setAudioFile]);
 
   return (
     <div>
-      {/* Using ContextAPI: {audioUrl && <audio src={audioUrl} controls />} */}
-      <div>Using IDB: {audioUrl && <audio src={audioUrl} controls />}</div>
+      <div>Audio: {audioUrl && <audio src={audioUrl} controls />}</div>
     </div>
   );
 }
