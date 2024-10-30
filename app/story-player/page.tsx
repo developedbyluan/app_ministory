@@ -1,11 +1,11 @@
 "use client";
 
 import { useDataContext } from "@/contexts/DataContext";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { createStore, get } from "idb-keyval";
 import { useSearchParams } from "next/navigation";
 
-export default function StoryPlayerPage() {
+function StoryPlayer() {
   const searchParams = useSearchParams();
   const { audioFile, setAudioFile } = useDataContext();
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
@@ -32,9 +32,13 @@ export default function StoryPlayerPage() {
     });
   }, [audioFile, searchParams, setAudioFile]);
 
+  return <div>Audio: {audioUrl && <audio src={audioUrl} controls />}</div>;
+}
+
+export default function StoryPlayerPage() {
   return (
-    <div>
-      <div>Audio: {audioUrl && <audio src={audioUrl} controls />}</div>
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <StoryPlayer />
+    </Suspense>
   );
 }
