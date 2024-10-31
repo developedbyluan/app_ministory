@@ -5,11 +5,5 @@ export default function AllLyricsPlayerLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <html lang="en">
-      <body>
-        <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
-      </body>
-    </html>
-  );
+  return <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>;
 }
