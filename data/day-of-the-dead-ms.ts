@@ -1,4 +1,6 @@
-export const dayOfTheDeadMs = [
+import { Lyric } from "@/types/types";
+
+export const dayOfTheDeadMs: Lyric[] = [
   {
     text: "Hello, welcome to the mini-story for The Race. Let’s get started.",
     ipa: "həˈloʊ, ˈwɛlkəm tu ðə ˈmɪni-ˈstɔri fɔr ðə reɪs. lɛts gɛt ˈstɑrtəd.",
