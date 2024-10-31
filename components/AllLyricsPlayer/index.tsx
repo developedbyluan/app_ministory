@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useDataContext } from "@/contexts/DataContext";
 import { createStore, get } from "idb-keyval";
+import LyricsDisplay from "./LyricsDisplay";
 
 export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
@@ -26,5 +27,13 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
     });
   }, [audioFile, audioKey]);
 
-  return <div>{audioUrl && <audio src={audioUrl} controls />}</div>;
+  return (
+    audioUrl &&
+    audioKey && (
+      <div>
+        <audio src={audioUrl} controls />
+        <LyricsDisplay lyricsKey={audioKey} />
+      </div>
+    )
+  );
 }
