@@ -50,7 +50,7 @@ export default function UploadAudioPage() {
       .then(() => {
         setAudioFile(file);
 
-        router.push(`/story-player?audio=${fileNameAsUrl}`);
+        router.push(`/all-lyrics-player?audio=${fileNameAsUrl}`);
       })
       .catch((error) => {
         toast({
