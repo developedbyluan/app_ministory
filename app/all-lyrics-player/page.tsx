@@ -5,7 +5,7 @@ import { useEffect, useState, Suspense } from "react";
 import { createStore, get } from "idb-keyval";
 import { useSearchParams } from "next/navigation";
 
-function StoryPlayer() {
+function AllLyricsPlayer() {
   const searchParams = useSearchParams();
   const { audioFile, setAudioFile } = useDataContext();
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
@@ -35,10 +35,10 @@ function StoryPlayer() {
   return <div>Audio: {audioUrl && <audio src={audioUrl} controls />}</div>;
 }
 
-export default function StoryPlayerPage() {
+export default function AllLyricsPlayerPage() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <StoryPlayer />
+      <AllLyricsPlayer />
     </Suspense>
   );
 }
