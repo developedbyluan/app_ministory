@@ -20,6 +20,7 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
     handleLyricClick,
     activeLyricIndex,
     isPlaying,
+    togglePlayPause,
   } = useAllLyricsPlayer({
     audioUrl,
     lyrics,
@@ -48,6 +49,12 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
       {audioUrl && audioKey && lyrics && (
         <div>
           <audio ref={audioRef} src={audioUrl} controls />
+          <button
+            className="fixed bottom-4 left-1/2 -translate-x-1/2 text-zinc-50 bg-zinc-950 px-4 py-2 rounded-md text-lg"
+            onClick={togglePlayPause}
+          >
+            {isPlaying ? "Pause" : "Play"}
+          </button>
           <LyricsDisplay
             lyrics={lyrics}
             onLyricClick={handleLyricClick}

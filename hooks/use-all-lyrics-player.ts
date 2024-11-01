@@ -62,7 +62,6 @@ export default function useAllLyricsPlayer({
     if (!audio) return;
 
     audio.currentTime = startTime;
-    console.log("startTime", startTime);
     audio.play();
     setIsPlaying(true);
     setActiveLyricIndex(clickedLyricIndex);
@@ -70,9 +69,19 @@ export default function useAllLyricsPlayer({
       audio.currentTime = endTime;
       audio.pause();
       setIsPlaying(false);
-      setActiveLyricIndex(-1);
-      console.log("currentTime", currentTime);
     }, (endTime - startTime) * 1000);
+  }
+
+  function togglePlayPause() {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (isPlaying) {
+      audio.pause();
+      setIsPlaying(false);
+      return;
+    }
+    audio.play();
+    setIsPlaying(true);
   }
   return {
     currentTime,
@@ -82,5 +91,6 @@ export default function useAllLyricsPlayer({
     handleLyricClick,
     isPlaying,
     activeLyricIndex,
+    togglePlayPause,
   };
 }

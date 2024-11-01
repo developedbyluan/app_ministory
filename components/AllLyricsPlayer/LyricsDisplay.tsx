@@ -32,9 +32,11 @@ export default function LyricsDisplay({
           } ${
             isPlaying
               ? activeLyricIndex === index
-                ? "font-bold text-zinc-950"
-                : "text-zinc-500"
-              : ""
+                ? "font-bold text-zinc-950 text-xl"
+                : "text-zinc-600"
+              : activeLyricIndex === index &&
+                index > 0 &&
+                "font-bold text-zinc-950 text-lg"
           }`}
           onClick={() => onLyricClick(index, lyric.startTime, lyric.endTime)}
         >
