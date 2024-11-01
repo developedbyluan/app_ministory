@@ -12,9 +12,10 @@ import { Lyric } from "@/types/types";
 export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const { audioFile } = useDataContext();
-  const { audioRef, handleLyricClick } = useAllLyricsPlayer({
-    audioUrl,
-  });
+  const { audioRef, handleLyricClick, activeLyricIndex, isPlaying } =
+    useAllLyricsPlayer({
+      audioUrl,
+    });
 
   const lyrics: Lyric[] | undefined = ministoryDB.get(audioKey);
 
@@ -41,7 +42,12 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
       {audioUrl && audioKey && lyrics && (
         <div>
           <audio ref={audioRef} src={audioUrl} controls />
-          <LyricsDisplay lyrics={lyrics} onLyricClick={handleLyricClick} />
+          <LyricsDisplay
+            lyrics={lyrics}
+            onLyricClick={handleLyricClick}
+            activeLyricIndex={activeLyricIndex}
+            isPlaying={isPlaying}
+          />
         </div>
       )}
     </div>

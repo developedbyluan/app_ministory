@@ -7,6 +7,7 @@ export default function useAllLyricsPlayer({
 }) {
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [activeLyricIndex, setActiveLyricIndex] = useState<number>(-1);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
@@ -19,7 +20,11 @@ export default function useAllLyricsPlayer({
     return () => audio.removeEventListener("timeupdate", updateTime);
   }, [audioUrl]);
 
-  function handleLyricClick(startTime: number, endTime: number) {
+  function handleLyricClick(
+    clickedLyricIndex: number,
+    startTime: number,
+    endTime: number
+  ) {
     if (isPlaying) return;
 
     const audio = audioRef.current;
@@ -29,10 +34,12 @@ export default function useAllLyricsPlayer({
     audio.currentTime = startTime;
     audio.play();
     setIsPlaying(true);
+    setActiveLyricIndex(clickedLyricIndex);
     setTimeout(() => {
       audio.currentTime = endTime;
       audio.pause();
       setIsPlaying(false);
+      setActiveLyricIndex(-1);
     }, (endTime - startTime) * 1000);
   }
   return {
@@ -40,5 +47,7 @@ export default function useAllLyricsPlayer({
     setCurrentTime,
     audioRef,
     handleLyricClick,
+    isPlaying,
+    activeLyricIndex,
   };
 }
