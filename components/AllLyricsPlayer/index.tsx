@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDataContext } from "@/contexts/DataContext";
 import { createStore, get } from "idb-keyval";
 import LyricsDisplay from "./LyricsDisplay";
@@ -11,6 +11,9 @@ import { Lyric } from "@/types/types";
 export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const { audioFile } = useDataContext();
+
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [currentTime, setCurrentTime] = useState<number>(0);
 
   const lyrics: Lyric[] | undefined = ministoryDB.get(audioKey);
 
@@ -32,14 +35,25 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
     });
   }, [audioFile, audioKey]);
 
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    console.log("Adding timeupdate event listener");
+    const updateTime = () => setCurrentTime(audio.currentTime);
+
+    audio.addEventListener("timeupdate", updateTime);
+
+    return () => audio.removeEventListener("timeupdate", updateTime);
+  }, [audioUrl]);
+
   return (
-    audioUrl &&
-    audioKey &&
-    lyrics && (
-      <div>
-        <audio src={audioUrl} controls />
-        <LyricsDisplay lyrics={lyrics} />
-      </div>
-    )
+    <div>
+      {audioUrl && audioKey && lyrics && (
+        <div>
+          <audio ref={audioRef} src={audioUrl} controls />
+          <LyricsDisplay lyrics={lyrics} />
+        </div>
+      )}
+    </div>
   );
 }
