@@ -16,6 +16,8 @@ export default function useAllLyricsPlayer({
   const audioRef = useRef<HTMLAudioElement>(null);
   const lyricRefsArray = useRef<HTMLParagraphElement[]>([]);
 
+  const [isReplaying, setIsReplaying] = useState(false);
+
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -64,15 +66,19 @@ export default function useAllLyricsPlayer({
     audio.currentTime = startTime;
     audio.play();
     setIsPlaying(true);
+    setIsReplaying(true);
     setActiveLyricIndex(clickedLyricIndex);
     setTimeout(() => {
       audio.currentTime = endTime;
       audio.pause();
       setIsPlaying(false);
+      setIsReplaying(false);
     }, (endTime - startTime) * 1000);
   }
 
   function togglePlayPause() {
+    if (isReplaying) return;
+
     const audio = audioRef.current;
     if (!audio) return;
     if (isPlaying) {
@@ -92,5 +98,6 @@ export default function useAllLyricsPlayer({
     isPlaying,
     activeLyricIndex,
     togglePlayPause,
+    isReplaying,
   };
 }
