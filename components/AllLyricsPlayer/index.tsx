@@ -50,7 +50,7 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
     <div>
       {audioUrl && audioKey && lyrics && (
         <div>
-          <audio ref={audioRef} src={audioUrl} controls />
+          <audio ref={audioRef} src={audioUrl} />
           <AudioControls
             isReplaying={isReplaying}
             isPlaying={isPlaying}
