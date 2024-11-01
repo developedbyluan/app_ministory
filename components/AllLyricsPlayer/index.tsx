@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useDataContext } from "@/contexts/DataContext";
 import { createStore, get } from "idb-keyval";
 import LyricsDisplay from "./LyricsDisplay";
+import useAllLyricsPlayer from "@/hooks/use-all-lyrics-player";
 import { ministoryDB } from "@/data/ministoryDB";
 
 import { Lyric } from "@/types/types";
@@ -11,9 +12,7 @@ import { Lyric } from "@/types/types";
 export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const { audioFile } = useDataContext();
-
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const [currentTime, setCurrentTime] = useState<number>(0);
+  const { audioRef } = useAllLyricsPlayer({ audioUrl });
 
   const lyrics: Lyric[] | undefined = ministoryDB.get(audioKey);
 
@@ -34,17 +33,6 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
       setAudioUrl(URL.createObjectURL(file));
     });
   }, [audioFile, audioKey]);
-
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    console.log("Adding timeupdate event listener");
-    const updateTime = () => setCurrentTime(audio.currentTime);
-
-    audio.addEventListener("timeupdate", updateTime);
-
-    return () => audio.removeEventListener("timeupdate", updateTime);
-  }, [audioUrl]);
 
   return (
     <div>
