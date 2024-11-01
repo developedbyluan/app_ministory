@@ -10,14 +10,20 @@ import { ministoryDB } from "@/data/ministoryDB";
 import { Lyric } from "@/types/types";
 
 export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
+  const lyrics: Lyric[] | undefined = ministoryDB.get(audioKey);
+
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const { audioFile } = useDataContext();
-  const { audioRef, handleLyricClick, activeLyricIndex, isPlaying } =
-    useAllLyricsPlayer({
-      audioUrl,
-    });
-
-  const lyrics: Lyric[] | undefined = ministoryDB.get(audioKey);
+  const {
+    audioRef,
+    lyricRefsArray,
+    handleLyricClick,
+    activeLyricIndex,
+    isPlaying,
+  } = useAllLyricsPlayer({
+    audioUrl,
+    lyrics,
+  });
 
   useEffect(() => {
     if (!audioKey) return;
@@ -47,6 +53,7 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
             onLyricClick={handleLyricClick}
             activeLyricIndex={activeLyricIndex}
             isPlaying={isPlaying}
+            lyricRefsArray={lyricRefsArray}
           />
         </div>
       )}
