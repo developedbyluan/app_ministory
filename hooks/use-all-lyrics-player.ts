@@ -17,7 +17,7 @@ export default function useAllLyricsPlayer({
   const lyricRefsArray = useRef<HTMLParagraphElement[]>([]);
 
   const [isReplaying, setIsReplaying] = useState(false);
-
+  const [playbackRate, setPlaybackRate] = useState(1);
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -73,7 +73,7 @@ export default function useAllLyricsPlayer({
       audio.pause();
       setIsPlaying(false);
       setIsReplaying(false);
-    }, (endTime - startTime) * 1000);
+    }, ((endTime - startTime) * 1000) / playbackRate);
   }
 
   function togglePlayPause() {
@@ -89,6 +89,13 @@ export default function useAllLyricsPlayer({
     audio.play();
     setIsPlaying(true);
   }
+
+  function changePlaybackRate() {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.playbackRate = playbackRate > 1.5 ? 0.75 : playbackRate + 0.25;
+    setPlaybackRate(audio.playbackRate);
+  }
   return {
     currentTime,
     setCurrentTime,
@@ -99,5 +106,7 @@ export default function useAllLyricsPlayer({
     activeLyricIndex,
     togglePlayPause,
     isReplaying,
+    playbackRate,
+    changePlaybackRate,
   };
 }

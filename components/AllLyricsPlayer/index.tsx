@@ -23,6 +23,8 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
     isPlaying,
     togglePlayPause,
     isReplaying,
+    playbackRate,
+    changePlaybackRate,
   } = useAllLyricsPlayer({
     audioUrl,
     lyrics,
@@ -55,6 +57,8 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
             isReplaying={isReplaying}
             isPlaying={isPlaying}
             togglePlayPause={togglePlayPause}
+            changePlaybackRate={changePlaybackRate}
+            playbackRate={playbackRate}
           />
           <LyricsDisplay
             lyrics={lyrics}
