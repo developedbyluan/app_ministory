@@ -4,10 +4,15 @@ import { useState, useEffect } from "react";
 import { useDataContext } from "@/contexts/DataContext";
 import { createStore, get } from "idb-keyval";
 import LyricsDisplay from "./LyricsDisplay";
+import { ministoryDB } from "@/data/ministoryDB";
+
+import { Lyric } from "@/types/types";
 
 export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const { audioFile } = useDataContext();
+
+  const lyrics: Lyric[] | undefined = ministoryDB.get(audioKey);
 
   useEffect(() => {
     if (!audioKey) return;
@@ -29,10 +34,11 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
 
   return (
     audioUrl &&
-    audioKey && (
+    audioKey &&
+    lyrics && (
       <div>
         <audio src={audioUrl} controls />
-        <LyricsDisplay lyricsKey={audioKey} />
+        <LyricsDisplay lyrics={lyrics} />
       </div>
     )
   );

@@ -1,27 +1,21 @@
-import { dayOfTheDeadMs } from "@/data/day-of-the-dead-ms";
 import { Lyric } from "@/types/types";
 
-type LyricsDisplayProps = {
-  lyricsKey: string;
-};
-export default function LyricsDisplay({ lyricsKey }: LyricsDisplayProps) {
-  const lyricsDB: { [key: string]: Lyric[] } = {
-    "day-of-the-dead-ms": dayOfTheDeadMs,
-  };
-
+export default function LyricsDisplay({ lyrics }: { lyrics: Lyric[] }) {
   function onLyricClick(startTime: number, endTime: number) {
     console.log(startTime, endTime);
   }
 
-  const lyricsElements = lyricsDB[lyricsKey].map((lyric, index) => (
-    <button
-      key={crypto.randomUUID()}
-      className="break-words text-left mb-8"
-      onClick={() => onLyricClick(lyric.startTime, lyric.endTime)}
-    >
-      {lyric.text}
-    </button>
-  ));
+  const lyricsElements = lyrics
+    ? lyrics.map((lyric) => (
+        <button
+          key={crypto.randomUUID()}
+          className="break-all text-left mb-8 cursor-pointer"
+          onClick={() => onLyricClick(lyric.startTime, lyric.endTime)}
+        >
+          {lyric.text}
+        </button>
+      ))
+    : null;
 
   return <div>{lyricsElements}</div>;
 }
