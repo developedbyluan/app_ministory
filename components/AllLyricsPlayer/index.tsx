@@ -57,6 +57,20 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
           >
             {isReplaying ? "Replaying" : isPlaying ? "Pause" : "Play"}
           </button>
+          {!isPlaying && (
+            <button
+              className="fixed bottom-4 right-4 text-zinc-50 bg-zinc-950 px-4 py-2 rounded-md text-lg"
+              onClick={() =>
+                handleLyricClick(
+                  activeLyricIndex,
+                  lyrics[activeLyricIndex].startTime,
+                  lyrics[activeLyricIndex].endTime
+                )
+              }
+            >
+              Replay
+            </button>
+          )}
           <LyricsDisplay
             lyrics={lyrics}
             onLyricClick={handleLyricClick}
