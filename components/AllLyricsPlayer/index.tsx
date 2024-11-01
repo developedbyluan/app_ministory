@@ -50,27 +50,21 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
       {audioUrl && audioKey && lyrics && (
         <div>
           <audio ref={audioRef} src={audioUrl} controls />
-          <button
-            disabled={isReplaying}
-            className="fixed bottom-4 left-1/2 -translate-x-1/2 text-zinc-50 bg-zinc-950 px-4 py-2 rounded-md text-lg"
-            onClick={togglePlayPause}
-          >
-            {isReplaying ? "Replaying" : isPlaying ? "Pause" : "Play"}
-          </button>
-          {!isPlaying && (
-            <button
-              className="fixed bottom-4 right-4 text-zinc-50 bg-zinc-950 px-4 py-2 rounded-md text-lg"
-              onClick={() =>
-                handleLyricClick(
-                  activeLyricIndex,
-                  lyrics[activeLyricIndex].startTime,
-                  lyrics[activeLyricIndex].endTime
-                )
-              }
-            >
-              Replay
-            </button>
-          )}
+          <div className="w-full bg-zinc-50/80 fixed bottom-0 flex justify-center py-4">
+            {!isReplaying ? (
+              <button
+                disabled={isReplaying}
+                className="text-zinc-50 bg-zinc-950 px-4 py-2 rounded-md text-lg"
+                onClick={togglePlayPause}
+              >
+                {isPlaying ? "Pause" : "Play"}
+              </button>
+            ) : (
+              <p className="text-zinc-950 px-4 py-2 font-bold text-xl">
+                Replaying...
+              </p>
+            )}
+          </div>
           <LyricsDisplay
             lyrics={lyrics}
             onLyricClick={handleLyricClick}
