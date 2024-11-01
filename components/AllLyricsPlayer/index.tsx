@@ -8,6 +8,7 @@ import useAllLyricsPlayer from "@/hooks/use-all-lyrics-player";
 import { ministoryDB } from "@/data/ministoryDB";
 
 import { Lyric } from "@/types/types";
+import AudioControls from "./AudioControls";
 
 export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
   const lyrics: Lyric[] | undefined = ministoryDB.get(audioKey);
@@ -50,21 +51,11 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
       {audioUrl && audioKey && lyrics && (
         <div>
           <audio ref={audioRef} src={audioUrl} controls />
-          <div className="w-full bg-zinc-50/80 fixed bottom-0 flex justify-center py-4">
-            {!isReplaying ? (
-              <button
-                disabled={isReplaying}
-                className="text-zinc-50 bg-zinc-950 px-4 py-2 rounded-md text-lg"
-                onClick={togglePlayPause}
-              >
-                {isPlaying ? "Pause" : "Play"}
-              </button>
-            ) : (
-              <p className="text-zinc-950 px-4 py-2 font-bold text-xl">
-                Replaying...
-              </p>
-            )}
-          </div>
+          <AudioControls
+            isReplaying={isReplaying}
+            isPlaying={isPlaying}
+            togglePlayPause={togglePlayPause}
+          />
           <LyricsDisplay
             lyrics={lyrics}
             onLyricClick={handleLyricClick}
