@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Play, Pause } from "lucide-react";
 
 type AudioControlsProps = {
   isReplaying: boolean;
@@ -19,11 +20,12 @@ export default function AudioControls({
     <div className="w-full bg-zinc-50/80 fixed bottom-0 flex justify-between py-4 px-4">
       {!isReplaying ? (
         <Button
+          variant="playPause"
           disabled={isReplaying}
-          className="text-zinc-50 bg-zinc-950 px-4 py-2 rounded-md text-lg"
           onClick={togglePlayPause}
         >
           {isPlaying ? "Pause" : "Play"}
+          {isPlaying ? <Pause /> : <Play />}
         </Button>
       ) : (
         <p className="w-full text-zinc-950 px-4 py-2 font-bold text-center text-xl">
