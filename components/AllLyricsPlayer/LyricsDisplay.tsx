@@ -39,7 +39,7 @@ export default function LyricsDisplay({
               : activeLyricIndex === index &&
                 index >= 0 &&
                 "font-bold text-zinc-950 text-xl"
-          }`}
+          } `}
           onClick={() => onLyricClick(index, lyric.startTime, lyric.endTime)}
         >
           <span>{lyric.text}</span>
@@ -48,6 +48,7 @@ export default function LyricsDisplay({
               {lyric.translation}
             </span>
           )}
+          {index === lyrics.length - 1 && <span className="h-20" />}
         </p>
       ))
     : null;
