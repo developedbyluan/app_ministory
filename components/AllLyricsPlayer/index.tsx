@@ -61,6 +61,8 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
             togglePlayPause={togglePlayPause}
             changePlaybackRate={changePlaybackRate}
             playbackRate={playbackRate}
+            setShowTranslation={setShowTranslation}
+            showTranslation={showTranslation}
           />
           <LyricsDisplay
             lyrics={lyrics}

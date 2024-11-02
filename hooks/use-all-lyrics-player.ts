@@ -19,7 +19,7 @@ export default function useAllLyricsPlayer({
   const [isReplaying, setIsReplaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1);
 
-  const [showTranslation, setShowTranslation] = useState(true);
+  const [showTranslation, setShowTranslation] = useState(false);
 
   useEffect(() => {
     const audio = audioRef.current;
