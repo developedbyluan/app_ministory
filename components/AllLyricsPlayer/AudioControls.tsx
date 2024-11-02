@@ -22,6 +22,8 @@ export default function AudioControls({
   showTranslation,
   setShowTranslation,
 }: AudioControlsProps) {
+  const playPauseAriaLabel = isPlaying ? "Pause" : "Play";
+
   return (
     <div
       className={`w-full bg-zinc-500/80 fixed bottom-0 flex items-center py-4 px-4 ${
@@ -39,6 +41,7 @@ export default function AudioControls({
             variant="ghost"
             className="font-extrabold text-2xl order-3"
             onClick={changePlaybackRate}
+            aria-label={`Change playback rate to ${playbackRate}x`}
           >
             {playbackRate}x
           </Button>
@@ -49,12 +52,16 @@ export default function AudioControls({
           variant="playPause"
           disabled={isReplaying}
           onClick={togglePlayPause}
+          aria-label={playPauseAriaLabel}
           className="w-14 h-14 rounded-full"
         >
           {isPlaying ? <Pause /> : <Play />}
         </Button>
       ) : (
-        <p className="w-full text-zinc-950 px-4 py-2 font-bold text-center text-xl">
+        <p
+          className="w-full text-zinc-950 px-4 py-2 font-bold text-center text-xl"
+          aria-label="Replaying..."
+        >
           Replaying...
         </p>
       )}

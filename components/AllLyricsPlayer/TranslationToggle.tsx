@@ -9,6 +9,9 @@ export default function TranslationToggle({
   showTranslation,
   setShowTranslation,
 }: TranslationToggleProps) {
+  const translationAriaLabel = showTranslation
+    ? "Hide translation"
+    : "Show translation";
   return (
     <div>
       <Checkbox
@@ -16,6 +19,7 @@ export default function TranslationToggle({
         checked={showTranslation}
         onCheckedChange={(checked) => setShowTranslation(checked as boolean)}
         className="peer sr-only"
+        aria-label={translationAriaLabel}
       />
       <label
         htmlFor="toggle-translation-checkbox"
