@@ -9,8 +9,8 @@ export default function ProgressBar({ progress }: ProgressBarProps) {
     <motion.div
       initial={{ width: 0 }}
       animate={{ width: `${progress}%` }}
-      transition={{ duration: 1 }}
-      className="h-2 bg-red-700 fixed left-0 top-0"
+      transition={{ duration: 0.5 }}
+      className="h-3 bg-black shadow-md fixed left-0 top-0"
     />
   );
 }
