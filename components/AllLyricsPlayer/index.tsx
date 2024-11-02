@@ -9,6 +9,7 @@ import { ministoryDB } from "@/data/ministoryDB";
 
 import { Lyric } from "@/types/types";
 import AudioControls from "./AudioControls";
+import ProgressBar from "./ProgressBar";
 
 export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
   const lyrics: Lyric[] | undefined = ministoryDB.get(audioKey);
@@ -27,6 +28,7 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
     changePlaybackRate,
     showTranslation,
     setShowTranslation,
+    progress,
   } = useAllLyricsPlayer({
     audioUrl,
     lyrics,
@@ -54,6 +56,7 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
     <div>
       {audioUrl && audioKey && lyrics && (
         <div className="px-4 py-4">
+          <ProgressBar progress={progress} />
           <audio ref={audioRef} src={audioUrl} />
           <AudioControls
             isReplaying={isReplaying}
