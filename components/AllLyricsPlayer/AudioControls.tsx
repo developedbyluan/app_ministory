@@ -26,7 +26,7 @@ export default function AudioControls({
 
   return (
     <div
-      className={`w-full bg-zinc-500/80 fixed bottom-0 left-0 flex items-center py-4 px-4 ${
+      className={`w-full bg-white/95 fixed bottom-0 left-0 flex items-center py-4 px-4 ${
         isReplaying || isPlaying ? "justify-center" : "justify-between"
       }`}
     >
@@ -53,7 +53,7 @@ export default function AudioControls({
           disabled={isReplaying}
           onClick={togglePlayPause}
           aria-label={playPauseAriaLabel}
-          className="w-14 h-14 rounded-full"
+          className="w-14 h-14 rounded-full fixed left-1/2 -translate-x-1/2 bottom-2"
         >
           {isPlaying ? <Pause /> : <Play />}
         </Button>
