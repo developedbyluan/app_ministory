@@ -23,7 +23,11 @@ export default function AudioControls({
   setShowTranslation,
 }: AudioControlsProps) {
   return (
-    <div className="w-full bg-zinc-500/80 fixed bottom-0 flex justify-between items-center py-4 px-4">
+    <div
+      className={`w-full bg-zinc-500/80 fixed bottom-0 flex items-center py-4 px-4 ${
+        isReplaying || isPlaying ? "justify-center" : "justify-between"
+      }`}
+    >
       {!isPlaying && !isReplaying && (
         <>
           <TranslationToggle
@@ -45,8 +49,8 @@ export default function AudioControls({
           variant="playPause"
           disabled={isReplaying}
           onClick={togglePlayPause}
+          className="w-14 h-14 rounded-full"
         >
-          {isPlaying ? "Pause" : "Play"}
           {isPlaying ? <Pause /> : <Play />}
         </Button>
       ) : (
