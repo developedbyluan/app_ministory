@@ -61,7 +61,7 @@ export default function useAllLyricsPlayer({
         (lyrics[lyrics.length - 1].endTime - lyrics[0].startTime)) *
       100;
     setProgress(newProgress);
-  }, [currentTime, lyrics, activeLyricIndex]);
+  }, [currentTime, lyrics, activeLyricIndex, showTranslation]);
 
   function handleLyricClick(
     clickedLyricIndex: number,
