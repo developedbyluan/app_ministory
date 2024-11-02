@@ -53,7 +53,7 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
   return (
     <div>
       {audioUrl && audioKey && lyrics && (
-        <div>
+        <div className="px-4 py-4">
           <audio ref={audioRef} src={audioUrl} />
           <AudioControls
             isReplaying={isReplaying}

@@ -26,7 +26,7 @@ export default function AudioControls({
 
   return (
     <div
-      className={`w-full bg-zinc-500/80 fixed bottom-0 flex items-center py-4 px-4 ${
+      className={`w-full bg-zinc-500/80 fixed bottom-0 left-0 flex items-center py-4 px-4 ${
         isReplaying || isPlaying ? "justify-center" : "justify-between"
       }`}
     >
@@ -62,7 +62,7 @@ export default function AudioControls({
           className="w-full text-zinc-950 px-4 py-2 font-bold text-center text-xl"
           aria-label="Replaying..."
         >
-          Replaying...
+          ...
         </p>
       )}
     </div>
