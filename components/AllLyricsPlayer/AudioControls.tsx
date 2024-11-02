@@ -25,7 +25,7 @@ export default function AudioControls({
 
   return (
     <div
-      className={`w-full bg-black fixed bottom-0 left-0 right-0 flex items-center py-4 px-4 rounded-tl-3xl rounded-tr-3xl ${
+      className={`w-full bg-zinc-950 fixed bottom-0 left-0 right-0 flex items-center py-4 px-4 rounded-tl-xl rounded-tr-xl ${
         isReplaying || isPlaying ? "justify-center" : "justify-between"
       }`}
     >
