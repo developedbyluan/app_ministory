@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Play, Pause } from "lucide-react";
 import TranslationToggle from "./TranslationToggle";
 import { Dispatch, SetStateAction } from "react";
+import PlayPauseToggler from "./PlayPauseToggler";
 
 type AudioControlsProps = {
   isReplaying: boolean;
@@ -48,15 +48,12 @@ export default function AudioControls({
         </>
       )}
       {!isReplaying ? (
-        <Button
-          variant="playPause"
-          disabled={isReplaying}
-          onClick={togglePlayPause}
-          aria-label={playPauseAriaLabel}
-          className="w-14 h-14 rounded-full fixed left-1/2 -translate-x-1/2 bottom-2"
-        >
-          {isPlaying ? <Pause /> : <Play />}
-        </Button>
+        <PlayPauseToggler
+          isPlaying={isPlaying}
+          isReplaying={isReplaying}
+          togglePlayPause={togglePlayPause}
+          playPauseAriaLabel={playPauseAriaLabel}
+        />
       ) : (
         <p
           className="w-full text-zinc-950 px-4 py-2 font-bold text-center text-xl"
