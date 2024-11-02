@@ -21,6 +21,8 @@ export default function useAllLyricsPlayer({
 
   const [showTranslation, setShowTranslation] = useState(false);
 
+  const [progress, setProgress] = useState(0);
+
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -53,6 +55,12 @@ export default function useAllLyricsPlayer({
         inline: "nearest",
       });
     }
+
+    const newProgress =
+      (currentTime /
+        (lyrics[lyrics.length - 1].endTime - lyrics[0].startTime)) *
+      100;
+    setProgress(newProgress);
   }, [currentTime, lyrics, activeLyricIndex]);
 
   function handleLyricClick(
@@ -114,5 +122,6 @@ export default function useAllLyricsPlayer({
     changePlaybackRate,
     showTranslation,
     setShowTranslation,
+    progress,
   };
 }
