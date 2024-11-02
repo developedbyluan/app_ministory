@@ -24,10 +24,22 @@ export default function AudioControls({
 }: AudioControlsProps) {
   return (
     <div className="w-full bg-zinc-500/80 fixed bottom-0 flex justify-between items-center py-4 px-4">
-      <TranslationToggle
-        showTranslation={showTranslation}
-        setShowTranslation={setShowTranslation}
-      />
+      {!isPlaying && !isReplaying && (
+        <>
+          <TranslationToggle
+            showTranslation={showTranslation}
+            setShowTranslation={setShowTranslation}
+          />
+
+          <Button
+            variant="ghost"
+            className="font-extrabold text-2xl order-3"
+            onClick={changePlaybackRate}
+          >
+            {playbackRate}x
+          </Button>
+        </>
+      )}
       {!isReplaying ? (
         <Button
           variant="playPause"
@@ -41,15 +53,6 @@ export default function AudioControls({
         <p className="w-full text-zinc-950 px-4 py-2 font-bold text-center text-xl">
           Replaying...
         </p>
-      )}
-      {!isReplaying && !isPlaying && (
-        <Button
-          variant="ghost"
-          className="font-extrabold text-2xl"
-          onClick={changePlaybackRate}
-        >
-          {playbackRate}x
-        </Button>
       )}
     </div>
   );
