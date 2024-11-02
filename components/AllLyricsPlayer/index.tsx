@@ -25,6 +25,8 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
     isReplaying,
     playbackRate,
     changePlaybackRate,
+    showTranslation,
+    setShowTranslation,
   } = useAllLyricsPlayer({
     audioUrl,
     lyrics,
@@ -66,6 +68,7 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
             activeLyricIndex={activeLyricIndex}
             isPlaying={isPlaying}
             lyricRefsArray={lyricRefsArray}
+            showTranslation={showTranslation}
           />
         </div>
       )}

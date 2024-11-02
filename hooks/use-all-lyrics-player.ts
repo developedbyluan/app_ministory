@@ -18,6 +18,9 @@ export default function useAllLyricsPlayer({
 
   const [isReplaying, setIsReplaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1);
+
+  const [showTranslation, setShowTranslation] = useState(true);
+
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -96,6 +99,7 @@ export default function useAllLyricsPlayer({
     audio.playbackRate = playbackRate > 1.5 ? 0.75 : playbackRate + 0.25;
     setPlaybackRate(audio.playbackRate);
   }
+
   return {
     currentTime,
     setCurrentTime,
@@ -108,5 +112,7 @@ export default function useAllLyricsPlayer({
     isReplaying,
     playbackRate,
     changePlaybackRate,
+    showTranslation,
+    setShowTranslation,
   };
 }

@@ -17,7 +17,7 @@ export default function AudioControls({
   playbackRate,
 }: AudioControlsProps) {
   return (
-    <div className="w-full bg-zinc-50/80 fixed bottom-0 flex justify-between py-4 px-4">
+    <div className="w-full bg-zinc-500/80 fixed bottom-0 flex justify-between py-4 px-4">
       {!isReplaying ? (
         <Button
           variant="playPause"
