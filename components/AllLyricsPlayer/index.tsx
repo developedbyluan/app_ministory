@@ -55,7 +55,7 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
   return (
     <div>
       {audioUrl && audioKey && lyrics && (
-        <div className="px-4 py-4">
+        <div className="px-4 py-8">
           <ProgressBar progress={progress} />
           <audio ref={audioRef} src={audioUrl} />
           <AudioControls

@@ -23,13 +23,13 @@ export default function TranslationToggle({
       />
       <label
         htmlFor="toggle-translation-checkbox"
-        className={`flex items-center justify-center font-extrabold text-xl shadow-sm px-4 py-1 rounded-md cursor-pointer transition-colors duration-200 ease-in-out ${
+        className={`flex items-center justify-center px-2 py-1 rounded-md font-extrabold text-xl cursor-pointer transition-colors duration-200 ease-in-out ${
           showTranslation
-            ? "bg-primary text-secondary"
-            : "bg-secondary text-primary border border-black"
+            ? "bg-black text-white border border-white"
+            : "bg-black text-zinc-600"
         }`}
       >
-        Vi
+        Vn
       </label>
     </div>
   );
