@@ -20,7 +20,7 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         playPause:
-          "bg-primary text-primary-foreground shadow px-4 py-2 text-lg",
+          "bg-primary text-primary-foreground font-bold shadow px-4 py-2 text-lg",
       },
       size: {
         default: "h-9 px-4 py-2",
