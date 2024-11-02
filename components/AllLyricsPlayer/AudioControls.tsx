@@ -1,7 +1,7 @@
 import TranslationToggle from "./TranslationToggle";
 import { Dispatch, SetStateAction } from "react";
 import PlayPauseToggler from "./PlayPauseToggler";
-import { X } from "lucide-react";
+import { PanelBottomOpenIcon, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 type AudioControlsProps = {
@@ -33,28 +33,35 @@ export default function AudioControls({
       }`}
     >
       {!isPlaying && !isReplaying && (
-        <button
-          className="bg-transparent text-zinc-200 font-bold"
-          onClick={() => router.back()}
-          aria-label="Close"
-        >
-          <X />
-        </button>
-      )}
-      <>
-        <TranslationToggle
-          showTranslation={showTranslation}
-          setShowTranslation={setShowTranslation}
-        />
+        <>
+          <button
+            className="bg-transparent text-zinc-200 font-bold"
+            onClick={() => router.back()}
+            aria-label="Close"
+          >
+            <X />
+          </button>
+          <TranslationToggle
+            showTranslation={showTranslation}
+            setShowTranslation={setShowTranslation}
+          />
 
-        <button
-          className="font-bold text-zinc-200 text-lg order-3"
-          onClick={changePlaybackRate}
-          aria-label={`Change playback rate to ${playbackRate}x`}
-        >
-          {playbackRate.toFixed(2)}x
-        </button>
-      </>
+          <button
+            className="font-bold text-zinc-200 text-lg order-3"
+            onClick={changePlaybackRate}
+            aria-label={`Change playback rate to ${playbackRate}x`}
+          >
+            {playbackRate.toFixed(2)}x
+          </button>
+
+          <button
+            className="bg-transparent text-zinc-200 font-bold order-5"
+            aria-label="Open Auto-Pause Mode"
+          >
+            <PanelBottomOpenIcon size={24} />
+          </button>
+        </>
+      )}
       {!isReplaying ? (
         <PlayPauseToggler
           isPlaying={isPlaying}
