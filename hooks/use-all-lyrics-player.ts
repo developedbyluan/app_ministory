@@ -1,13 +1,16 @@
 import { useState, useRef, useEffect } from "react";
 import { Lyric } from "@/types/types";
 
+import { useDataContext } from "@/contexts/DataContext";
+import { createStore, get } from "idb-keyval";
+
 type UseAllLyricsPlayerProps = {
-  audioUrl: string | null;
+  audioKey: string | null;
   lyrics: Lyric[] | undefined;
 };
 
 export default function useAllLyricsPlayer({
-  audioUrl,
+  audioKey,
   lyrics,
 }: UseAllLyricsPlayerProps) {
   const [currentTime, setCurrentTime] = useState<number>(0);
@@ -22,6 +25,9 @@ export default function useAllLyricsPlayer({
   const [showTranslation, setShowTranslation] = useState(false);
 
   const [progress, setProgress] = useState(0);
+
+  const [audioUrl, setAudioUrl] = useState<string | null>(null);
+  const { audioFile } = useDataContext();
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -62,6 +68,24 @@ export default function useAllLyricsPlayer({
       100;
     setProgress(newProgress);
   }, [currentTime, lyrics, activeLyricIndex, showTranslation]);
+
+  useEffect(() => {
+    if (!audioKey) return;
+
+    if (audioFile) {
+      setAudioUrl(URL.createObjectURL(audioFile));
+      return;
+    }
+
+    const customStore = createStore("msa--english", "mp3");
+
+    get(audioKey, customStore).then((file) => {
+      if (!file) {
+        throw new Error("No audio file found in local database");
+      }
+      setAudioUrl(URL.createObjectURL(file));
+    });
+  }, [audioFile, audioKey]);
 
   function handleLyricClick(
     clickedLyricIndex: number,
@@ -123,5 +147,6 @@ export default function useAllLyricsPlayer({
     showTranslation,
     setShowTranslation,
     progress,
+    audioUrl,
   };
 }
