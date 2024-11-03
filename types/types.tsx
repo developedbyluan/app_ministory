@@ -9,3 +9,14 @@ export type Lyric = {
   startTime: number;
   endTime: number;
 };
+
+export type Explanationary = {
+  english_sentence: string;
+  vietnamese_translation: string;
+  breakdown: {
+    chunk: string;
+    ipa: string;
+    meaning: string;
+    explanation: string;
+  }[];
+};
