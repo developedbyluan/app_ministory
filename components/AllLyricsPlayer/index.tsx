@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { useDataContext } from "@/contexts/DataContext";
 import { createStore, get } from "idb-keyval";
 import LyricsDisplay from "./LyricsDisplay";
@@ -11,7 +11,15 @@ import { Lyric } from "@/types/types";
 import AudioControls from "./AudioControls";
 import ProgressBar from "./ProgressBar";
 
-export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
+type AllLyricsPlayerProps = {
+  audioKey: string;
+  setShowAutoPauseMode: Dispatch<SetStateAction<boolean>>;
+};
+
+export default function AllLyricsPlayer({
+  audioKey,
+  setShowAutoPauseMode,
+}: AllLyricsPlayerProps) {
   const lyrics: Lyric[] | undefined = ministoryDB.get(audioKey);
 
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
@@ -66,6 +74,7 @@ export default function AllLyricsPlayer({ audioKey }: { audioKey: string }) {
             playbackRate={playbackRate}
             setShowTranslation={setShowTranslation}
             showTranslation={showTranslation}
+            setShowAutoPauseMode={setShowAutoPauseMode}
           />
           <LyricsDisplay
             lyrics={lyrics}

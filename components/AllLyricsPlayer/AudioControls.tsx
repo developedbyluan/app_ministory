@@ -12,6 +12,7 @@ type AudioControlsProps = {
   playbackRate: number;
   showTranslation: boolean;
   setShowTranslation: Dispatch<SetStateAction<boolean>>;
+  setShowAutoPauseMode: Dispatch<SetStateAction<boolean>>;
 };
 
 export default function AudioControls({
@@ -22,6 +23,7 @@ export default function AudioControls({
   playbackRate,
   showTranslation,
   setShowTranslation,
+  setShowAutoPauseMode,
 }: AudioControlsProps) {
   const playPauseAriaLabel = isPlaying ? "Pause" : "Play";
 
@@ -57,6 +59,7 @@ export default function AudioControls({
           <button
             className="bg-transparent text-zinc-200 font-bold order-5"
             aria-label="Open Auto-Pause Mode"
+            onClick={() => setShowAutoPauseMode(true)}
           >
             <PanelBottomOpenIcon size={24} />
           </button>
