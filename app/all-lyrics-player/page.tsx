@@ -25,7 +25,7 @@ export default function AllLyricsPlayerPage() {
 
       <div
         className={cn(
-          "py-8 px-4 fixed opacity-90 inset-0 bg-background transition-transform duration-300 ease-in-out",
+          "py-8 px-4 fixed inset-0 bg-black transition-transform duration-300 ease-in-out",
           showAutoPauseMode ? "translate-y-0" : "translate-y-full"
         )}
       >
