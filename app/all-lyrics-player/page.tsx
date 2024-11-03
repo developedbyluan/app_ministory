@@ -20,12 +20,13 @@ export default function AllLyricsPlayerPage() {
     <div>
       <AllLyricsPlayer
         audioKey={audioKey}
+        showAutoPauseMode={showAutoPauseMode}
         setShowAutoPauseMode={setShowAutoPauseMode}
       />
 
       <div
         className={cn(
-          "py-8 px-4 fixed inset-0 bg-black transition-transform duration-300 ease-in-out",
+          "py-8 px-4 fixed inset-0 bg-black transition-transform duration-500 ease-in-out",
           showAutoPauseMode ? "translate-y-0" : "translate-y-full"
         )}
       >

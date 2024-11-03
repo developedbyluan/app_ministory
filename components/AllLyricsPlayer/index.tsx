@@ -14,11 +14,13 @@ import ProgressBar from "./ProgressBar";
 type AllLyricsPlayerProps = {
   audioKey: string;
   setShowAutoPauseMode: Dispatch<SetStateAction<boolean>>;
+  showAutoPauseMode: boolean;
 };
 
 export default function AllLyricsPlayer({
   audioKey,
   setShowAutoPauseMode,
+  showAutoPauseMode,
 }: AllLyricsPlayerProps) {
   const lyrics: Lyric[] | undefined = ministoryDB.get(audioKey);
 
@@ -76,14 +78,16 @@ export default function AllLyricsPlayer({
             showTranslation={showTranslation}
             setShowAutoPauseMode={setShowAutoPauseMode}
           />
-          <LyricsDisplay
-            lyrics={lyrics}
-            onLyricClick={handleLyricClick}
-            activeLyricIndex={activeLyricIndex}
-            isPlaying={isPlaying}
-            lyricRefsArray={lyricRefsArray}
-            showTranslation={showTranslation}
-          />
+          {!showAutoPauseMode && (
+            <LyricsDisplay
+              lyrics={lyrics}
+              onLyricClick={handleLyricClick}
+              activeLyricIndex={activeLyricIndex}
+              isPlaying={isPlaying}
+              lyricRefsArray={lyricRefsArray}
+              showTranslation={showTranslation}
+            />
+          )}
         </div>
       )}
     </div>
