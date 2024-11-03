@@ -2,48 +2,54 @@
 
 import { Dispatch, SetStateAction } from "react";
 import LyricsDisplay from "./LyricsDisplay";
-import useAllLyricsPlayer from "@/hooks/use-all-lyrics-player";
-import { ministoryDB } from "@/data/ministoryDB";
-
-import { Lyric } from "@/types/types";
 import AudioControls from "./AudioControls";
 import ProgressBar from "./ProgressBar";
+import { Lyric } from "@/types/types";
 
 type AllLyricsPlayerProps = {
-  audioKey: string;
+  audioRef: React.RefObject<HTMLAudioElement>;
+  lyricRefsArray: React.RefObject<HTMLParagraphElement[]>;
+  handleLyricClick: (
+    clickedLyricIndex: number,
+    startTime: number,
+    endTime: number
+  ) => void;
+  activeLyricIndex: number;
+  isPlaying: boolean;
+  togglePlayPause: () => void;
+  isReplaying: boolean;
+  playbackRate: number;
+  changePlaybackRate: () => void;
+  setShowTranslation: Dispatch<SetStateAction<boolean>>;
+  showTranslation: boolean;
+  progress: number;
+  audioUrl: string | null;
+  lyrics: Lyric[] | undefined;
   setShowAutoPauseMode: Dispatch<SetStateAction<boolean>>;
   showAutoPauseMode: boolean;
 };
 
 export default function AllLyricsPlayer({
-  audioKey,
+  audioRef,
+  lyricRefsArray,
+  handleLyricClick,
+  activeLyricIndex,
+  isPlaying,
+  togglePlayPause,
+  isReplaying,
+  playbackRate,
+  changePlaybackRate,
+  setShowTranslation,
+  showTranslation,
+  progress,
+  audioUrl,
+  lyrics,
   setShowAutoPauseMode,
   showAutoPauseMode,
 }: AllLyricsPlayerProps) {
-  const lyrics: Lyric[] | undefined = ministoryDB.get(audioKey);
-
-  const {
-    audioRef,
-    lyricRefsArray,
-    handleLyricClick,
-    activeLyricIndex,
-    isPlaying,
-    togglePlayPause,
-    isReplaying,
-    playbackRate,
-    changePlaybackRate,
-    showTranslation,
-    setShowTranslation,
-    progress,
-    audioUrl,
-  } = useAllLyricsPlayer({
-    audioKey,
-    lyrics,
-  });
-
   return (
     <div>
-      {audioUrl && audioKey && lyrics && (
+      {audioUrl && (
         <div className="px-4 py-8">
           <ProgressBar progress={progress} />
           <audio ref={audioRef} src={audioUrl} />
@@ -59,7 +65,7 @@ export default function AllLyricsPlayer({
           />
           {!showAutoPauseMode && (
             <LyricsDisplay
-              lyrics={lyrics}
+              lyrics={lyrics || []}
               onLyricClick={handleLyricClick}
               activeLyricIndex={activeLyricIndex}
               isPlaying={isPlaying}
