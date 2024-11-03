@@ -10,7 +10,7 @@ export default function ProgressBar({ progress }: ProgressBarProps) {
       initial={{ width: 0 }}
       animate={{ width: `${progress}%` }}
       transition={{ duration: 0.5 }}
-      className="z-50 h-3 bg-zinc-800 shadow-sm fixed left-0 top-0"
+      className="z-50 h-2 bg-zinc-800 shadow-sm fixed left-0 top-0"
     />
   );
 }
