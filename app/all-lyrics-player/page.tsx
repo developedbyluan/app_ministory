@@ -70,7 +70,11 @@ export default function AllLyricsPlayerPage() {
           showAutoPauseMode ? "translate-y-0" : "translate-y-full"
         )}
       >
-        <AutoPauseMode />
+        <AutoPauseMode
+          activeLyricIndex={activeLyricIndex}
+          audioKey={audioKey}
+          setShowAutoPauseMode={setShowAutoPauseMode}
+        />
       </div>
     </div>
   );
