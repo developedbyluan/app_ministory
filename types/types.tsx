@@ -1,4 +1,5 @@
 export type Lyric = {
+  id: number;
   text: string;
   ipa: string;
   translation: string;
