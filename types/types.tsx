@@ -10,6 +10,11 @@ export type Lyric = {
   endTime: number;
 };
 
+export type Phrases = {
+  id: number;
+  phrases: Phrase[];
+};
+
 export type Phrase = {
   phrase: string;
   ipa: string;
