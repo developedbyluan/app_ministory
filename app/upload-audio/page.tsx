@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation";
 import { set, createStore } from "idb-keyval";
 
 // TODO: Load lessonsData (list of available lessons) from a database instead of dummy data
-import { lessons as lessonsData } from "@/data/lessons";
+import { lessonsList as lessonsData } from "@/data/msa--english/lessons-list";
 
 export default function UploadAudioPage() {
   const [showLessons, setShowLessons] = useState(false);

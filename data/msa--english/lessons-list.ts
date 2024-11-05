@@ -1,4 +1,4 @@
-export const lessons = [
+export const lessonsList = [
   {
     id: 1,
     title: "0. The Race MS.mp3",
