@@ -1,7 +1,8 @@
 // import { explanationaryDB } from "@/data/explanationaryDB";
 import { explanationaryDB } from "@/data/msa--english/explanationary";
 import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
-import { X } from "lucide-react";
+import { Languages, Repeat1, StepBack, StepForward, X } from "lucide-react";
+import PhrasePopover from "./PhrasePopover";
 
 type AutoPauseModeProps = {
   activeLyricIndex: number;
@@ -29,17 +30,12 @@ export default function AutoPauseMode({
 
   return (
     <div className="absolute pt-8 px-4 inset-0 bottom-[5.25rem] rounded-b-xl bg-white">
-      <div>
+      <div className="h-3/4 bg-slate-50 flex flex-col justify-center items-start">
         {explanationary && explanationary[currentExplanationaryIndex] ? (
           <div>
-            <p>{explanationary[currentExplanationaryIndex].id}</p>
-            <p className="flex gap-2">
-              {explanationary[currentExplanationaryIndex].phrases.map(
-                (phrase) => (
-                  <span key={crypto.randomUUID()}>{phrase.phrase}</span>
-                )
-              )}
-            </p>
+            <PhrasePopover
+              phrases={explanationary[currentExplanationaryIndex].phrases}
+            />
           </div>
         ) : (
           <p>No explanationary found</p>
@@ -51,6 +47,29 @@ export default function AutoPauseMode({
           onClick={() => setShowAutoPauseMode(false)}
         >
           <X />
+        </button>
+
+        <button
+          className="bg-zinc-800 p-2 rounded-full hover:bg-zinc-700 transition-colors duration-300"
+          onClick={() => {
+            setCurrentExplanationaryIndex((prev) => prev - 1);
+          }}
+        >
+          <StepBack />
+        </button>
+        <button
+          className="bg-zinc-600 p-2 rounded-full hover:bg-zinc-500 transition-colors duration-300"
+          onClick={() => {
+            setCurrentExplanationaryIndex((prev) => prev + 1);
+          }}
+        >
+          <StepForward size={36} />
+        </button>
+        <button className="bg-zinc-800 p-2 rounded-full hover:bg-zinc-700 transition-colors duration-300">
+          <Languages />
+        </button>
+        <button className="bg-zinc-800 p-2 rounded-full hover:bg-zinc-700 transition-colors duration-300">
+          <Repeat1 />
         </button>
       </div>
     </div>
