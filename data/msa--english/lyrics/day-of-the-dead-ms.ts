@@ -2,6 +2,7 @@ import type { Lyric } from "@/types/types";
 
 export const dayOfTheDeadMs: Lyric[] = [
   {
+    id: 0,
     text: "Welcome to the mini story for Day of the Dead.",
     ipa: "ˈwɛlkəm tu ðə ˈmɪni ˈstɔri fɔr deɪ əv ðə dɛd.",
     translation:
@@ -14,6 +15,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 5.075086,
   },
   {
+    id: 1,
     text: "In the mini story I will do 3 things.",
     ipa: "ɪn ðə ˈmɪni ˈstɔri aɪ wɪl du θri θɪŋz.",
     translation: "Trong câu chuyện ngắn này, tôi sẽ làm ba việc.",
@@ -25,6 +27,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 11.655782,
   },
   {
+    id: 2,
     text: "I will make a statement.",
     ipa: "aɪ wɪl meɪk ə ˈsteɪtmənt.",
     translation: "Tôi sẽ đưa ra một câu khẳng định.",
@@ -36,6 +39,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 15.825531,
   },
   {
+    id: 3,
     text: "For example, “I arrived in Guatemala.”",
     ipa: "fɔr ɪgˈzæmpəl, “aɪ əˈraɪvd ɪn ɡwɑtəˈmɑlə.”",
     translation: "Ví dụ, “Tôi đã đến Guatemala.”",
@@ -47,6 +51,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 20.560736,
   },
   {
+    id: 4,
     text: "When you hear a statement, a sentence, you just say, “Ah,” or, “Oh.”",
     ipa: "wɛn ju hɪr ə ˈsteɪtmənt, ə ˈsɛntəns, ju dʒʌst seɪ, “ɑː,” ɔr, “oʊ.”",
     translation:
@@ -59,6 +64,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 32.8073,
   },
   {
+    id: 5,
     text: "You need to say that.",
     ipa: "ju nid tu seɪ ðæt.",
     translation: "Bạn cần nói như vậy.",
@@ -70,6 +76,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 34.642427,
   },
   {
+    id: 6,
     text: "Show that you understand this is not a question.",
     ipa: "ʃoʊ ðæt ju ˌʌndərˈstænd ðɪs ɪz nɑt ə ˈkwɛstʃən.",
     translation: "Chứng tỏ rằng bạn hiểu đây không phải là một câu hỏi.",
@@ -81,6 +88,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 40.197133,
   },
   {
+    id: 7,
     text: "A statement is not a question, so when you hear a statement say, “Ah.”",
     ipa: "ə ˈsteɪtmənt ɪz nɑt ə ˈkwɛstʃən, soʊ wɛn ju hɪr ə ˈsteɪtmənt seɪ, “ɑː.”",
     translation:
@@ -93,6 +101,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 48.565055,
   },
   {
+    id: 8,
     text: "For example, “I arrive in Guatemala.” “Ah.”",
     ipa: "fɔr ɪgˈzæmpəl, “aɪ əˈraɪv ɪn ɡwɑtəˈmɑlə.” “ɑː.”",
     translation: "Ví dụ, “Tôi đến Guatemala.” “À.”",
@@ -104,6 +113,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 54.298538,
   },
   {
+    id: 9,
     text: "The second thing I will do is ask a question you know the answer to.",
     ipa: "ðə ˈsɛkənd θɪŋ aɪ wɪl du ɪz æsk ə ˈkwɛstʃən ju noʊ ði ˈænsər tu.",
     translation:
@@ -116,6 +126,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 65.772119,
   },
   {
+    id: 10,
     text: "For example, “Where do I arrive?”",
     ipa: "fɔr ɪgˈzæmpəl, “wɛr du aɪ əˈraɪv?”",
     translation: "Ví dụ, “Tôi đến đâu?”",
@@ -127,6 +138,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 72.693379,
   },
   {
+    id: 11,
     text: "I will stop.",
     ipa: "aɪ wɪl stɑp.",
     translation: "Tôi sẽ dừng lại.",
@@ -138,6 +150,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 76.478586,
   },
   {
+    id: 12,
     text: "You say the answer.",
     ipa: "ju seɪ ði ˈænsər.",
     translation: "Bạn nói câu trả lời.",
@@ -149,6 +162,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 78.889812,
   },
   {
+    id: 13,
     text: "You must say the answer to every question.",
     ipa: "ju mʌst seɪ ði ˈænsər tu ˈɛvri ˈkwɛstʃən.",
     translation: "Bạn phải nói câu trả lời cho mọi câu hỏi.",
@@ -160,6 +174,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 83.85974,
   },
   {
+    id: 14,
     text: "I say, “I arrive in Guatemala. Where did I arrive?”",
     ipa: "aɪ seɪ, “aɪ əˈraɪv ɪn ɡwɑtəˈmɑlə. wɛr dɪd aɪ əˈraɪv?”",
     translation: "Tôi nói, “Tôi đến Guatemala. Tôi đã đến đâu?”",
@@ -171,6 +186,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 92.148728,
   },
   {
+    id: 15,
     text: "You say, “Guatemala.”",
     ipa: "ju seɪ, “ɡwɑtəˈmɑlə.”",
     translation: "Bạn nói, “Guatemala.”",
@@ -182,6 +198,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 96.067889,
   },
   {
+    id: 16,
     text: "Easy.",
     ipa: "ˈizi.",
     translation: "Dễ ha.",
@@ -193,6 +210,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 98.056534,
   },
   {
+    id: 17,
     text: "And No. 3, I might ask a question you don’t know the answer to.",
     ipa: "ænd noʊ θri, aɪ maɪt æsk ə ˈkwɛstʃən ju doʊnt noʊ ði ˈænsər tu.",
     translation:
@@ -205,6 +223,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 106.77406,
   },
   {
+    id: 18,
     text: "If you don’t know the answer just guess.",
     ipa: "ɪf ju doʊnt noʊ ði ˈænsər dʒʌst ɡɛs.",
     translation: "Nếu bạn không biết câu trả lời, hãy đoán nhé.",
@@ -216,6 +235,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 111.791897,
   },
   {
+    id: 19,
     text: "Say any answer, but you must answer every question.",
     ipa: "seɪ ˈɛni ˈænsər, bət ju mʌst ˈænsər ˈɛvri ˈkwɛstʃən.",
     translation:
@@ -228,6 +248,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 118.664814,
   },
   {
+    id: 20,
     text: "Use your pause button if necessary.",
     ipa: "jus jʊər pɔz ˈbʌtən ɪf ˈnɛsəsəri.",
     translation: "Sử dụng nút tạm dừng nếu cần thiết.",
@@ -239,6 +260,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 123.74755,
   },
   {
+    id: 21,
     text: "Let’s begin.",
     ipa: "lɛts bɪˈɡɪn.",
     translation: "Hãy bắt đầu.",
@@ -250,6 +272,7 @@ export const dayOfTheDeadMs: Lyric[] = [
     endTime: 126.96927,
   },
   {
+    id: 22,
     text: "Here we go.",
     ipa: "hɪər wi ɡoʊ.",
     translation: "Chúng ta bắt đầu thôi.",
