@@ -38,7 +38,7 @@ export default function AudioControls({
         <>
           <button
             className="bg-transparent text-zinc-200 font-bold"
-            onClick={() => router.back()}
+            onClick={() => router.push("/upload-audio")}
             aria-label="Close"
           >
             <X />
