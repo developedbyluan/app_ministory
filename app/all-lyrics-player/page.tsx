@@ -7,7 +7,7 @@ import AutoPauseMode from "@/components/AutoPauseMode";
 
 import { cn } from "@/lib/utils";
 
-import { ministoryDB } from "@/data/ministoryDB";
+import { lyricsCollection } from "@/data/msa--english/lyrics-collection";
 import { Lyric } from "@/types/types";
 
 import useAllLyricsPlayer from "@/hooks/use-all-lyrics-player";
@@ -22,7 +22,7 @@ export default function AllLyricsPlayerPage() {
     throw new Error("No audio key provided");
   }
 
-  const lyrics: Lyric[] | undefined = ministoryDB.get(audioKey);
+  const lyrics: Lyric[] | undefined = lyricsCollection.get(audioKey);
 
   const {
     audioRef,
