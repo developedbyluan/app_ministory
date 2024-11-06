@@ -19,6 +19,17 @@ export default function AutoPauseMode({
   const [currentExplanationaryIndex, setCurrentExplanationaryIndex] =
     useState<number>(activeLyricIndex);
 
+  function stepForward() {
+    if (!explanationary) return;
+    if (currentExplanationaryIndex >= explanationary.length - 1) return;
+    setCurrentExplanationaryIndex((prev) => prev + 1);
+  }
+
+  function stepBack() {
+    if (currentExplanationaryIndex <= 0) return;
+    setCurrentExplanationaryIndex((prev) => prev - 1);
+  }
+
   return (
     <div className="absolute pt-8 px-4 inset-0 bottom-[5.25rem] rounded-b-xl bg-white">
       <div className="h-3/4 bg-slate-50 flex flex-col justify-center items-start">
@@ -42,17 +53,13 @@ export default function AutoPauseMode({
 
         <button
           className="bg-zinc-800 p-2 rounded-full hover:bg-zinc-700 transition-colors duration-300"
-          onClick={() => {
-            setCurrentExplanationaryIndex((prev) => prev - 1);
-          }}
+          onClick={stepBack}
         >
           <StepBack />
         </button>
         <button
-          className="bg-zinc-600 p-2 rounded-full hover:bg-zinc-500 transition-colors duration-300"
-          onClick={() => {
-            setCurrentExplanationaryIndex((prev) => prev + 1);
-          }}
+          className="bg-zinc-800 p-2 rounded-full hover:bg-zinc-700 transition-colors duration-300"
+          onClick={stepForward}
         >
           <StepForward size={36} />
         </button>
