@@ -38,6 +38,7 @@ export default function AllLyricsPlayerPage() {
     setShowTranslation,
     progress,
     audioUrl,
+    setScrollLyricIntoView,
   } = useAllLyricsPlayer({
     audioKey,
     lyrics,
@@ -78,6 +79,7 @@ export default function AllLyricsPlayerPage() {
             setShowAutoPauseMode={setShowAutoPauseMode}
             handleLyricClick={handleLyricClick}
             lyrics={lyrics}
+            setScrollLyricIntoView={setScrollLyricIntoView}
           />
         )}
       </div>

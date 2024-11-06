@@ -11,6 +11,7 @@ type AutoPauseModeProps = {
   setShowAutoPauseMode: Dispatch<SetStateAction<boolean>>;
   handleLyricClick: (index: number, startTime: number, endTime: number) => void;
   lyrics: Lyric[] | undefined;
+  setScrollLyricIntoView: Dispatch<SetStateAction<boolean>>;
 };
 
 export default function AutoPauseMode({
@@ -19,6 +20,7 @@ export default function AutoPauseMode({
   setShowAutoPauseMode,
   handleLyricClick,
   lyrics,
+  setScrollLyricIntoView,
 }: AutoPauseModeProps) {
   const explanationary = explanationaryDB.get(audioKey);
   const [currentExplanationaryIndex, setCurrentExplanationaryIndex] =
@@ -61,7 +63,10 @@ export default function AutoPauseMode({
       <div className="w-full bg-zinc-950 p-4 rounded-tl-xl rounded-tr-xl fixed bottom-0 left-0 right-0 flex items-center justify-between">
         <button
           className="bg-zinc-800 p-2 rounded-full hover:bg-zinc-700 transition-colors duration-300"
-          onClick={() => setShowAutoPauseMode(false)}
+          onClick={() => {
+            setShowAutoPauseMode(false);
+            setScrollLyricIntoView(true);
+          }}
         >
           <X />
         </button>

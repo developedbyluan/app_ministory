@@ -26,6 +26,8 @@ export default function useAllLyricsPlayer({
 
   const [progress, setProgress] = useState(0);
 
+  const [scrollLyricIntoView, setScrollLyricIntoView] = useState(false);
+
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const { audioFile } = useDataContext();
 
@@ -50,7 +52,7 @@ export default function useAllLyricsPlayer({
       );
     });
 
-    if (newActiveLyricIndex !== activeLyricIndex) {
+    if (newActiveLyricIndex !== activeLyricIndex || scrollLyricIntoView) {
       setActiveLyricIndex(newActiveLyricIndex);
     }
 
@@ -60,6 +62,7 @@ export default function useAllLyricsPlayer({
         block: "center",
         inline: "nearest",
       });
+      setScrollLyricIntoView(false);
     }
 
     const newProgress =
@@ -67,7 +70,13 @@ export default function useAllLyricsPlayer({
         (lyrics[lyrics.length - 1].endTime - lyrics[0].startTime)) *
       100;
     setProgress(newProgress);
-  }, [currentTime, lyrics, activeLyricIndex, showTranslation]);
+  }, [
+    currentTime,
+    lyrics,
+    activeLyricIndex,
+    showTranslation,
+    scrollLyricIntoView,
+  ]);
 
   useEffect(() => {
     if (!audioKey) return;
@@ -148,5 +157,6 @@ export default function useAllLyricsPlayer({
     setShowTranslation,
     progress,
     audioUrl,
+    setScrollLyricIntoView,
   };
 }
