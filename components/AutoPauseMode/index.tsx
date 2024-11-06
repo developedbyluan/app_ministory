@@ -11,6 +11,7 @@ type AutoPauseModeProps = {
   handleLyricClick: (index: number, startTime: number, endTime: number) => void;
   lyrics: Lyric[] | undefined;
   setScrollLyricIntoView: Dispatch<SetStateAction<boolean>>;
+  isReplaying: boolean;
 };
 
 export default function AutoPauseMode({
@@ -20,6 +21,7 @@ export default function AutoPauseMode({
   handleLyricClick,
   lyrics,
   setScrollLyricIntoView,
+  isReplaying,
 }: AutoPauseModeProps) {
   const explanationary = explanationaryDB.get(audioKey);
   const [currentExplanationaryIndex, setCurrentExplanationaryIndex] =
@@ -53,6 +55,7 @@ export default function AutoPauseMode({
           <div>
             <PhrasePopover
               phrases={explanationary[currentExplanationaryIndex].phrases}
+              isReplaying={isReplaying}
             />
           </div>
         ) : (

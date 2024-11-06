@@ -80,6 +80,7 @@ export default function AllLyricsPlayerPage() {
             handleLyricClick={handleLyricClick}
             lyrics={lyrics}
             setScrollLyricIntoView={setScrollLyricIntoView}
+            isReplaying={isReplaying}
           />
         )}
       </div>

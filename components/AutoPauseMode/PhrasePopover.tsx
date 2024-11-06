@@ -5,10 +5,16 @@ import {
 } from "@/components/ui/popover";
 import { Phrase } from "@/types/types";
 
+import { cn } from "@/lib/utils";
+
 type PhrasePopoverProps = {
   phrases: Phrase[];
+  isReplaying: boolean;
 };
-export default function PhrasePopover({ phrases }: PhrasePopoverProps) {
+export default function PhrasePopover({
+  phrases,
+  isReplaying,
+}: PhrasePopoverProps) {
   const phrasesElements = phrases.map((item) => {
     const { phrase, ipa, meaning, explanation } = item;
 
@@ -16,7 +22,13 @@ export default function PhrasePopover({ phrases }: PhrasePopoverProps) {
     const phraseArray = phrase.split(" ");
     return (
       <Popover key={crypto.randomUUID()}>
-        <PopoverTrigger className="flex rounded cursor-pointer transition-colors hover:bg-blue-100">
+        <PopoverTrigger
+          className={cn(
+            "flex rounded cursor-pointer",
+            !isReplaying && "transition-colors hover:bg-blue-100"
+          )}
+          disabled={isReplaying}
+        >
           {ipaArray.map((ipaItem, index) => (
             <div
               key={crypto.randomUUID()}
