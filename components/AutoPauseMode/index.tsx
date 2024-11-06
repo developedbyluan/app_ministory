@@ -1,6 +1,6 @@
 // import { explanationaryDB } from "@/data/explanationaryDB";
 import { explanationaryDB } from "@/data/msa--english/explanationary";
-import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 import { Languages, Repeat1, StepBack, StepForward, X } from "lucide-react";
 import PhrasePopover from "./PhrasePopover";
 
@@ -17,16 +17,7 @@ export default function AutoPauseMode({
 }: AutoPauseModeProps) {
   const explanationary = explanationaryDB.get(audioKey);
   const [currentExplanationaryIndex, setCurrentExplanationaryIndex] =
-    useState<number>(0);
-
-  useEffect(() => {
-    // console.log("active lyric index", activeLyricIndex);
-    // console.log("explanationary", explanationary);
-    if (!activeLyricIndex || !explanationary) return;
-    if (activeLyricIndex < 0) return;
-    setCurrentExplanationaryIndex(activeLyricIndex);
-    // console.log("0", explanationary[0]);
-  }, [explanationary, activeLyricIndex]);
+    useState<number>(activeLyricIndex);
 
   return (
     <div className="absolute pt-8 px-4 inset-0 bottom-[5.25rem] rounded-b-xl bg-white">
