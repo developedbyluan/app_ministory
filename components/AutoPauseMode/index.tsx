@@ -1,5 +1,5 @@
 import { explanationaryDB } from "@/data/msa--english/explanationary";
-import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 import { Languages, Repeat1, StepBack, StepForward, X } from "lucide-react";
 import PhrasePopover from "./PhrasePopover";
 import { Lyric } from "@/types/types";
@@ -24,12 +24,6 @@ export default function AutoPauseMode({
   const explanationary = explanationaryDB.get(audioKey);
   const [currentExplanationaryIndex, setCurrentExplanationaryIndex] =
     useState<number>(activeLyricIndex);
-
-  useEffect(() => {
-    if (!lyrics) return;
-    if (currentExplanationaryIndex !== 0) return;
-    handleLyricClick(0, lyrics[0].startTime, lyrics[0].endTime);
-  }, []);
 
   function stepForward() {
     if (!explanationary || !lyrics) return;
