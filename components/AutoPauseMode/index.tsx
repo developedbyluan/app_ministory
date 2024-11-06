@@ -3,30 +3,45 @@ import { explanationaryDB } from "@/data/msa--english/explanationary";
 import { useState, type Dispatch, type SetStateAction } from "react";
 import { Languages, Repeat1, StepBack, StepForward, X } from "lucide-react";
 import PhrasePopover from "./PhrasePopover";
+import { Lyric } from "@/types/types";
 
 type AutoPauseModeProps = {
   activeLyricIndex: number;
   audioKey: string;
   setShowAutoPauseMode: Dispatch<SetStateAction<boolean>>;
+  handleLyricClick: (index: number, startTime: number, endTime: number) => void;
+  lyrics: Lyric[] | undefined;
 };
 
 export default function AutoPauseMode({
   activeLyricIndex,
   audioKey,
   setShowAutoPauseMode,
+  handleLyricClick,
+  lyrics,
 }: AutoPauseModeProps) {
   const explanationary = explanationaryDB.get(audioKey);
   const [currentExplanationaryIndex, setCurrentExplanationaryIndex] =
     useState<number>(activeLyricIndex);
 
   function stepForward() {
-    if (!explanationary) return;
+    if (!explanationary || !lyrics) return;
     if (currentExplanationaryIndex >= explanationary.length - 1) return;
+    handleLyricClick(
+      currentExplanationaryIndex + 1,
+      lyrics[currentExplanationaryIndex + 1].startTime,
+      lyrics[currentExplanationaryIndex + 1].endTime
+    );
     setCurrentExplanationaryIndex((prev) => prev + 1);
   }
 
   function stepBack() {
-    if (currentExplanationaryIndex <= 0) return;
+    if (currentExplanationaryIndex <= 0 || !lyrics) return;
+    handleLyricClick(
+      currentExplanationaryIndex - 1,
+      lyrics[currentExplanationaryIndex - 1].startTime,
+      lyrics[currentExplanationaryIndex - 1].endTime
+    );
     setCurrentExplanationaryIndex((prev) => prev - 1);
   }
 
@@ -66,7 +81,17 @@ export default function AutoPauseMode({
         <button className="bg-zinc-800 p-2 rounded-full hover:bg-zinc-700 transition-colors duration-300">
           <Languages />
         </button>
-        <button className="bg-zinc-800 p-2 rounded-full hover:bg-zinc-700 transition-colors duration-300">
+        <button
+          className="bg-zinc-800 p-2 rounded-full hover:bg-zinc-700 transition-colors duration-300"
+          onClick={() => {
+            if (!lyrics) return;
+            handleLyricClick(
+              currentExplanationaryIndex,
+              lyrics[currentExplanationaryIndex].startTime,
+              lyrics[currentExplanationaryIndex].endTime
+            );
+          }}
+        >
           <Repeat1 />
         </button>
       </div>

@@ -76,6 +76,8 @@ export default function AllLyricsPlayerPage() {
             activeLyricIndex={activeLyricIndex}
             audioKey={audioKey}
             setShowAutoPauseMode={setShowAutoPauseMode}
+            handleLyricClick={handleLyricClick}
+            lyrics={lyrics}
           />
         )}
       </div>
