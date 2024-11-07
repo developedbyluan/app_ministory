@@ -3,6 +3,8 @@ import { useState, type Dispatch, type SetStateAction } from "react";
 import { Languages, Repeat1, StepBack, StepForward, X } from "lucide-react";
 import PhrasePopover from "./PhrasePopover";
 import { Lyric } from "@/types/types";
+import WordList from "./WordList";
+import { ScrollArea } from "@radix-ui/react-scroll-area";
 
 type AutoPauseModeProps = {
   activeLyricIndex: number;
@@ -27,6 +29,8 @@ export default function AutoPauseMode({
   const [currentExplanationaryIndex, setCurrentExplanationaryIndex] =
     useState<number>(activeLyricIndex);
 
+  const [showExplanationary, setShowExplanationary] = useState<boolean>(true);
+
   function stepForward() {
     if (!explanationary || !lyrics) return;
     if (currentExplanationaryIndex >= explanationary.length - 1) return;
@@ -49,20 +53,34 @@ export default function AutoPauseMode({
   }
 
   return (
-    <div className="absolute pt-8 px-4 inset-0 bottom-[5.25rem] rounded-b-xl bg-white">
-      <div className="h-3/4 bg-slate-50 flex flex-col justify-center items-start">
+    <div className="h-5/6 overflow-y-auto">
+      <div className="relative h-full flex flex-col justify-evenly gap-y-4">
         {explanationary && explanationary[currentExplanationaryIndex] ? (
-          <div>
-            <PhrasePopover
-              phrases={explanationary[currentExplanationaryIndex].phrases}
-              isReplaying={isReplaying}
-            />
-          </div>
+          <>
+            <div>
+              <PhrasePopover
+                phrases={explanationary[currentExplanationaryIndex].phrases}
+                isReplaying={isReplaying}
+              />
+              {showExplanationary && (
+                <div className="text-sm text-gray-800">
+                  {lyrics?.[currentExplanationaryIndex].translation}
+                </div>
+              )}
+            </div>
+            {showExplanationary && (
+              <ScrollArea className="h-2/3 overflow-y-auto border-t">
+                <WordList
+                  phrases={explanationary![currentExplanationaryIndex].phrases}
+                />
+              </ScrollArea>
+            )}
+          </>
         ) : (
           <p>No explanationary found</p>
         )}
       </div>
-      <div className="w-full bg-zinc-950 p-4 rounded-tl-xl rounded-tr-xl fixed bottom-0 left-0 right-0">
+      <div className="w-full bg-zinc-950 p-4 rounded-tl-xl rounded-tr-xl absolute bottom-0 left-0 right-0">
         {!isReplaying ? (
           <div
             id="auto-pause-mode-controls"
@@ -90,7 +108,10 @@ export default function AutoPauseMode({
             >
               <StepForward size={36} />
             </button>
-            <button className="bg-zinc-800 p-2 rounded-full hover:bg-zinc-700 transition-colors duration-300">
+            <button
+              className="bg-zinc-800 p-2 rounded-full hover:bg-zinc-700 transition-colors duration-300"
+              onClick={() => setShowExplanationary((prev) => !prev)}
+            >
               <Languages />
             </button>
             <button
