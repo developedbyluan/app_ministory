@@ -14,6 +14,8 @@ type AutoPauseModeProps = {
   lyrics: Lyric[] | undefined;
   setScrollLyricIntoView: Dispatch<SetStateAction<boolean>>;
   isReplaying: boolean;
+  showTranslation: boolean;
+  setShowTranslation: Dispatch<SetStateAction<boolean>>;
 };
 
 export default function AutoPauseMode({
@@ -24,12 +26,12 @@ export default function AutoPauseMode({
   lyrics,
   setScrollLyricIntoView,
   isReplaying,
+  showTranslation,
+  setShowTranslation,
 }: AutoPauseModeProps) {
   const explanationary = explanationaryDB.get(audioKey);
   const [currentExplanationaryIndex, setCurrentExplanationaryIndex] =
     useState<number>(activeLyricIndex);
-
-  const [showExplanationary, setShowExplanationary] = useState<boolean>(true);
 
   function stepForward() {
     if (!explanationary || !lyrics) return;
@@ -62,13 +64,13 @@ export default function AutoPauseMode({
                 phrases={explanationary[currentExplanationaryIndex].phrases}
                 isReplaying={isReplaying}
               />
-              {showExplanationary && (
+              {showTranslation && (
                 <div className="text-sm text-gray-800">
                   {lyrics?.[currentExplanationaryIndex].translation}
                 </div>
               )}
             </div>
-            {showExplanationary && (
+            {showTranslation && (
               <ScrollArea className="h-2/3 overflow-y-auto border-t">
                 <WordList
                   phrases={explanationary![currentExplanationaryIndex].phrases}
@@ -110,7 +112,7 @@ export default function AutoPauseMode({
             </button>
             <button
               className="bg-zinc-800 p-2 rounded-full hover:bg-zinc-700 transition-colors duration-300"
-              onClick={() => setShowExplanationary((prev) => !prev)}
+              onClick={() => setShowTranslation((prev) => !prev)}
             >
               <Languages />
             </button>

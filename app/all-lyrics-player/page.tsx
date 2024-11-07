@@ -81,6 +81,8 @@ export default function AllLyricsPlayerPage() {
             lyrics={lyrics}
             setScrollLyricIntoView={setScrollLyricIntoView}
             isReplaying={isReplaying}
+            showTranslation={showTranslation}
+            setShowTranslation={setShowTranslation}
           />
         )}
       </div>
