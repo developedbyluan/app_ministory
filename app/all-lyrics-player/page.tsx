@@ -67,7 +67,7 @@ export default function AllLyricsPlayerPage() {
       />
       <div
         className={cn(
-          "h-screen py-8 px-4 fixed inset-0 transition-transform duration-500 ease-in-out flex flex-col justify-start",
+          "h-screen bg-white py-8 px-4 fixed inset-0 transition-transform duration-500 ease-in-out flex flex-col justify-start",
           showAutoPauseMode
             ? "translate-y-0"
             : "translate-y-full bg-white duration-300"
