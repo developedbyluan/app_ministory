@@ -34,10 +34,8 @@ export default function PhrasePopover({
               key={crypto.randomUUID()}
               className="flex flex-col items-center"
             >
-              {!true && (
-                <span className="block text-xs text-gray-600">{ipaItem}</span>
-              )}
-              <span className="inline-block p-1 pt-0 text-xl font-bold">
+              <span className="block text-xs text-gray-600">{ipaItem}</span>
+              <span className="inline-block p-1 pt-0 text-xl font-semibold">
                 {phraseArray[index]}
               </span>
             </div>
