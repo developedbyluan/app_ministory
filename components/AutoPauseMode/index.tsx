@@ -1,10 +1,11 @@
 import { explanationaryDB } from "@/data/msa--english/explanationary";
 import { useState, type Dispatch, type SetStateAction } from "react";
-import { Languages, Repeat1, StepBack, StepForward, X } from "lucide-react";
+import { Repeat1, StepBack, StepForward, X } from "lucide-react";
 import PhrasePopover from "./PhrasePopover";
 import { Lyric } from "@/types/types";
 import WordList from "./WordList";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
+import TranslationToggle from "../AllLyricsPlayer/TranslationToggle";
 
 type AutoPauseModeProps = {
   activeLyricIndex: number;
@@ -110,12 +111,12 @@ export default function AutoPauseMode({
             >
               <StepForward size={36} />
             </button>
-            <button
-              className="bg-zinc-800 p-2 rounded-full hover:bg-zinc-700 transition-colors duration-300"
-              onClick={() => setShowTranslation((prev) => !prev)}
-            >
-              <Languages />
-            </button>
+
+            <TranslationToggle
+              showTranslation={showTranslation}
+              setShowTranslation={setShowTranslation}
+            />
+
             <button
               className="bg-zinc-800 p-2 rounded-full hover:bg-zinc-700 transition-colors duration-300"
               onClick={() => {

@@ -1,4 +1,5 @@
 import { Checkbox } from "@/components/ui/checkbox";
+import { Languages } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 
 type TranslationToggleProps = {
@@ -23,13 +24,11 @@ export default function TranslationToggle({
       />
       <label
         htmlFor="toggle-translation-checkbox"
-        className={`flex items-center justify-center px-2 py-1 rounded-md font-extrabold text-sm cursor-pointer border transition-colors duration-200 ease-in-out ${
-          showTranslation
-            ? "bg-black text-white border-white"
-            : "bg-zinc-950 text-zinc-600 border-zinc-600"
+        className={`flex items-center justify-center p-[0.6rem] rounded-full font-extrabold text-sm cursor-pointer transition-colors duration-200 ease-in-out ${
+          showTranslation ? "bg-black text-white" : "bg-zinc-800"
         }`}
       >
-        Vn
+        <Languages size={20} />
       </label>
     </div>
   );
