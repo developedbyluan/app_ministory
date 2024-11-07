@@ -24,8 +24,8 @@ export default function PhrasePopover({
       <Popover key={crypto.randomUUID()}>
         <PopoverTrigger
           className={cn(
-            "flex rounded cursor-pointer",
-            !isReplaying && "transition-colors hover:bg-blue-100"
+            "flex bg-yellow-100 rounded mx-1 my-1 cursor-pointer",
+            !isReplaying && "transition-colors hover:bg-yellow-200"
           )}
           disabled={isReplaying}
         >
