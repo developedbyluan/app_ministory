@@ -21,7 +21,7 @@ export default function PlayPauseToggler({
       className={`flex gap-2 justify-center items-center p-2 rounded-full transition-all duration-300 ease-in-out border-2 ${
         isPlaying
           ? "bg-black text-white shadow-inner font-bold text-xl border-white"
-          : "bg-white text-black font-bold text-xl shadow-[0_0_0_2px_inset_rgba(0,0,0,0.1),0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-2px_rgba(0,0,0,0.1)] "
+          : "bg-zinc-200 text-black font-bold text-xl shadow-[0_0_0_2px_inset_rgba(0,0,0,0.1),0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-2px_rgba(0,0,0,0.1)] "
       }`}
     >
       {isPlaying ? <Pause /> : <Play />}

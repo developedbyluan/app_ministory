@@ -37,7 +37,7 @@ export default function AudioControls({
       {!isPlaying && !isReplaying && (
         <>
           <button
-            className="bg-transparent text-zinc-200 font-bold"
+            className="bg-zinc-200 p-2 rounded-full hover:bg-zinc-100 transition-colors duration-300"
             onClick={() => router.push("/upload-audio")}
             aria-label="Close"
           >
@@ -57,7 +57,7 @@ export default function AudioControls({
           </button>
 
           <button
-            className="bg-transparent text-zinc-200 font-bold order-5"
+            className="bg-zinc-200 p-2 rounded-full font-bold order-5"
             aria-label="Open Auto-Pause Mode"
             onClick={() => setShowAutoPauseMode(true)}
           >
