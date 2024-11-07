@@ -2,11 +2,7 @@ import { Lyric } from "@/types/types";
 
 type LyricsDisplayProps = {
   lyrics: Lyric[];
-  onLyricClick: (
-    clickedLyricIndex: number,
-    startTime: number,
-    endTime: number
-  ) => void;
+  onLyricClick: (clickedLyricIndex: number, startTime: number) => void;
   activeLyricIndex: number;
   lyricRefsArray: React.RefObject<HTMLParagraphElement[]>;
   isPlaying: boolean;
@@ -40,7 +36,7 @@ export default function LyricsDisplay({
                 index >= 0 &&
                 "font-bold text-zinc-950 text-xl"
           } `}
-          onClick={() => onLyricClick(index, lyric.startTime, lyric.endTime)}
+          onClick={() => onLyricClick(index, lyric.startTime)}
         >
           <span>{lyric.text}</span>
           {showTranslation && (

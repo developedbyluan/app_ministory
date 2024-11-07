@@ -96,11 +96,7 @@ export default function useAllLyricsPlayer({
     });
   }, [audioFile, audioKey]);
 
-  function handleLyricClick(
-    clickedLyricIndex: number,
-    startTime: number,
-    endTime: number
-  ) {
+  function handleLyricClick(clickedLyricIndex: number, startTime: number) {
     if (isPlaying) return;
 
     const audio = audioRef.current;
@@ -110,14 +106,6 @@ export default function useAllLyricsPlayer({
     audio.currentTime = startTime;
     audio.play();
     setIsPlaying(true);
-    setIsReplaying(true);
-    setActiveLyricIndex(clickedLyricIndex);
-    setTimeout(() => {
-      audio.currentTime = endTime;
-      audio.pause();
-      setIsPlaying(false);
-      setIsReplaying(false);
-    }, ((endTime - startTime) * 1000) / playbackRate);
   }
 
   function togglePlayPause() {
@@ -141,6 +129,30 @@ export default function useAllLyricsPlayer({
     setPlaybackRate(audio.playbackRate);
   }
 
+  function handleReplay(
+    lyricIndex: number,
+    startTime: number,
+    endTime: number
+  ) {
+    if (isPlaying) return;
+
+    const audio = audioRef.current;
+
+    if (!audio) return;
+
+    audio.currentTime = startTime;
+    audio.play();
+    setIsPlaying(true);
+    setIsReplaying(true);
+    setActiveLyricIndex(lyricIndex);
+    setTimeout(() => {
+      audio.currentTime = endTime;
+      audio.pause();
+      setIsPlaying(false);
+      setIsReplaying(false);
+    }, ((endTime - startTime) * 1000) / playbackRate);
+  }
+
   return {
     currentTime,
     setCurrentTime,
@@ -158,5 +170,6 @@ export default function useAllLyricsPlayer({
     progress,
     audioUrl,
     setScrollLyricIntoView,
+    handleReplay,
   };
 }

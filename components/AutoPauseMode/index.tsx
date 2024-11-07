@@ -11,24 +11,28 @@ type AutoPauseModeProps = {
   activeLyricIndex: number;
   audioKey: string;
   setShowAutoPauseMode: Dispatch<SetStateAction<boolean>>;
-  handleLyricClick: (index: number, startTime: number, endTime: number) => void;
   lyrics: Lyric[] | undefined;
   setScrollLyricIntoView: Dispatch<SetStateAction<boolean>>;
   isReplaying: boolean;
   showTranslation: boolean;
   setShowTranslation: Dispatch<SetStateAction<boolean>>;
+  handleReplay: (
+    lyricIndex: number,
+    startTime: number,
+    endTime: number
+  ) => void;
 };
 
 export default function AutoPauseMode({
   activeLyricIndex,
   audioKey,
   setShowAutoPauseMode,
-  handleLyricClick,
   lyrics,
   setScrollLyricIntoView,
   isReplaying,
   showTranslation,
   setShowTranslation,
+  handleReplay,
 }: AutoPauseModeProps) {
   const explanationary = explanationaryDB.get(audioKey);
   const [currentExplanationaryIndex, setCurrentExplanationaryIndex] =
@@ -37,7 +41,7 @@ export default function AutoPauseMode({
   function stepForward() {
     if (!explanationary || !lyrics) return;
     if (currentExplanationaryIndex >= explanationary.length - 1) return;
-    handleLyricClick(
+    handleReplay(
       currentExplanationaryIndex + 1,
       lyrics[currentExplanationaryIndex + 1].startTime,
       lyrics[currentExplanationaryIndex + 1].endTime
@@ -47,12 +51,21 @@ export default function AutoPauseMode({
 
   function stepBack() {
     if (currentExplanationaryIndex <= 0 || !lyrics) return;
-    handleLyricClick(
+    handleReplay(
       currentExplanationaryIndex - 1,
       lyrics[currentExplanationaryIndex - 1].startTime,
       lyrics[currentExplanationaryIndex - 1].endTime
     );
     setCurrentExplanationaryIndex((prev) => prev - 1);
+  }
+
+  function replayLyric() {
+    if (!lyrics) return;
+    handleReplay(
+      currentExplanationaryIndex,
+      lyrics[currentExplanationaryIndex].startTime,
+      lyrics[currentExplanationaryIndex].endTime
+    );
   }
 
   return (
@@ -119,14 +132,7 @@ export default function AutoPauseMode({
 
             <button
               className="bg-zinc-200 p-2 rounded-full hover:bg-zinc-100 transition-colors duration-300"
-              onClick={() => {
-                if (!lyrics) return;
-                handleLyricClick(
-                  currentExplanationaryIndex,
-                  lyrics[currentExplanationaryIndex].startTime,
-                  lyrics[currentExplanationaryIndex].endTime
-                );
-              }}
+              onClick={replayLyric}
             >
               <Repeat1 />
             </button>

@@ -37,19 +37,21 @@ export default function AudioControls({
       {!isPlaying && !isReplaying && (
         <>
           <button
-            className="bg-zinc-200 p-2 rounded-full hover:bg-zinc-100 transition-colors duration-300"
+            className="bg-zinc-200 p-2 rounded-full hover:bg-zinc-100 transition-colors duration-300 order-1"
             onClick={() => router.push("/upload-audio")}
             aria-label="Close"
           >
             <X />
           </button>
-          <TranslationToggle
-            showTranslation={showTranslation}
-            setShowTranslation={setShowTranslation}
-          />
+          <div className="order-4">
+            <TranslationToggle
+              showTranslation={showTranslation}
+              setShowTranslation={setShowTranslation}
+            />
+          </div>
 
           <button
-            className="font-bold text-zinc-200 text-lg order-3"
+            className="font-bold text-zinc-200 text-lg order-2"
             onClick={changePlaybackRate}
             aria-label={`Change playback rate to ${playbackRate}x`}
           >
@@ -66,12 +68,14 @@ export default function AudioControls({
         </>
       )}
       {!isReplaying ? (
-        <PlayPauseToggler
-          isPlaying={isPlaying}
-          isReplaying={isReplaying}
-          togglePlayPause={togglePlayPause}
-          playPauseAriaLabel={playPauseAriaLabel}
-        />
+        <div className="order-3">
+          <PlayPauseToggler
+            isPlaying={isPlaying}
+            isReplaying={isReplaying}
+            togglePlayPause={togglePlayPause}
+            playPauseAriaLabel={playPauseAriaLabel}
+          />
+        </div>
       ) : (
         <p
           className="w-full text-white px-4 py-2 font-bold text-center text-xl"

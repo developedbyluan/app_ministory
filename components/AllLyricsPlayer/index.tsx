@@ -9,11 +9,7 @@ import { Lyric } from "@/types/types";
 type AllLyricsPlayerProps = {
   audioRef: React.RefObject<HTMLAudioElement>;
   lyricRefsArray: React.RefObject<HTMLParagraphElement[]>;
-  handleLyricClick: (
-    clickedLyricIndex: number,
-    startTime: number,
-    endTime: number
-  ) => void;
+  handleLyricClick: (clickedLyricIndex: number, startTime: number) => void;
   activeLyricIndex: number;
   isPlaying: boolean;
   togglePlayPause: () => void;
