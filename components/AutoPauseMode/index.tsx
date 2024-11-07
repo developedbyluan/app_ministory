@@ -90,7 +90,7 @@ export default function AutoPauseMode({
             className="flex items-center justify-between"
           >
             <button
-              className="bg-zinc-800 p-2 rounded-full hover:bg-zinc-700 transition-colors duration-300"
+              className="bg-zinc-200 p-2 rounded-full hover:bg-zinc-100 transition-colors duration-300"
               onClick={() => {
                 setShowAutoPauseMode(false);
                 setScrollLyricIntoView(true);
@@ -100,13 +100,13 @@ export default function AutoPauseMode({
             </button>
 
             <button
-              className="bg-zinc-800 p-2 rounded-full hover:bg-zinc-700 transition-colors duration-300"
+              className="bg-zinc-200 p-2 rounded-full hover:bg-zinc-100 transition-colors duration-300"
               onClick={stepBack}
             >
               <StepBack />
             </button>
             <button
-              className="bg-zinc-800 p-2 rounded-full hover:bg-zinc-700 transition-colors duration-300"
+              className="bg-zinc-200 p-2 rounded-full hover:bg-zinc-100 transition-colors duration-300"
               onClick={stepForward}
             >
               <StepForward size={36} />
@@ -118,7 +118,7 @@ export default function AutoPauseMode({
             />
 
             <button
-              className="bg-zinc-800 p-2 rounded-full hover:bg-zinc-700 transition-colors duration-300"
+              className="bg-zinc-200 p-2 rounded-full hover:bg-zinc-100 transition-colors duration-300"
               onClick={() => {
                 if (!lyrics) return;
                 handleLyricClick(

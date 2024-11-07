@@ -25,7 +25,9 @@ export default function TranslationToggle({
       <label
         htmlFor="toggle-translation-checkbox"
         className={`flex items-center justify-center p-[0.6rem] rounded-full font-extrabold text-sm cursor-pointer transition-colors duration-200 ease-in-out ${
-          showTranslation ? "bg-black text-white" : "bg-zinc-800"
+          showTranslation
+            ? "bg-black text-white border border-white"
+            : "bg-zinc-200"
         }`}
       >
         <Languages size={20} />
