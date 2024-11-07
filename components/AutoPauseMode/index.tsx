@@ -6,6 +6,7 @@ import { Lyric } from "@/types/types";
 import WordList from "./WordList";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import TranslationToggle from "../AllLyricsPlayer/TranslationToggle";
+import { useSpeech } from "@/hooks/useSpeech";
 
 type AutoPauseModeProps = {
   activeLyricIndex: number;
@@ -37,7 +38,7 @@ export default function AutoPauseMode({
   const explanationary = explanationaryDB.get(audioKey);
   const [currentExplanationaryIndex, setCurrentExplanationaryIndex] =
     useState<number>(activeLyricIndex);
-
+  const { speakPhrase } = useSpeech();
   function stepForward() {
     if (!explanationary || !lyrics) return;
     if (currentExplanationaryIndex >= explanationary.length - 1) return;
@@ -88,6 +89,8 @@ export default function AutoPauseMode({
               <ScrollArea className="h-2/3 overflow-y-auto border-t">
                 <WordList
                   phrases={explanationary![currentExplanationaryIndex].phrases}
+                  speakPhrase={speakPhrase}
+                  isReplaying={isReplaying}
                 />
               </ScrollArea>
             )}
