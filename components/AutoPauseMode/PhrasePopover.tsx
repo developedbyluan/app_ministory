@@ -42,9 +42,7 @@ export default function PhrasePopover({
           ))}
         </PopoverTrigger>
         <PopoverContent>
-          <p>
-            <strong>IPA:</strong> /{ipa}/
-          </p>
+          <p>/ {ipa} /</p>
           <p>
             <strong>Dịch:</strong> {meaning}
           </p>
