@@ -27,7 +27,7 @@ export default function TranslationToggle({
         className={`flex items-center justify-center p-[0.6rem] rounded-full font-extrabold text-sm cursor-pointer transition-colors duration-200 ease-in-out ${
           showTranslation
             ? "bg-black text-white border border-white"
-            : "bg-zinc-200"
+            : "bg-zinc-400"
         }`}
       >
         <Languages size={20} />
