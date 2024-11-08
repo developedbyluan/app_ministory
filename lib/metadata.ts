@@ -1,6 +1,4 @@
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
+export const metadata = {
   title: "Mini Story App",
   description:
     "Mini Story App is a simple and easy-to-use audio player app tailored for Effortless English Learners taught by A.J. Hoge.",
@@ -8,6 +6,7 @@ export const metadata: Metadata = {
     icon: [{ url: "/favicon.png", sizes: "256x256", type: "image/png" }],
     apple: [{ url: "/apple-icon-180.png" }],
   },
+  appleTouchIcon: [{ url: "/apple-icon-180.png" }],
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
