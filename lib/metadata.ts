@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     "Mini Story App is a simple and easy-to-use audio player app tailored for Effortless English Learners taught by A.J. Hoge.",
   icons: {
-    icon: [{ url: "/favicon.png", sizes: "196x196", type: "image/png" }],
+    icon: [{ url: "/favicon.png", sizes: "256x256", type: "image/png" }],
     apple: [{ url: "/icons/apple-icon-180.png" }],
   },
   appleWebApp: {
