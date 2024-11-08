@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   title: "Mini Story App",
   description:
     "Mini Story App is a simple and easy-to-use audio player app tailored for Effortless English Learners taught by A.J. Hoge.",
+  icons: {
+    icon: [{ url: "/favicon.png", sizes: "196x196", type: "image/png" }],
+  },
 };
 
 export default function RootLayout({
