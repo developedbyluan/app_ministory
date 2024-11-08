@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -24,6 +24,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [{ url: "/favicon.png", sizes: "196x196", type: "image/png" }],
   },
+};
+
+export const viewport: Viewport = {
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({
