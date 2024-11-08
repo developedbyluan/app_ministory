@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
       "Mini Story App is a simple and easy-to-use audio player app tailored for Effortless English Learners taught by A.J. Hoge.",
     start_url: "/",
     display: "standalone",
-    background_color: "#ff0000",
-    theme_color: "#0000ff",
+    background_color: "#09090b",
+    theme_color: "#ffffff",
     orientation: "portrait-primary",
     icons: [
       {
