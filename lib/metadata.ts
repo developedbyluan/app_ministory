@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
+    title: "Mini Story App",
     startupImage: [
       {
         url: "/apple-splash-2048-2732.jpg",
