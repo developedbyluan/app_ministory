@@ -5,13 +5,19 @@ export const metadata: Metadata = {
     "Mini Story App is a simple and easy-to-use audio player app tailored for Effortless English Learners taught by A.J. Hoge.",
   icons: {
     icon: [{ url: "favicon.png", sizes: "256x256", type: "image/png" }],
-    apple: [{ url: "apple-icon-180.png", sizes: "180x180", type: "image/png" }],
+    apple: [
+      { url: "apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
   },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
     title: "Mini Story App",
     startupImage: [
+      {
+        url: "apple-splash-2048-2732.jpg",
+        media: "default",
+      },
       {
         url: "apple-splash-2048-2732.jpg",
         media:
