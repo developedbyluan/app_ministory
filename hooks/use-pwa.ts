@@ -10,6 +10,17 @@ export default function usePWA() {
 
     if (typeof navigator === "undefined") return;
 
+    if (!("serviceWorker" in navigator)) return;
+
+    navigator.serviceWorker
+      .register("/sw.js")
+      .then((registration) => {
+        console.log("Service worker registration successful", registration);
+      })
+      .catch((error) => {
+        console.log("Service worker registration failed", error);
+      });
+
     setIsOnline(navigator.onLine);
 
     const handleOnline = () => setIsOnline(true);
