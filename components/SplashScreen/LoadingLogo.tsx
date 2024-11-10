@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { Book } from "lucide-react";
+import { BookOpen } from "lucide-react";
 
 export default function LoadingLogo() {
   return (
@@ -17,7 +17,7 @@ export default function LoadingLogo() {
         className="absolute inset-2 border-4 border-white border-dashed rounded-full"
       />
       <div className="absolute inset-0 flex items-center justify-center">
-        <Book className="w-28 h-28" aria-hidden="true" />
+        <BookOpen className="w-28 h-28" aria-hidden="true" />
       </div>
     </motion.div>
   );
