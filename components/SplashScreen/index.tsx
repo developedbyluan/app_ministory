@@ -3,7 +3,7 @@
 import LoadingLogo from "@/components/SplashScreen/LoadingLogo";
 import WelcomeText from "@/components/SplashScreen/WelcomeText";
 import EnterAppButton from "@/components/SplashScreen/EnterAppButton";
-
+import AppInstallButton from "@/components/SplashScreen/AppInstallButton";
 import usePWA from "@/hooks/use-pwa";
 
 type SplashScreenProps = {
@@ -25,26 +25,10 @@ export default function SplashScreen({ hrefValue }: SplashScreenProps) {
       <WelcomeText />
 
       {isInstallable ? (
-        <button
-          onClick={handleInstallClick}
-          className="px-8 py-3 rounded-full bg-white text-black font-semibold text-lg tracking-wide shadow-lg hover:bg-gray-100 active:scale-95 transition-all duration-200 flex items-center gap-2"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-            />
-          </svg>
-          Install
-        </button>
+        <AppInstallButton
+          onInstallClick={handleInstallClick}
+          installText="Install"
+        />
       ) : (
         !isStandaloneDisplayMode &&
         !isIOS && (
