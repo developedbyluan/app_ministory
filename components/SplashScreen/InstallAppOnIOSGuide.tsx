@@ -6,7 +6,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-export default function InstallAppOnnIOSGuide() {
+import Image from "next/image";
+
+export default function InstallAppOnIOSGuide() {
   return (
     <div>
       <Dialog>
@@ -31,18 +33,36 @@ export default function InstallAppOnnIOSGuide() {
           <DialogHeader>
             <DialogTitle>Add to HomeScreen</DialogTitle>
           </DialogHeader>
-          <div className="mt-4 text-sm text-muted-foreground animate-fade-in">
+          <div className="text-sm text-muted-foreground animate-fade-in">
             <p>To install this app on your iOS device:</p>
-            <ol className="list-decimal list-inside mt-2">
+            <ol className="flex flex-col gap-2 list-decimal list-inside mt-2">
               <li>
-                Tap the share button <span aria-label="share icon">⎋</span> in
-                Safari
+                Tap the share button in Safari
+                <Image
+                  src="/ios-share-button.png"
+                  width={200}
+                  height={200}
+                  alt="safari share button"
+                />
               </li>
               <li>
                 Scroll down and tap &quot;Add to Home Screen&quot;{" "}
-                <span aria-label="plus icon">➕</span>
+                <Image
+                  src="/ios-add-to-homescreen.png"
+                  width={200}
+                  height={200}
+                  alt="add to homescreen"
+                />
               </li>
-              <li>Tap &quot;Add&quot; in the top right corner</li>
+              <li>
+                Tap &quot;Add&quot; in the top right corner
+                <Image
+                  src="/ios-add-button--in-add-to-homescreen.png"
+                  width={200}
+                  height={200}
+                  alt="add to homescreen add"
+                />
+              </li>
             </ol>
           </div>
         </DialogContent>
