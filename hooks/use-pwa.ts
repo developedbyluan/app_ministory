@@ -54,6 +54,15 @@ export default function usePWA() {
       handleBeforeInstallPrompt as EventListener
     );
 
+    const handleAppInstalled = () => {
+      setIsInstallable(false);
+    };
+
+    window.addEventListener(
+      "appinstalled",
+      handleAppInstalled as EventListener
+    );
+
     return () => {
       window.removeEventListener("online", handleOnline);
       window.removeEventListener("offline", handleOffline);
@@ -70,7 +79,7 @@ export default function usePWA() {
     installPrompt.prompt();
     installPrompt.userChoice.then((choiceResult) => {
       if (choiceResult.outcome === "accepted") {
-        setIsInstalled(true);
+        setIsInstallable(false);
       }
       setInstallPrompt(null);
     });
