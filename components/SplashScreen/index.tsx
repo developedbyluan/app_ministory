@@ -13,29 +13,6 @@ type SplashScreenProps = {
 export default function SplashScreen({ hrefValue }: SplashScreenProps) {
   const { isOnline, isInstallable, isInstalled, handleInstallClick } = usePWA();
 
-  // const installAppOrEnterApp = () => {
-  //   if (isOnline && isInstalled) {
-  //     return <EnterAppButton hrefValue={hrefValue} />;
-  //   } else if (isInstalled) {
-  //     return (
-  //       <p className="flex flex-col gap-1 text-center text-xs text-red-300">
-  //         <span>Currently you cannot use the Mini Story App offline.</span>
-  //         <span>Please connect to the internet to use it.</span>
-  //       </p>
-  //     );
-  //   } else if (isInstallable) {
-  //     return <button onClick={handleInstallClick}>Install</button>;
-  //   } else {
-  //       <p className="flex flex-col gap-1 text-center text-xs text-red-300">
-  //         <span>You cannot install this app.</span>
-  //         <span>
-  //           Your device does not support it or you have it installed already.
-  //         </span>
-  //       </p>
-  //     );
-  //   }
-  // };
-
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4 overflow-hidden">
       <LoadingLogo />
@@ -70,6 +47,13 @@ export default function SplashScreen({ hrefValue }: SplashScreenProps) {
       )}
 
       {isOnline && isInstalled && <EnterAppButton hrefValue={hrefValue} />}
+
+      {!isOnline && (
+        <p className="flex flex-col gap-1 text-center text-xs text-red-300">
+          <span>Currently you cannot use the Mini Story App offline.</span>
+          <span>Please connect to the internet to use it.</span>
+        </p>
+      )}
     </div>
   );
 }
