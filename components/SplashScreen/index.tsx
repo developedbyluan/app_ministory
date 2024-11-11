@@ -11,7 +11,12 @@ type SplashScreenProps = {
 };
 
 export default function SplashScreen({ hrefValue }: SplashScreenProps) {
-  const { isOnline, isInstallable, isInstalled, handleInstallClick } = usePWA();
+  const {
+    isOnline,
+    isInstallable,
+    isStandaloneDisplayMode,
+    handleInstallClick,
+  } = usePWA();
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4 overflow-hidden">
@@ -40,13 +45,17 @@ export default function SplashScreen({ hrefValue }: SplashScreenProps) {
           Install
         </button>
       ) : (
-        <p className="flex flex-col gap-1 text-center text-xs text-green-300">
-          <span>Hi Friend, go to your HomeScreen. </span>
-          <span>The Mini Story App waits for you there.</span>
-        </p>
+        !isStandaloneDisplayMode && (
+          <p className="flex flex-col gap-1 text-center text-xs text-green-300">
+            <span>Hi Friend, go to your HomeScreen. </span>
+            <span>The Mini Story App waits for you there.</span>
+          </p>
+        )
       )}
 
-      {isOnline && isInstalled && <EnterAppButton hrefValue={hrefValue} />}
+      {isOnline && isStandaloneDisplayMode && (
+        <EnterAppButton hrefValue={hrefValue} />
+      )}
 
       {!isOnline && (
         <p className="flex flex-col gap-1 text-center text-xs text-red-300">

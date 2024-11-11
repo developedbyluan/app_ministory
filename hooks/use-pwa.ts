@@ -16,7 +16,7 @@ export default function usePWA() {
   const [isInstallable, setIsInstallable] = useState(false);
   const [installPrompt, setInstallPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
-  const [isInstalled, setIsInstalled] = useState(false);
+  const [isStandaloneDisplayMode, setIsStandaloneDisplayMode] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -63,7 +63,9 @@ export default function usePWA() {
       handleAppInstalled as EventListener
     );
 
-    setIsInstalled(window.matchMedia("(display-mode: standalone)").matches);
+    setIsStandaloneDisplayMode(
+      window.matchMedia("(display-mode: standalone)").matches
+    );
 
     return () => {
       window.removeEventListener("online", handleOnline);
@@ -91,5 +93,10 @@ export default function usePWA() {
     });
   }
 
-  return { isOnline, isInstallable, handleInstallClick, isInstalled };
+  return {
+    isOnline,
+    isInstallable,
+    handleInstallClick,
+    isStandaloneDisplayMode,
+  };
 }
