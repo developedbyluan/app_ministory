@@ -70,6 +70,10 @@ export default function usePWA() {
         "beforeinstallprompt",
         handleBeforeInstallPrompt as EventListener
       );
+      window.removeEventListener(
+        "appinstalled",
+        handleAppInstalled as EventListener
+      );
     };
   }, []);
 
