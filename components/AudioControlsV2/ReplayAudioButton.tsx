@@ -1,21 +1,13 @@
-import { Repeat1, PointerOff } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Repeat1 } from "lucide-react";
 
 type ReplayAudioProps = {
-  isReplaying: boolean;
+  onReplay?: () => void;
 };
 
-export default function ReplayAudio({ isReplaying }: ReplayAudioProps) {
+export default function ReplayAudio({ onReplay }: ReplayAudioProps) {
   return (
-    <button
-      disabled={isReplaying}
-      className={cn(isReplaying ? "opacity-5" : "opacity-100")}
-    >
-      {isReplaying ? (
-        <PointerOff color="white" size={32} />
-      ) : (
-        <Repeat1 color="white" size={32} />
-      )}
+    <button onClick={onReplay}>
+      <Repeat1 color="white" size={32} />
     </button>
   );
 }

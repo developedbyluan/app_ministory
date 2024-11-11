@@ -1,20 +1,15 @@
-import { PointerOff, StepForward } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { StepForward } from "lucide-react";
 
 type StepForwardButtonProps = {
-  isReplaying: boolean;
+  onPlaySingleLyric: () => void;
 };
 
 export default function StepForwardButton({
-  isReplaying,
+  onPlaySingleLyric,
 }: StepForwardButtonProps) {
   return (
-    <button className={cn(isReplaying ? "opacity-10" : "opacity-100")}>
-      {isReplaying ? (
-        <PointerOff color="white" size={32} />
-      ) : (
-        <StepForward color="white" fill="white" size={32} />
-      )}
+    <button onClick={onPlaySingleLyric}>
+      <StepForward color="white" fill="white" size={32} />
     </button>
   );
 }
