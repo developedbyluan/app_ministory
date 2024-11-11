@@ -1,6 +1,7 @@
 import React from "react";
 import PlayPauseToggler from "./PlayPauseToggler";
 import StepForwardButton from "./StepForwardButton";
+import ReplayAudioButton from "./ReplayAudioButton";
 
 interface AudioControlsProps {
   isPlaying?: boolean;
@@ -27,7 +28,10 @@ export default function AudioControlsV2({
         )}
 
         {type === "auto-pause" && (
-          <StepForwardButton isReplaying={isReplaying} />
+          <>
+            <StepForwardButton isReplaying={isReplaying} />
+            <ReplayAudioButton isReplaying={isReplaying} />
+          </>
         )}
       </div>
     </div>
