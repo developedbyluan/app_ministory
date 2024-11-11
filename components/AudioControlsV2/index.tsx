@@ -1,6 +1,6 @@
 import React from "react";
-import PlayPauseToggler from "./AudioControlsV2Children/PlayPauseToggler";
-import StepForwardButton from "./AudioControlsV2Children/StepForwardButton";
+import PlayPauseToggler from "./PlayPauseToggler";
+import StepForwardButton from "./StepForwardButton";
 
 interface AudioControlsProps {
   isPlaying?: boolean;
