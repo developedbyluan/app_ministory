@@ -4,6 +4,7 @@ import LoadingLogo from "@/components/SplashScreen/LoadingLogo";
 import WelcomeText from "@/components/SplashScreen/WelcomeText";
 import EnterAppButton from "@/components/SplashScreen/EnterAppButton";
 import AppInstallButton from "@/components/SplashScreen/AppInstallButton";
+import InstallAppOnIOSGuide from "@/components/SplashScreen/InstallAppOnIOSGuide";
 import usePWA from "@/hooks/use-pwa";
 
 type SplashScreenProps = {
@@ -39,11 +40,7 @@ export default function SplashScreen({ hrefValue }: SplashScreenProps) {
         )
       )}
 
-      {isIOS && !isStandaloneDisplayMode && (
-        <p className="flex flex-col gap-1 text-center text-xs text-yellow-300">
-          <span>Hi Friend, add this app to your HomeScreen to use it.</span>
-        </p>
-      )}
+      {isIOS && !isStandaloneDisplayMode && <InstallAppOnIOSGuide />}
 
       {isOnline && isStandaloneDisplayMode && (
         <EnterAppButton hrefValue={hrefValue} />
