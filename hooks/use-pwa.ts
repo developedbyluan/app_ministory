@@ -2,8 +2,18 @@
 
 import { useEffect, useState } from "react";
 
+type BeforeInstallPromptEvent = Event & {
+  readonly platforms: string[];
+  readonly userChoice: Promise<{
+    outcome: "accepted" | "dismissed";
+    platform: string;
+  }>;
+  prompt(): Promise<void>;
+};
+
 export default function usePWA() {
   const [isOnline, setIsOnline] = useState(true);
+  const [isInstallable, setIsInstallable] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -30,6 +40,15 @@ export default function usePWA() {
     window.addEventListener("offline", handleOffline);
 
     // Add to HomeScreen
+    const handleBeforeInstallPrompt = (event: BeforeInstallPromptEvent) => {
+      event.preventDefault();
+      setIsInstallable(true);
+    };
+
+    window.addEventListener(
+      "beforeinstallprompt",
+      handleBeforeInstallPrompt as EventListener
+    );
 
     return () => {
       window.removeEventListener("online", handleOnline);
@@ -37,5 +56,5 @@ export default function usePWA() {
     };
   }, []);
 
-  return { isOnline };
+  return { isOnline, isInstallable };
 }
