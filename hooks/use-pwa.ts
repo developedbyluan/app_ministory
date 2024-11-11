@@ -63,6 +63,8 @@ export default function usePWA() {
       handleAppInstalled as EventListener
     );
 
+    setIsInstalled(window.matchMedia("(display-mode: standalone)").matches);
+
     return () => {
       window.removeEventListener("online", handleOnline);
       window.removeEventListener("offline", handleOffline);

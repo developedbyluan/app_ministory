@@ -68,6 +68,8 @@ export default function SplashScreen({ hrefValue }: SplashScreenProps) {
           <span>The Mini Story App waits for you there.</span>
         </p>
       )}
+
+      {isOnline && isInstalled && <EnterAppButton hrefValue={hrefValue} />}
     </div>
   );
 }
