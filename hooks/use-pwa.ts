@@ -14,6 +14,9 @@ type BeforeInstallPromptEvent = Event & {
 export default function usePWA() {
   const [isOnline, setIsOnline] = useState(true);
   const [isInstallable, setIsInstallable] = useState(false);
+  const [installPrompt, setInstallPrompt] =
+    useState<BeforeInstallPromptEvent | null>(null);
+  const [isInstalled, setIsInstalled] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -43,6 +46,7 @@ export default function usePWA() {
     const handleBeforeInstallPrompt = (event: BeforeInstallPromptEvent) => {
       event.preventDefault();
       setIsInstallable(true);
+      setInstallPrompt(event);
     };
 
     window.addEventListener(
@@ -56,5 +60,17 @@ export default function usePWA() {
     };
   }, []);
 
-  return { isOnline, isInstallable };
+  function handleInstallClick() {
+    if (!installPrompt) return;
+
+    installPrompt.prompt();
+    installPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === "accepted") {
+        setIsInstalled(true);
+      }
+      setInstallPrompt(null);
+    });
+  }
+
+  return { isOnline, isInstallable, handleInstallClick, isInstalled };
 }
