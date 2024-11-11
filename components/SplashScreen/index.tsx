@@ -11,17 +11,27 @@ type SplashScreenProps = {
 };
 
 export default function SplashScreen({ hrefValue }: SplashScreenProps) {
-  const { isOnline } = usePWA();
+  const { isOnline, isInstallable, isInstalled, handleInstallClick } = usePWA();
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4 overflow-hidden">
       <LoadingLogo />
       <WelcomeText />
-      {isOnline ? (
+      {isOnline && isInstalled ? (
         <EnterAppButton hrefValue={hrefValue} />
-      ) : (
+      ) : isInstalled ? (
         <p className="flex flex-col gap-1 text-center text-xs text-red-300">
           <span>Currently you cannot use the Mini Story App offline.</span>
           <span>Please connect to the internet to use it.</span>
+        </p>
+      ) : isInstallable ? (
+        <button onClick={handleInstallClick}>Install</button>
+      ) : (
+        <p className="flex flex-col gap-1 text-center text-xs text-red-300">
+          <span>You cannot install this app.</span>
+          <span>
+            Your device does not support it or you have it installed already.
+          </span>
         </p>
       )}
     </div>
