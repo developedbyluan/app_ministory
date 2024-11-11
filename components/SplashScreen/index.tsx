@@ -20,7 +20,10 @@ export default function SplashScreen({
       {isOnline ? (
         <EnterAppButton hrefValue={hrefValue} />
       ) : (
-        <p>Mini Story App needs internet connection to work.</p>
+        <p className="flex flex-col gap-1 text-center text-xs text-red-300">
+          <span>Currently you cannot use the Mini Story App offline.</span>
+          <span>Please connect to the internet to use it.</span>
+        </p>
       )}
     </div>
   );

@@ -1,4 +1,4 @@
-const STATIC_CACHE_NAME = "static-v0";
+const STATIC_CACHE_NAME = "miniStoryApp-0.0.0";
 
 self.addEventListener("install", (event) => {
   console.log("1. Service worker installing", event);
