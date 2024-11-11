@@ -7,6 +7,9 @@ import AppInstallButton from "@/components/SplashScreen/AppInstallButton";
 import InstallAppOnIOSGuide from "@/components/SplashScreen/InstallAppOnIOSGuide";
 import usePWA from "@/hooks/use-pwa";
 
+import { redirect } from "next/navigation";
+import { useEffect } from "react";
+
 type SplashScreenProps = {
   hrefValue: string;
 };
@@ -19,6 +22,12 @@ export default function SplashScreen({ hrefValue }: SplashScreenProps) {
     isIOS,
     handleInstallClick,
   } = usePWA();
+
+  useEffect(() => {
+    if (isStandaloneDisplayMode) {
+      redirect(hrefValue);
+    }
+  }, [isStandaloneDisplayMode, hrefValue]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4 overflow-hidden">
