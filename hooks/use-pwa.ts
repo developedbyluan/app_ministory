@@ -17,6 +17,7 @@ export default function usePWA() {
   const [installPrompt, setInstallPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
   const [isStandaloneDisplayMode, setIsStandaloneDisplayMode] = useState(false);
+  const [isIOS, setIsIOS] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -66,6 +67,11 @@ export default function usePWA() {
     setIsStandaloneDisplayMode(
       window.matchMedia("(display-mode: standalone)").matches
     );
+    setIsIOS(
+      navigator.userAgent.includes("iPhone") ||
+        navigator.userAgent.includes("iPad") ||
+        navigator.userAgent.includes("iPod")
+    );
 
     return () => {
       window.removeEventListener("online", handleOnline);
@@ -98,5 +104,6 @@ export default function usePWA() {
     isInstallable,
     handleInstallClick,
     isStandaloneDisplayMode,
+    isIOS,
   };
 }

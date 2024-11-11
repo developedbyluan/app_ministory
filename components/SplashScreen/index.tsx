@@ -15,6 +15,7 @@ export default function SplashScreen({ hrefValue }: SplashScreenProps) {
     isOnline,
     isInstallable,
     isStandaloneDisplayMode,
+    isIOS,
     handleInstallClick,
   } = usePWA();
 
@@ -45,12 +46,19 @@ export default function SplashScreen({ hrefValue }: SplashScreenProps) {
           Install
         </button>
       ) : (
-        !isStandaloneDisplayMode && (
+        !isStandaloneDisplayMode &&
+        !isIOS && (
           <p className="flex flex-col gap-1 text-center text-xs text-green-300">
             <span>Hi Friend, go to your HomeScreen. </span>
             <span>The Mini Story App waits for you there.</span>
           </p>
         )
+      )}
+
+      {isIOS && (
+        <p className="flex flex-col gap-1 text-center text-xs text-yellow-300">
+          <span>Hi Friend, add this app to your HomeScreen to use it.</span>
+        </p>
       )}
 
       {isOnline && isStandaloneDisplayMode && (
