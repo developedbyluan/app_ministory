@@ -6,7 +6,7 @@ interface AudioControlsProps {
   isPlaying?: boolean;
   onPlayPause?: () => void;
   isReplaying?: boolean;
-  type: "standard" | "audio-pause";
+  type: "standard" | "auto-pause";
 }
 
 export default function AudioControlsV2({
@@ -26,7 +26,7 @@ export default function AudioControlsV2({
           />
         )}
 
-        {type === "audio-pause" && (
+        {type === "auto-pause" && (
           <StepForwardButton isReplaying={isReplaying} />
         )}
       </div>
