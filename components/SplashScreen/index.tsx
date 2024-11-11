@@ -39,7 +39,7 @@ export default function SplashScreen({ hrefValue }: SplashScreenProps) {
         )
       )}
 
-      {isIOS && (
+      {isIOS && !isStandaloneDisplayMode && (
         <p className="flex flex-col gap-1 text-center text-xs text-yellow-300">
           <span>Hi Friend, add this app to your HomeScreen to use it.</span>
         </p>
