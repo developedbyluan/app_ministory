@@ -5,20 +5,25 @@ import ReplayAudioButton from "./ReplayAudioButton";
 
 import PauseTouchArea from "./PauseTouchArea";
 import { motion, AnimatePresence } from "framer-motion";
+import TranslationToggler from "./TranslationToggler";
 
-interface AudioControlsProps {
+type AudioControlsProps = {
   isPlaying?: boolean;
   onPlayPause?: () => void;
   isReplaying?: boolean;
   onReplay?: () => void;
+  showTranslation: boolean;
+  onShowTranslation: () => void;
   type: "standard" | "auto-pause";
-}
+};
 
 export default function AudioControlsV2({
   isPlaying = false,
   onPlayPause = () => {},
   isReplaying = false,
   onReplay,
+  showTranslation,
+  onShowTranslation,
   type = "standard",
 }: AudioControlsProps) {
   return (
@@ -46,6 +51,11 @@ export default function AudioControlsV2({
                   <ReplayAudioButton onReplay={onReplay} />
                 </>
               )}
+
+              <TranslationToggler
+                showTranslation={showTranslation}
+                onShowTranslation={onShowTranslation}
+              />
             </div>
           </motion.div>
         )}
