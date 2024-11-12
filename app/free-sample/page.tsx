@@ -5,6 +5,7 @@ import AudioControlsV2 from "@/components/AudioControlsV2";
 
 import { lyrics } from "./lyrics";
 import ProgressBar from "@/components/AllLyricsPlayer/ProgressBar";
+import LyricsDisplay from "@/components/AllLyricsPlayer/LyricsDisplay";
 
 export default function FreeSamplePage() {
   // const [isPlaying, setIsPlaying] = useState(false);
@@ -15,12 +16,13 @@ export default function FreeSamplePage() {
     audioRef,
     audioUrl,
     isPlaying,
-    isReplaying,
     showTranslation,
+    setShowTranslation,
     togglePlayPause,
-    handleReplay,
-    handleShowTranslation,
     progress,
+    handleLyricClick,
+    activeLyricIndex,
+    lyricRefsArray,
   } = useAllLyricsPlayer({
     audioKey: "the-race-ms",
     lyrics: lyrics,
@@ -46,12 +48,20 @@ export default function FreeSamplePage() {
       <ProgressBar progress={progress} />
       {audioUrl && <audio ref={audioRef} src={audioUrl} />}
 
-      <div id="standard-player">
+      <div id="standard-player" className="pt-10 px-7">
+        <LyricsDisplay
+          lyrics={lyrics}
+          onLyricClick={handleLyricClick}
+          activeLyricIndex={activeLyricIndex}
+          lyricRefsArray={lyricRefsArray}
+          isPlaying={isPlaying}
+          showTranslation={showTranslation}
+        />
         <AudioControlsV2
           isPlaying={isPlaying}
           onPlayPause={togglePlayPause}
           showTranslation={showTranslation}
-          onShowTranslation={handleShowTranslation}
+          onShowTranslation={() => setShowTranslation((prev) => !prev)}
           type="standard"
         />
       </div>
