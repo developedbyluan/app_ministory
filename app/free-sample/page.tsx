@@ -1,7 +1,8 @@
 "use client";
 // import { useState } from "react";
-import AudioControlsV2 from "@/components/AudioControlsV2";
 import useAllLyricsPlayer from "@/hooks/use-all-lyrics-player";
+
+import { lyrics } from "./lyrics";
 
 export default function FreeSamplePage() {
   // const [isPlaying, setIsPlaying] = useState(false);
@@ -19,20 +20,7 @@ export default function FreeSamplePage() {
     handleShowTranslation,
   } = useAllLyricsPlayer({
     audioKey: "the-race-ms",
-    lyrics: [
-      {
-        id: 1,
-        text: "Hello",
-        ipa: "Həˈləʊ",
-        translation: "Hello",
-        startTime: 0,
-        endTime: 10,
-        imgUrl: "",
-        altText: "",
-        imgCredit: "",
-        type: "intro",
-      },
-    ],
+    lyrics: lyrics,
   });
 
   // const handlePlayPause = () => {
