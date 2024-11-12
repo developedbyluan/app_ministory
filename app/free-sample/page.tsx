@@ -1,6 +1,7 @@
 "use client";
 // import { useState } from "react";
 import useAllLyricsPlayer from "@/hooks/use-all-lyrics-player";
+import AudioControlsV2 from "@/components/AudioControlsV2";
 
 import { lyrics } from "./lyrics";
 
@@ -15,7 +16,7 @@ export default function FreeSamplePage() {
     isPlaying,
     isReplaying,
     showTranslation,
-    handlePlayPause,
+    togglePlayPause,
     handleReplay,
     handleShowTranslation,
   } = useAllLyricsPlayer({
@@ -41,15 +42,16 @@ export default function FreeSamplePage() {
   return (
     <div>
       {audioUrl && <audio ref={audioRef} src={audioUrl} controls />}
-      <div id="standard-player"></div>
-      {/* <AudioControlsV2
+
+      <div id="standard-player">
+        <AudioControlsV2
           isPlaying={isPlaying}
-        isReplaying={isReplaying}
-        onPlayPause={handlePlayPause}
-        type="standard"
-        showTranslation={showTranslation}
-        onShowTranslation={handleShowTranslation}
-      /> */}
+          onPlayPause={togglePlayPause}
+          showTranslation={showTranslation}
+          onShowTranslation={handleShowTranslation}
+          type="standard"
+        />
+      </div>
 
       <div id="auto-pause-player"></div>
       {/* <AudioControlsV2
