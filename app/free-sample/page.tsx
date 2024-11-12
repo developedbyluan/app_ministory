@@ -41,7 +41,7 @@ export default function FreeSamplePage() {
 
   return (
     <div>
-      {audioUrl && <audio ref={audioRef} src={audioUrl} controls />}
+      {audioUrl && <audio ref={audioRef} src={audioUrl} />}
 
       <div id="standard-player">
         <AudioControlsV2
