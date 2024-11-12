@@ -4,6 +4,7 @@ import useAllLyricsPlayer from "@/hooks/use-all-lyrics-player";
 import AudioControlsV2 from "@/components/AudioControlsV2";
 
 import { lyrics } from "./lyrics";
+import ProgressBar from "@/components/AllLyricsPlayer/ProgressBar";
 
 export default function FreeSamplePage() {
   // const [isPlaying, setIsPlaying] = useState(false);
@@ -19,6 +20,7 @@ export default function FreeSamplePage() {
     togglePlayPause,
     handleReplay,
     handleShowTranslation,
+    progress,
   } = useAllLyricsPlayer({
     audioKey: "the-race-ms",
     lyrics: lyrics,
@@ -41,6 +43,7 @@ export default function FreeSamplePage() {
 
   return (
     <div>
+      <ProgressBar progress={progress} />
       {audioUrl && <audio ref={audioRef} src={audioUrl} />}
 
       <div id="standard-player">
