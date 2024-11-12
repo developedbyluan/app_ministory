@@ -44,7 +44,7 @@ export default function PauseTouchArea({
       className={cn(
         "fixed inset-0",
         isPlaying || isReplaying
-          ? "flex flex-col justify-end items-center"
+          ? "flex flex-col justify-end items-center z-30"
           : "hidden"
       )}
     >
