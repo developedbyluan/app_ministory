@@ -32,7 +32,7 @@ export default function AudioControlsV2({
     <div>
       <AnimatePresence>
         {!isReplaying && !isPlaying && (
-          <div className="opacity-95">
+          <div className="opacity-95 z-50">
             <CloseButton route="/upload-audio" />
             <motion.div
               initial={{ y: 100, opacity: 0 }}

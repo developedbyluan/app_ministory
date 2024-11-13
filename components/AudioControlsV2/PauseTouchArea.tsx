@@ -44,13 +44,11 @@ export default function PauseTouchArea({
       className={cn(
         "fixed inset-0",
         isPlaying || isReplaying
-          ? "flex flex-col justify-end items-center z-30"
+          ? "flex flex-col justify-end items-center z-10 text-zinc-400"
           : "hidden"
       )}
     >
-      <p className="w-full text-center text-zinc-400 bg-zinc-50 text-sm">
-        Tap Anywhere to Pause
-      </p>
+      Tap Anywhere to Pause the Audio
     </motion.div>
   );
 }
