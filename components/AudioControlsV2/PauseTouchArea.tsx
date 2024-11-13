@@ -48,7 +48,9 @@ export default function PauseTouchArea({
           : "hidden"
       )}
     >
-      <span className="text-zinc-400 text-sm">Tap Anywhere to Pause</span>
+      <p className="w-full text-center text-zinc-400 bg-zinc-50 text-sm">
+        Tap Anywhere to Pause
+      </p>
     </motion.div>
   );
 }
