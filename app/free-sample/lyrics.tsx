@@ -2,7 +2,7 @@ import { Lyric } from "@/types/types";
 
 export const lyrics: Lyric[] = [
   {
-    id: 1,
+    id: 0,
     text: "Hello, welcome to the mini-story for The Race. Let’s get started.",
     ipa: "həˈloʊ, ˈwɛlkəm tu ðə ˈmɪni-ˈstɔri fɔr ðə reɪs. lɛts gɛt ˈstɑrtəd.",
     translation:
@@ -15,7 +15,7 @@ export const lyrics: Lyric[] = [
     endTime: 8.36128,
   },
   {
-    id: 2,
+    id: 1,
     text: "It was 5:00 and Alan was riding his motorcycle in San Francisco.",
     ipa: "ɪt wʌz 5:00 ænd ˈælən wʌz ˈraɪdɪŋ hɪz ˈmoʊtərˌsaɪkəl ɪn sæn frænˈsɪskoʊ.",
     translation: "Lúc đó là 5 giờ và Alan đang lái xe máy ở San Francisco.",
@@ -27,7 +27,7 @@ export const lyrics: Lyric[] = [
     endTime: 18.021236,
   },
   {
-    id: 3,
+    id: 2,
     text: "When was Alan riding his motorcycle?",
     ipa: "wɛn wʌz ˈælən ˈraɪdɪŋ hɪz ˈmoʊtərˌsaɪkəl?",
     translation: "Khi nào Alan đang lái xe máy?",
@@ -39,7 +39,7 @@ export const lyrics: Lyric[] = [
     endTime: 25.39302,
   },
   {
-    id: 4,
+    id: 3,
     text: "Well, at 5:00, right? At 5:00, Alan was riding his motorcycle.",
     ipa: "wɛl, æt 5:00, raɪt? æt 5:00, ˈælən wʌz ˈraɪdɪŋ hɪz ˈmoʊtərˌsaɪkəl.",
     translation:
@@ -52,7 +52,7 @@ export const lyrics: Lyric[] = [
     endTime: 35.945174,
   },
   {
-    id: 5,
+    id: 4,
     text: "Was Alan riding his car? Or was Alan riding his motorcycle?",
     ipa: "wʌz ˈælən ˈraɪdɪŋ hɪz kɑr? ɔr wʌz ˈælən ˈraɪdɪŋ hɪz ˈmoʊtərˌsaɪkəl?",
     translation: "Alan đang lái ô tô à? Hay là Alan đang lái xe máy?",
@@ -64,7 +64,7 @@ export const lyrics: Lyric[] = [
     endTime: 45.575407,
   },
   {
-    id: 6,
+    id: 5,
     text: "Well, of course, Alan was riding his motorcycle.",
     ipa: "wɛl, əv kɔrs, ˈælən wʌz ˈraɪdɪŋ hɪz ˈmoʊtərˌsaɪkəl.",
     translation: "À, tất nhiên là Alan đang lái xe máy.",
@@ -76,7 +76,7 @@ export const lyrics: Lyric[] = [
     endTime: 51.784356,
   },
   {
-    id: 7,
+    id: 6,
     text: "Where was Alan riding his motorcycle?",
     ipa: "wɛr wʌz ˈælən ˈraɪdɪŋ hɪz ˈmoʊtərˌsaɪkəl?",
     translation: "Alan đang lái xe máy ở đâu?",
@@ -88,7 +88,7 @@ export const lyrics: Lyric[] = [
     endTime: 55.905923,
   },
   {
-    id: 8,
+    id: 7,
     text: "In San Francisco. Alan was riding his motorcycle in San Francisco.",
     ipa: "ɪn sæn frænˈsɪskoʊ. ˈælən wʌz ˈraɪdɪŋ hɪz ˈmoʊtərˌsaɪkəl ɪn sæn frænˈsɪskoʊ.",
     translation: "Ở San Francisco. Alan đang lái xe máy ở San Francisco.",
@@ -100,7 +100,7 @@ export const lyrics: Lyric[] = [
     endTime: 64.537957,
   },
   {
-    id: 9,
+    id: 8,
     text: "When was he riding?",
     ipa: "wɛn wʌz hi ˈraɪdɪŋ?",
     translation: "Anh ấy đang lái xe khi nào?",
@@ -112,7 +112,7 @@ export const lyrics: Lyric[] = [
     endTime: 67.439101,
   },
   {
-    id: 10,
+    id: 9,
     text: "At five o'clock. At five o'clock, Alan was riding his motorcycle in San Francisco.",
     ipa: "æt faɪv əˈklɑk. æt faɪv əˈklɑk, ˈælən wʌz ˈraɪdɪŋ hɪz ˈmoʊtərˌsaɪkəl ɪn sæn frænˈsɪskoʊ.",
     translation:
@@ -125,7 +125,7 @@ export const lyrics: Lyric[] = [
     endTime: 78.160379,
   },
   {
-    id: 11,
+    id: 10,
     text: "He was riding down Van Ness Street and came to a stoplight.",
     ipa: "hi wʌz ˈraɪdɪŋ daʊn væn nɛs strit ænd keɪm tu ə ˈstɑpˌlaɪt.",
     translation:
@@ -138,7 +138,7 @@ export const lyrics: Lyric[] = [
     endTime: 88.568498,
   },
   {
-    id: 12,
+    id: 11,
     text: "Who was riding down Van Ness Street?",
     ipa: "hu wʌz ˈraɪdɪŋ daʊn væn nɛs strit?",
     translation: "Ai đang lái xe xuống đường Van Ness?",
@@ -150,7 +150,7 @@ export const lyrics: Lyric[] = [
     endTime: 93.851683,
   },
   {
-    id: 13,
+    id: 12,
     text: "Alan. Alan was riding down Van Ness Street.",
     ipa: "ˈælən. ˈælən wʌz ˈraɪdɪŋ daʊn væn nɛs strit.",
     translation: "Alan. Alan đang lái xe xuống đường Van Ness.",
@@ -162,7 +162,7 @@ export const lyrics: Lyric[] = [
     endTime: 99.887599,
   },
   {
-    id: 14,
+    id: 13,
     text: "What was he riding on?",
     ipa: "wʌt wʌz hi ˈraɪdɪŋ ɑn?",
     translation: "Anh ấy đang lái cái gì?",
@@ -174,7 +174,7 @@ export const lyrics: Lyric[] = [
     endTime: 104.214153,
   },
   {
-    id: 15,
+    id: 14,
     text: "On a motorcycle. He was riding on his motorcycle.",
     ipa: "ɑn ə ˈmoʊtərˌsaɪkəl. hi wʌz ˈraɪdɪŋ ɑn hɪz ˈmoʊtərˌsaɪkəl.",
     translation: "Trên một chiếc xe máy. Anh ấy đang lái xe máy của mình.",
@@ -186,7 +186,7 @@ export const lyrics: Lyric[] = [
     endTime: 112.025697,
   },
   {
-    id: 16,
+    id: 15,
     text: "Was he riding down Market Street?",
     ipa: "wʌz hi ˈraɪdɪŋ daʊn ˈmɑrkɪt strit?",
     translation: "Anh ấy có đang lái xe xuống đường Market không?",
@@ -198,7 +198,7 @@ export const lyrics: Lyric[] = [
     endTime: 118.343479,
   },
   {
-    id: 17,
+    id: 16,
     text: "No, no, no, not Market Street, he wasn’t riding down Market Street.",
     ipa: "noʊ, noʊ, noʊ, nɑt ˈmɑrkɪt strit, hi ˈwɑzənt ˈraɪdɪŋ daʊn ˈmɑrkɪt strit.",
     translation:
@@ -211,7 +211,7 @@ export const lyrics: Lyric[] = [
     endTime: 125.829162,
   },
   {
-    id: 18,
+    id: 17,
     text: "Was he riding down Lombard Street?",
     ipa: "wʌz hi ˈraɪdɪŋ daʊn ˈlɑmbɑrd strit?",
     translation: "Anh ấy có đang lái xe xuống đường Lombard không?",
@@ -223,7 +223,7 @@ export const lyrics: Lyric[] = [
     endTime: 130.601714,
   },
   {
-    id: 19,
+    id: 18,
     text: "No. He wasn’t riding down Lombard Street, he was riding down Van Ness Street.",
     ipa: "noʊ. hi ˈwɑzənt ˈraɪdɪŋ daʊn ˈlɑmbɑrd strit, hi wʌz ˈraɪdɪŋ daʊn væn nɛs strit.",
     translation:
@@ -236,7 +236,7 @@ export const lyrics: Lyric[] = [
     endTime: 141.471588,
   },
   {
-    id: 20,
+    id: 19,
     text: "When? When was he riding down Van Ness Street?",
     ipa: "wɛn? wɛn wʌz hi ˈraɪdɪŋ daʊn væn nɛs strit?",
     translation: "Khi nào? Khi nào anh ấy đang lái xe xuống đường Van Ness?",
@@ -248,7 +248,7 @@ export const lyrics: Lyric[] = [
     endTime: 149.303611,
   },
   {
-    id: 21,
+    id: 20,
     text: "At 5:00. At 5:00, he was riding down Van Ness Street.",
     ipa: "æt 5:00. æt 5:00, hi wʌz ˈraɪdɪŋ daʊn væn nɛs strit.",
     translation:
@@ -261,7 +261,7 @@ export const lyrics: Lyric[] = [
     endTime: 158.044364,
   },
   {
-    id: 22,
+    id: 21,
     text: "Who was riding down Van Ness Street at 5:00?",
     ipa: "hu wʌz ˈraɪdɪŋ daʊn væn nɛs strit æt 5:00?",
     translation: "Ai đang lái xe xuống đường Van Ness lúc 5 giờ?",
@@ -273,7 +273,7 @@ export const lyrics: Lyric[] = [
     endTime: 165.332809,
   },
   {
-    id: 23,
+    id: 22,
     text: "Alan. Alan was riding down Van Ness Street at 5:00.",
     ipa: "ˈælən. ˈælən wʌz ˈraɪdɪŋ daʊn væn nɛs strit æt 5:00.",
     translation: "Alan. Alan đang lái xe xuống đường Van Ness lúc 5 giờ.",
@@ -285,7 +285,7 @@ export const lyrics: Lyric[] = [
     endTime: 174.503836,
   },
   {
-    id: 24,
+    id: 23,
     text: "Was he in a truck?",
     ipa: "wʌz hi ɪn ə trʌk?",
     translation: "Anh ấy có ở trong một chiếc xe tải không?",
@@ -297,7 +297,7 @@ export const lyrics: Lyric[] = [
     endTime: 178.331776,
   },
   {
-    id: 25,
+    id: 24,
     text: "No. He wasn’t in a truck. He was on his motorcycle and he came to a stoplight.",
     ipa: "noʊ. hi ˈwɑzənt ɪn ə trʌk. hi wʌz ɑn hɪz ˈmoʊtərˌsaɪkəl ænd hi keɪm tu ə ˈstɑpˌlaɪt.",
     translation:
@@ -310,7 +310,7 @@ export const lyrics: Lyric[] = [
     endTime: 193.699721,
   },
   {
-    id: 26,
+    id: 25,
     text: "Did Alan come to a go light?",
     ipa: "dɪd ˈælən kʌm tu ə ɡoʊ laɪt?",
     translation: "Alan có gặp go light không?",
@@ -322,7 +322,7 @@ export const lyrics: Lyric[] = [
     endTime: 199.172082,
   },
   {
-    id: 27,
+    id: 26,
     text: "No. No, no, no, no. He didn’t come to a go light. He came to a stoplight.",
     ipa: "noʊ. noʊ, noʊ, noʊ, noʊ. hi ˈdɪdnt kʌm tu ə ɡoʊ laɪt. hi keɪm tu ə ˈstɑpˌlaɪt.",
     translation:
@@ -335,7 +335,7 @@ export const lyrics: Lyric[] = [
     endTime: 208.109779,
   },
   {
-    id: 28,
+    id: 27,
     text: "We never say “go light,” we only say stoplight.",
     ipa: "wi ˈnɛvər seɪ “ɡoʊ laɪt,” wi ˈoʊnli seɪ ˈstɑpˌlaɪt.",
     translation:
@@ -349,7 +349,7 @@ export const lyrics: Lyric[] = [
     endTime: 217.523382,
   },
   {
-    id: 29,
+    id: 28,
     text: "Who came to a stoplight?",
     ipa: "hu keɪm tu ə ˈstɑpˌlaɪt?",
     translation: "Ai đến chỗ đèn giao thông?",
@@ -361,7 +361,7 @@ export const lyrics: Lyric[] = [
     endTime: 221.61023,
   },
   {
-    id: 30,
+    id: 29,
     text: "Alan, of course! Alan came to a stoplight.",
     ipa: "ˈælən, ʌv kɔrs! ˈælən keɪm tu ə ˈstɑpˌlaɪt.",
     translation: "Alan, tất nhiên rồi! Alan đến chỗ đèn giao thông.",
@@ -373,7 +373,7 @@ export const lyrics: Lyric[] = [
     endTime: 227.968496,
   },
   {
-    id: 31,
+    id: 30,
     text: "What was he on when he came to a stoplight?",
     ipa: "wʌt wəz hi ɑn wɛn hi keɪm tu ə ˈstɑpˌlaɪt?",
     translation: "Anh ấy đang đi xe gì khi đến chỗ đèn giao thông?",
@@ -385,7 +385,7 @@ export const lyrics: Lyric[] = [
     endTime: 237.868694,
   },
   {
-    id: 32,
+    id: 31,
     text: "A motorcycle. He was on a motorcycle when he came to a stoplight.",
     ipa: "ə ˈmoʊtərˌsaɪkəl. hi wəz ɑn ə ˈmoʊtərˌsaɪkəl wɛn hi keɪm tu ə ˈstɑpˌlaɪt.",
     translation:
@@ -398,7 +398,7 @@ export const lyrics: Lyric[] = [
     endTime: 249.74437,
   },
   {
-    id: 33,
+    id: 32,
     text: "Where was the stoplight?",
     ipa: "wɛr wʌz ðə ˈstɑpˌlaɪt?",
     translation: "Đèn giao thông ở đâu?",
@@ -410,7 +410,7 @@ export const lyrics: Lyric[] = [
     endTime: 255.237126,
   },
   {
-    id: 34,
+    id: 33,
     text: "Well, on Van Ness Street. The stoplight was on Van Ness Street.",
     ipa: "wɛl, ɑn væn nɛs strit. ðə ˈstɑpˌlaɪt wʌz ɑn væn nɛs strit.",
     translation: "Ở đường Van Ness. Đèn giao thông nằm trên đường Van Ness.",
@@ -422,7 +422,7 @@ export const lyrics: Lyric[] = [
     endTime: 265.139789,
   },
   {
-    id: 35,
+    id: 34,
     text: "Was the stoplight on Embarcadero Street or was the stoplight on Van Ness Street?",
     ipa: "wʌz ðə ˈstɑpˌlaɪt ɑn ɪmˌbɑrkəˈdɛroʊ strit ɔr wʌz ðə ˈstɑpˌlaɪt ɑn væn nɛs strit?",
     translation:
@@ -435,7 +435,7 @@ export const lyrics: Lyric[] = [
     endTime: 278.089381,
   },
   {
-    id: 36,
+    id: 35,
     text: "Van Ness, of course, Van Ness. The stoplight was on Van Ness Street.",
     ipa: "væn nɛs, ʌv kɔrs, væn nɛs. ðə ˈstɑpˌlaɪt wʌz ɑn væn nɛs strit.",
     translation:
@@ -448,7 +448,7 @@ export const lyrics: Lyric[] = [
     endTime: 286.778358,
   },
   {
-    id: 37,
+    id: 36,
     text: "Who was at the stoplight?",
     ipa: "hu wʌz æt ðə ˈstɑpˌlaɪt?",
     translation: "Ai ở chỗ đèn giao thông?",
@@ -460,7 +460,7 @@ export const lyrics: Lyric[] = [
     endTime: 292.37413,
   },
   {
-    id: 38,
+    id: 37,
     text: "Alan was at the stoplight.",
     ipa: "ˈælən wʌz æt ðə ˈstɑpˌlaɪt.",
     translation: "Alan đang ở chỗ đèn giao thông.",
@@ -472,7 +472,7 @@ export const lyrics: Lyric[] = [
     endTime: 297.284588,
   },
   {
-    id: 39,
+    id: 38,
     text: "Which city was Alan in?",
     ipa: "wɪtʃ ˈsɪti wʌz ˈælən ɪn?",
     translation: "Alan đang ở thành phố nào?",
@@ -484,7 +484,7 @@ export const lyrics: Lyric[] = [
     endTime: 303.839038,
   },
   {
-    id: 40,
+    id: 39,
     text: "In San Francisco, of course. Alan was in San Francisco.",
     ipa: "ɪn sæn frænˈsɪskoʊ, ʌv kɔrs. ˈælən wʌz ɪn sæn frænˈsɪskoʊ.",
     translation: "Ở San Francisco, tất nhiên rồi. Alan đang ở San Francisco.",
@@ -496,7 +496,7 @@ export const lyrics: Lyric[] = [
     endTime: 311.795167,
   },
   {
-    id: 41,
+    id: 40,
     text: "Where is Van Ness?",
     ipa: "wɛr ɪz væn nɛs?",
     translation: "Van Ness ở đâu?",
@@ -508,7 +508,7 @@ export const lyrics: Lyric[] = [
     endTime: 315.707444,
   },
   {
-    id: 42,
+    id: 41,
     text: "Well, Van Ness Street is in San Francisco, of course. Van Ness Street is in San Francisco.",
     ipa: "wɛl, væn nɛs strit ɪz ɪn sæn frænˈsɪskoʊ, ʌv kɔrs. væn nɛs strit ɪz ɪn sæn frænˈsɪskoʊ.",
     translation:
@@ -521,7 +521,7 @@ export const lyrics: Lyric[] = [
     endTime: 327.162565,
   },
   {
-    id: 43,
+    id: 42,
     text: "Is Van Ness Street in New York? Or is Van Ness Street in San Francisco?",
     ipa: "ɪz væn nɛs strit ɪn nu jɔrk? ɔr ɪz væn nɛs strit ɪn sæn frænˈsɪskoʊ?",
     translation: "Đường Van Ness nằm ở New York hay ở San Francisco?",
@@ -533,7 +533,7 @@ export const lyrics: Lyric[] = [
     endTime: 338.607825,
   },
   {
-    id: 44,
+    id: 43,
     text: "Well, of course, Van Ness Street is in San Francisco.",
     ipa: "wɛl, ʌv kɔrs, væn nɛs strit ɪz ɪn sæn frænˈsɪskoʊ.",
     translation: "Tất nhiên rồi, Van Ness Street nằm ở San Francisco.",
@@ -545,7 +545,7 @@ export const lyrics: Lyric[] = [
     endTime: 345.682262,
   },
   {
-    id: 45,
+    id: 44,
     text: "Where was Alan riding?",
     ipa: "wɛr wʌz ˈælən ˈraɪdɪŋ?",
     translation: "Alan đang lái xe ở đâu?",
@@ -557,7 +557,7 @@ export const lyrics: Lyric[] = [
     endTime: 353.53413,
   },
   {
-    id: 46,
+    id: 45,
     text: "He was riding on Van Ness Street, in San Francisco and he came to a stoplight.",
     ipa: "hi wʌz ˈraɪdɪŋ ɑn væn nɛs strit, ɪn sæn frænˈsɪskoʊ ænd hi keɪm tu ə ˈstɑpˌlaɪt.",
     translation:
@@ -570,7 +570,7 @@ export const lyrics: Lyric[] = [
     endTime: 364.576629,
   },
   {
-    id: 47,
+    id: 46,
     text: "A red Ferrari pulled up next to him.",
     ipa: "ə rɛd fəˈrɑri pʊld ʌp nɛkst tu hɪm.",
     translation: "Một chiếc Ferrari đỏ dừng lại bên cạnh anh ấy.",
@@ -582,7 +582,7 @@ export const lyrics: Lyric[] = [
     endTime: 370.065792,
   },
   {
-    id: 48,
+    id: 47,
     text: "Did the red Ferrari pull up behind him?",
     ipa: "dɪd ðə rɛd fəˈrɑri pʊld ʌp bɪˈhaɪnd hɪm?",
     translation: "Chiếc Ferrari đỏ dừng lại sau anh ấy phải không?",
@@ -594,7 +594,7 @@ export const lyrics: Lyric[] = [
     endTime: 377.204889,
   },
   {
-    id: 49,
+    id: 48,
     text: "No, no, no, not behind him, the red Ferrari pulled up next to him.",
     ipa: "noʊ, noʊ, noʊ, nɑt bɪˈhaɪnd hɪm, ðə rɛd fəˈrɑri pʊld ʌp nɛkst tu hɪm.",
     translation:
@@ -607,7 +607,7 @@ export const lyrics: Lyric[] = [
     endTime: 386.832829,
   },
   {
-    id: 50,
+    id: 49,
     text: "What pulled up next to Alan?",
     ipa: "wʌt pʊld ʌp nɛkst tu ˈælən?",
     translation: "Cái gì dừng lại bên cạnh Alan?",
@@ -619,7 +619,7 @@ export const lyrics: Lyric[] = [
     endTime: 390.720863,
   },
   {
-    id: 51,
+    id: 50,
     text: "A red Ferrari. A red Ferrari pulled up next to Alan.",
     ipa: "ə rɛd fəˈrɑri. ə rɛd fəˈrɑri pʊld ʌp nɛkst tu ˈælən.",
     translation:
@@ -632,7 +632,7 @@ export const lyrics: Lyric[] = [
     endTime: 398.576402,
   },
   {
-    id: 52,
+    id: 51,
     text: "Did Alan pull up next to a red Ferrari?",
     ipa: "dɪd ˈælən pʊld ʌp nɛkst tu ə rɛd fəˈrɑri?",
     translation: "Alan dừng lại bên cạnh một chiếc Ferrari đỏ phải không?",
@@ -644,7 +644,7 @@ export const lyrics: Lyric[] = [
     endTime: 405.879339,
   },
   {
-    id: 53,
+    id: 52,
     text: "No, no, no. Alan didn’t pull up next to a red Ferrari, a red Ferrari pulled up next to him.",
     ipa: "noʊ, noʊ, noʊ. ˈælən ˈdɪdnt pʊld ʌp nɛkst tu ə rɛd fəˈrɑri, ə rɛd fəˈrɑri pʊld ʌp nɛkst tu hɪm.",
     translation:
@@ -657,7 +657,7 @@ export const lyrics: Lyric[] = [
     endTime: 418.96509,
   },
   {
-    id: 54,
+    id: 53,
     text: "Where did the red Ferrari pull up next to Alan?",
     ipa: "wɛr dɪd ðə rɛd fəˈrɑri pʊld ʌp nɛkst tu ˈælən?",
     translation: "Chiếc Ferrari đỏ dừng lại bên cạnh Alan ở đâu?",
@@ -669,7 +669,7 @@ export const lyrics: Lyric[] = [
     endTime: 426.995123,
   },
   {
-    id: 55,
+    id: 54,
     text: "At a stoplight on Van Ness Street. At a stoplight on Van Ness Street, a red Ferrari pulled up next to Alan.",
     ipa: "æt ə ˈstɑpˌlaɪt ɑn væn nɛs strit. æt ə ˈstɑpˌlaɪt ɑn væn nɛs strit, ə rɛd fəˈrɑri pʊld ʌp nɛkst tu ˈælən.",
     translation:
@@ -682,7 +682,7 @@ export const lyrics: Lyric[] = [
     endTime: 444.563681,
   },
   {
-    id: 56,
+    id: 55,
     text: "Was Alan in a red Ferrari?",
     ipa: "wʌz ˈælən ɪn ə rɛd fəˈrɑri?",
     translation: "Alan có ở trong chiếc Ferrari đỏ không?",
@@ -694,7 +694,7 @@ export const lyrics: Lyric[] = [
     endTime: 450.091,
   },
   {
-    id: 57,
+    id: 56,
     text: "No, no, no, Alan wasn’t in a red Ferrari. He was on a motorcycle. Alan was on a motorcycle.",
     ipa: "noʊ, noʊ, noʊ, ˈælən ˈwɑzənt ɪn ə rɛd fəˈrɑri. hi wʌz ɑn ə ˈmoʊtərˌsaɪkəl. ˈælən wʌz ɑn ə ˈmoʊtərˌsaɪkəl.",
     translation:
@@ -707,7 +707,7 @@ export const lyrics: Lyric[] = [
     endTime: 462.219554,
   },
   {
-    id: 58,
+    id: 57,
     text: "What did the red Ferrari do?",
     ipa: "wʌt dɪd ðə rɛd fəˈrɑri du?",
     translation: "Chiếc Ferrari đỏ đã làm gì?",
