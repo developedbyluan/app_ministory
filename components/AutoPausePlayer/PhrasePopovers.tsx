@@ -9,8 +9,10 @@ import type { Phrases } from "@/types/types";
 
 export default function PhrasePopovers({
   sentenceAsPhrases,
+  showIpa = false,
 }: {
   sentenceAsPhrases: Phrases;
+  showIpa?: boolean;
 }) {
   const { id, phrases } = sentenceAsPhrases;
 
@@ -19,7 +21,7 @@ export default function PhrasePopovers({
     return (
       <Popover key={id + crypto.randomUUID()}>
         <PopoverTrigger>
-          <EnglishIPADisplay english={phrase} ipa={ipa} showIpa={true} />
+          <EnglishIPADisplay english={phrase} ipa={ipa} showIpa={showIpa} />
         </PopoverTrigger>
         <PopoverContent>
           <p>
