@@ -7,6 +7,7 @@ import PauseTouchArea from "./PauseTouchArea";
 import { motion, AnimatePresence } from "framer-motion";
 import TranslationToggler from "./TranslationToggler";
 import CloseButton from "./CloseButton";
+import { MonitorPause } from "lucide-react";
 
 type AudioControlsProps = {
   isPlaying?: boolean;
@@ -47,10 +48,16 @@ export default function AudioControlsV2({
                 />
 
                 {type === "standard" && (
-                  <PlayPauseToggler
-                    isPlaying={isPlaying}
-                    onPlayPause={onPlayPause}
-                  />
+                  <>
+                    <PlayPauseToggler
+                      isPlaying={isPlaying}
+                      onPlayPause={onPlayPause}
+                    />
+
+                    <button>
+                      <MonitorPause size={32} color="white" />
+                    </button>
+                  </>
                 )}
 
                 {type === "auto-pause" && onReplay && (
