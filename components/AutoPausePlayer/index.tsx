@@ -7,6 +7,7 @@ import AudioControlsV2 from "@/components/AudioControlsV2";
 import { Lyric } from "@/types/types";
 import WordList from "@/components/AutoPauseMode/WordList";
 import { useSpeech } from "@/hooks/useSpeech";
+import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 
 type AutoPausePlayerProps = {
   lyrics: Lyric[];
@@ -44,6 +45,7 @@ export default function AutoPausePlayer({
   const [currentIndex, setCurrentIndex] = useState(
     activeLyricIndex > -1 ? activeLyricIndex : 0
   );
+  const [showWordList, setShowWordList] = useState(false);
 
   const { speakPhrase } = useSpeech();
 
@@ -77,23 +79,39 @@ export default function AutoPausePlayer({
   }
   return (
     <div className="fixed inset-0 z-40 bg-zinc-50 flex h-svh justify-center">
-      <div className="flex flex-col justify-center h-5/6 mt-14 px-4">
+      <div className="w-full flex flex-col justify-center h-5/6 mt-14 px-4">
         <PhrasePopovers
           sentenceAsPhrases={phrasesCollection[currentIndex]}
           showIpa={false}
         />
         {showTranslation && (
-          <p className="text-gray-700 text-sm mx-1">
+          <p
+            className="text-zinc-800 text-sm mx-1"
+            style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}
+          >
             {lyrics[currentIndex].translation}
           </p>
         )}
-        <div className="h-3/5 overflow-y-auto pb-4 bg-zinc-100 mt-2 rounded-t-xl">
-          <WordList
-            phrases={phrasesCollection[currentIndex].phrases}
-            isReplaying={isReplaying}
-            speakPhrase={speakPhrase}
-          />
-        </div>
+        <button
+          onClick={() => setShowWordList((prev) => !prev)}
+          className="flex items-center gap-x-1 mx-auto text-xs text-gray-600"
+        >
+          {showWordList ? "hide" : "show"} word list
+          {showWordList ? (
+            <ChevronUpIcon width={16} height={16} />
+          ) : (
+            <ChevronDownIcon width={16} height={16} />
+          )}
+        </button>
+        {showWordList && (
+          <div className="h-3/5 overflow-y-auto pb-4 bg-zinc-100 mt-4 rounded-t-xl">
+            <WordList
+              phrases={phrasesCollection[currentIndex].phrases}
+              isReplaying={isReplaying}
+              speakPhrase={speakPhrase}
+            />
+          </div>
+        )}
       </div>
       <AudioControlsV2
         type="auto-pause"
