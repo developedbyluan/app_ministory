@@ -19,7 +19,7 @@ type AudioControlsProps = {
   showTranslation: boolean;
   onShowTranslation: () => void;
   setShowAutoPausePlayer: Dispatch<SetStateAction<boolean>>;
-  setScrollLyricIntoView: Dispatch<SetStateAction<boolean>>;
+  setScrollLyricIntoView?: Dispatch<SetStateAction<boolean>>;
   type: "standard" | "auto-pause";
 };
 
@@ -36,6 +36,8 @@ export default function AudioControlsV2({
   type = "standard",
 }: AudioControlsProps) {
   function handleHideAutoPausePlayer() {
+    if (type !== "auto-pause") return;
+    if (!setShowAutoPausePlayer || !setScrollLyricIntoView) return;
     setShowAutoPausePlayer(false);
     setScrollLyricIntoView((prev) => !prev);
   }
