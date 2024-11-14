@@ -14,6 +14,7 @@ type AudioControlsProps = {
   onPlayPause?: () => void;
   isReplaying?: boolean;
   onReplay?: () => void;
+  onNext?: () => void;
   showTranslation: boolean;
   onShowTranslation: () => void;
   type: "standard" | "auto-pause";
@@ -24,6 +25,7 @@ export default function AudioControlsV2({
   onPlayPause = () => {},
   isReplaying = false,
   onReplay,
+  onNext,
   showTranslation,
   onShowTranslation,
   type = "standard",
@@ -60,9 +62,9 @@ export default function AudioControlsV2({
                   </>
                 )}
 
-                {type === "auto-pause" && onReplay && (
+                {type === "auto-pause" && onReplay && onNext && (
                   <>
-                    <StepForwardButton onPlaySingleLyric={onReplay} />
+                    <StepForwardButton onPlaySingleLyric={onNext} />
                     <ReplayAudioButton onReplay={onReplay} />
                   </>
                 )}

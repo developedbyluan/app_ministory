@@ -30,8 +30,21 @@ export default function AutoPausePlayer({
   isReplaying,
 }: AutoPausePlayerProps) {
   const [currentIndex, setCurrentIndex] = useState(
-    activeLyricIndex > -1 ? activeLyricIndex : 1
+    activeLyricIndex > -1 ? activeLyricIndex : 0
   );
+
+  function handleNextLyric() {
+    console.log("phrasesCollection.length", phrasesCollection.length);
+    if (currentIndex <= phrasesCollection.length - 2) {
+      console.log("currentIndex", currentIndex);
+      setCurrentIndex((prev) => prev + 1);
+      handleReplay(
+        currentIndex + 1,
+        lyrics[currentIndex + 1].startTime,
+        lyrics[currentIndex + 1].endTime
+      );
+    }
+  }
 
   function replaySingleLyric() {
     if (currentIndex < lyrics.length - 1) {
@@ -62,6 +75,7 @@ export default function AutoPausePlayer({
         showTranslation={showTranslation}
         onShowTranslation={() => setShowTranslation((prev) => !prev)}
         onReplay={replaySingleLyric}
+        onNext={handleNextLyric}
       />
     </div>
   );
