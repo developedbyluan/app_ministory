@@ -8,11 +8,12 @@ import AutoPausePlayer from "@/components/AutoPausePlayer";
 
 import { lyrics } from "./lyrics";
 
+const AUDIO_URL = "./The Race MS.mp3";
+
 export default function FreeSamplePage() {
   const [showAutoPausePlayer, setShowAutoPausePlayer] = useState(false);
   const {
     audioRef,
-    audioUrl,
     isPlaying,
     setIsPlaying,
     isReplaying,
@@ -35,7 +36,7 @@ export default function FreeSamplePage() {
   return (
     <div>
       <ProgressBar progress={progress} />
-      {audioUrl && <audio ref={audioRef} src={audioUrl} />}
+      <audio ref={audioRef} src={AUDIO_URL} />
 
       {showAutoPausePlayer ? (
         <AutoPausePlayer
