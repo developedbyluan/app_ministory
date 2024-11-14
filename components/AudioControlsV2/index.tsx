@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import PlayPauseToggler from "./PlayPauseToggler";
 import StepForwardButton from "./StepForwardButton";
 import ReplayAudioButton from "./ReplayAudioButton";
@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import TranslationToggler from "./TranslationToggler";
 import CloseButton from "./CloseButton";
 import { MonitorPause } from "lucide-react";
+import HideButton from "./HideButton";
 
 type AudioControlsProps = {
   isPlaying?: boolean;
@@ -17,6 +18,7 @@ type AudioControlsProps = {
   onNext?: () => void;
   showTranslation: boolean;
   onShowTranslation: () => void;
+  setShowAutoPausePlayer: Dispatch<SetStateAction<boolean>>;
   type: "standard" | "auto-pause";
 };
 
@@ -28,6 +30,7 @@ export default function AudioControlsV2({
   onNext,
   showTranslation,
   onShowTranslation,
+  setShowAutoPausePlayer,
   type = "standard",
 }: AudioControlsProps) {
   return (
@@ -35,7 +38,10 @@ export default function AudioControlsV2({
       <AnimatePresence>
         {!isReplaying && !isPlaying && (
           <div className="opacity-95 z-50">
-            <CloseButton route="/upload-audio" />
+            {type === "standard" && <CloseButton route="/upload-audio" />}
+            {type === "auto-pause" && (
+              <HideButton setShowAutoPausePlayer={setShowAutoPausePlayer} />
+            )}
             <motion.div
               initial={{ y: 100, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -56,7 +62,9 @@ export default function AudioControlsV2({
                       onPlayPause={onPlayPause}
                     />
 
-                    <button>
+                    <button
+                      onClick={() => setShowAutoPausePlayer((prev) => !prev)}
+                    >
                       <MonitorPause size={32} color="white" />
                     </button>
                   </>

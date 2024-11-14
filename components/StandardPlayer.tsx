@@ -12,6 +12,7 @@ type StandardPlayerProps = {
   showTranslation: boolean;
   togglePlayPause: () => void;
   setShowTranslation: Dispatch<SetStateAction<boolean>>;
+  setShowAutoPausePlayer: Dispatch<SetStateAction<boolean>>;
 };
 
 export default function StandardPlayer({
@@ -23,6 +24,7 @@ export default function StandardPlayer({
   showTranslation,
   togglePlayPause,
   setShowTranslation,
+  setShowAutoPausePlayer,
 }: StandardPlayerProps) {
   return (
     <div id="standard-player" className="pt-10 px-7">
@@ -40,6 +42,7 @@ export default function StandardPlayer({
         showTranslation={showTranslation}
         onShowTranslation={() => setShowTranslation((prev) => !prev)}
         type="standard"
+        setShowAutoPausePlayer={setShowAutoPausePlayer}
       />
     </div>
   );

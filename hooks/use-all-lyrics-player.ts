@@ -31,6 +31,8 @@ export default function useAllLyricsPlayer({
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const { audioFile } = useDataContext();
 
+  const replayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -145,12 +147,26 @@ export default function useAllLyricsPlayer({
     setIsPlaying(true);
     setIsReplaying(true);
     setActiveLyricIndex(lyricIndex);
-    setTimeout(() => {
+    replayTimeoutRef.current = setTimeout(() => {
       audio.currentTime = endTime;
       audio.pause();
       setIsPlaying(false);
       setIsReplaying(false);
     }, ((endTime - startTime) * 1000) / playbackRate);
+  }
+
+  function clearReplayTimeout() {
+    if (!audioRef.current) return;
+
+    if (replayTimeoutRef.current) {
+      clearTimeout(replayTimeoutRef.current);
+      replayTimeoutRef.current = null;
+
+      if (lyrics && activeLyricIndex > -1) {
+        audioRef.current.currentTime = lyrics[activeLyricIndex].startTime;
+        audioRef.current.pause();
+      }
+    }
   }
 
   return {
@@ -160,9 +176,11 @@ export default function useAllLyricsPlayer({
     lyricRefsArray,
     handleLyricClick,
     isPlaying,
+    setIsPlaying,
     activeLyricIndex,
     togglePlayPause,
     isReplaying,
+    setIsReplaying,
     playbackRate,
     changePlaybackRate,
     showTranslation,
@@ -171,5 +189,6 @@ export default function useAllLyricsPlayer({
     audioUrl,
     setScrollLyricIntoView,
     handleReplay,
+    clearReplayTimeout,
   };
 }

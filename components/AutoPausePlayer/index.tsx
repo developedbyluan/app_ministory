@@ -17,7 +17,11 @@ type AutoPausePlayerProps = {
   showTranslation: boolean;
   setShowTranslation: Dispatch<SetStateAction<boolean>>;
   isPlaying: boolean;
+  setIsPlaying: Dispatch<SetStateAction<boolean>>;
   isReplaying: boolean;
+  setIsReplaying: Dispatch<SetStateAction<boolean>>;
+  clearReplayTimeout: () => void;
+  setShowAutoPausePlayer: Dispatch<SetStateAction<boolean>>;
 };
 
 export default function AutoPausePlayer({
@@ -27,26 +31,36 @@ export default function AutoPausePlayer({
   showTranslation,
   setShowTranslation,
   isPlaying,
+  setIsPlaying,
   isReplaying,
+  setIsReplaying,
+  clearReplayTimeout,
+  setShowAutoPausePlayer,
 }: AutoPausePlayerProps) {
   const [currentIndex, setCurrentIndex] = useState(
     activeLyricIndex > -1 ? activeLyricIndex : 0
   );
 
   function handleNextLyric() {
-    console.log("phrasesCollection.length", phrasesCollection.length);
-    if (currentIndex <= phrasesCollection.length - 2) {
-      console.log("currentIndex", currentIndex);
-      setCurrentIndex((prev) => prev + 1);
-      handleReplay(
-        currentIndex + 1,
-        lyrics[currentIndex + 1].startTime,
-        lyrics[currentIndex + 1].endTime
-      );
-    }
+    if (currentIndex >= phrasesCollection.length - 1) return;
+
+    const nextIndex = currentIndex + 1;
+    setCurrentIndex(nextIndex);
+    handleReplay(
+      nextIndex,
+      lyrics[nextIndex].startTime,
+      lyrics[nextIndex].endTime
+    );
   }
 
   function replaySingleLyric() {
+    if (isReplaying) {
+      clearReplayTimeout();
+      setIsReplaying((prev) => !prev);
+      setIsPlaying((prev) => !prev);
+      return;
+    }
+
     if (currentIndex < lyrics.length - 1) {
       handleReplay(
         currentIndex,
@@ -76,6 +90,7 @@ export default function AutoPausePlayer({
         onShowTranslation={() => setShowTranslation((prev) => !prev)}
         onReplay={replaySingleLyric}
         onNext={handleNextLyric}
+        setShowAutoPausePlayer={setShowAutoPausePlayer}
       />
     </div>
   );
