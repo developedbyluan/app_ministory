@@ -3,6 +3,7 @@
 import useAllLyricsPlayer from "@/hooks/use-all-lyrics-player";
 import ProgressBar from "@/components/AllLyricsPlayer/ProgressBar";
 import StandardPlayer from "@/components/StandardPlayer";
+import AutoPausePlayer from "@/components/AutoPausePlayer";
 
 import { lyrics } from "./lyrics";
 
@@ -11,6 +12,7 @@ export default function FreeSamplePage() {
     audioRef,
     audioUrl,
     isPlaying,
+    isReplaying,
     showTranslation,
     setShowTranslation,
     togglePlayPause,
@@ -18,6 +20,7 @@ export default function FreeSamplePage() {
     handleLyricClick,
     activeLyricIndex,
     lyricRefsArray,
+    handleReplay,
   } = useAllLyricsPlayer({
     audioKey: "the-race-ms",
     lyrics: lyrics,
@@ -39,16 +42,15 @@ export default function FreeSamplePage() {
         setShowTranslation={setShowTranslation}
       />
 
-      <div id="auto-pause-player"></div>
-      {/* <AudioControlsV2
+      <AutoPausePlayer
+        lyrics={lyrics}
+        activeLyricIndex={activeLyricIndex}
         isPlaying={isPlaying}
         isReplaying={isReplaying}
-        onPlayPause={handlePlayPause}
-        onReplay={handleReplay}
         showTranslation={showTranslation}
-        onShowTranslation={handleShowTranslation}
-        type="auto-pause"
-      /> */}
+        setShowTranslation={setShowTranslation}
+        handleReplay={handleReplay}
+      />
     </div>
   );
 }
