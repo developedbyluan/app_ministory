@@ -3,8 +3,10 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import PhrasePopovers from "./PhrasePopovers";
 import { phrasesCollection } from "@/app/free-sample/phrases-collection";
-import AudioControlsV2 from "../AudioControlsV2";
+import AudioControlsV2 from "@/components/AudioControlsV2";
 import { Lyric } from "@/types/types";
+import WordList from "@/components/AutoPauseMode/WordList";
+import { useSpeech } from "@/hooks/useSpeech";
 
 type AutoPausePlayerProps = {
   lyrics: Lyric[];
@@ -43,6 +45,8 @@ export default function AutoPausePlayer({
     activeLyricIndex > -1 ? activeLyricIndex : 0
   );
 
+  const { speakPhrase } = useSpeech();
+
   function handleNextLyric() {
     if (currentIndex >= phrasesCollection.length - 1) return;
 
@@ -73,7 +77,7 @@ export default function AutoPausePlayer({
   }
   return (
     <div className="fixed inset-0 z-40 bg-zinc-50 flex h-svh justify-center">
-      <div className="flex flex-col justify-center h-5/6 bg-red-100 mt-14 px-4">
+      <div className="flex flex-col justify-center h-5/6 mt-14 px-4">
         <PhrasePopovers
           sentenceAsPhrases={phrasesCollection[currentIndex]}
           showIpa={false}
@@ -83,6 +87,13 @@ export default function AutoPausePlayer({
             {lyrics[currentIndex].translation}
           </p>
         )}
+        <div className="h-3/5 overflow-y-auto pb-4 bg-zinc-100 mt-2 rounded-t-xl">
+          <WordList
+            phrases={phrasesCollection[currentIndex].phrases}
+            isReplaying={isReplaying}
+            speakPhrase={speakPhrase}
+          />
+        </div>
       </div>
       <AudioControlsV2
         type="auto-pause"
