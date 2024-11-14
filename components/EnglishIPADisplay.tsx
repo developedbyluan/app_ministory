@@ -22,14 +22,14 @@ export default function EnglishIPADisplay({
     };
   });
   const englishIPAElements = englishIPA.map((item) => (
-    <div key={crypto.randomUUID()} className="flex flex-col items-center pr-2">
+    <div key={crypto.randomUUID()} className="flex flex-col items-center mx-1">
       {showIpa && <span className="text-sm text-gray-600">{item.ipa}</span>}
-      <span className="text-xl font-medium">{item.english}</span>
+      <span className="text-xl font-semibold">{item.english}</span>
     </div>
   ));
 
   return (
-    <div className="flex flex-wrap mb-2 border-b-2 border-dotted mr-2 hover:border-none hover:bg-yellow-50">
+    <div className="flex flex-wrap mb-2 border-b-2 border-dotted hover:border-none hover:bg-yellow-100 hover:rounded-md">
       {englishIPAElements}
     </div>
   );
