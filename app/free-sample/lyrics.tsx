@@ -16,9 +16,9 @@ export const lyrics: Lyric[] = [
   },
   {
     id: 1,
-    text: "It was 5:00 and Alan was riding his motorcycle in San Francisco.",
-    ipa: "ɪt wʌz 5:00 ænd ˈælən wʌz ˈraɪdɪŋ hɪz ˈmoʊtərˌsaɪkəl ɪn sæn frænˈsɪskoʊ.",
-    translation: "Lúc đó là 5 giờ và Alan đang lái xe máy ở San Francisco.",
+    text: "It was five o'clock and Alan was riding his motorcycle in San Francisco.",
+    ipa: "ɪt wʌz faɪv ˈoʊˈklɑk ænd ˈælən wʌz ˈraɪdɪŋ hɪz ˈmoʊtərˌsaɪkəl ɪn sæn frænˈsɪskoʊ.",
+    translation: "Lúc 5 giờ và Alan đang lái xe máy ở San Francisco.",
     imgUrl: "no-imgUrl",
     altText: "no-altText",
     imgCredit: "no-credit",
@@ -40,8 +40,8 @@ export const lyrics: Lyric[] = [
   },
   {
     id: 3,
-    text: "Well, at 5:00, right? At 5:00, Alan was riding his motorcycle.",
-    ipa: "wɛl, æt 5:00, raɪt? æt 5:00, ˈælən wʌz ˈraɪdɪŋ hɪz ˈmoʊtərˌsaɪkəl.",
+    text: "Well, at five o'clock, right? At five o'clock, Alan was riding his motorcycle.",
+    ipa: "wɛl, æt faɪv ˈoʊˈklɑk, raɪt? æt faɪv ˈoʊˈklɑk, ˈælən wʌz ˈraɪdɪŋ hɪz ˈmoʊtərˌsaɪkəl.",
     translation:
       "Ừ, vào lúc 5 giờ, đúng không? Lúc 5 giờ, Alan đang lái xe máy.",
     imgUrl: "no-imgUrl",
