@@ -26,6 +26,7 @@ export default function FreeSamplePage() {
     lyricRefsArray,
     handleReplay,
     clearReplayTimeout,
+    setScrollLyricIntoView,
   } = useAllLyricsPlayer({
     audioKey: "the-race-ms",
     lyrics: lyrics,
@@ -49,6 +50,7 @@ export default function FreeSamplePage() {
           handleReplay={handleReplay}
           clearReplayTimeout={clearReplayTimeout}
           setShowAutoPausePlayer={setShowAutoPausePlayer}
+          setScrollLyricIntoView={setScrollLyricIntoView}
         />
       ) : (
         <StandardPlayer

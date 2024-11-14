@@ -19,6 +19,7 @@ type AudioControlsProps = {
   showTranslation: boolean;
   onShowTranslation: () => void;
   setShowAutoPausePlayer: Dispatch<SetStateAction<boolean>>;
+  setScrollLyricIntoView: Dispatch<SetStateAction<boolean>>;
   type: "standard" | "auto-pause";
 };
 
@@ -31,8 +32,14 @@ export default function AudioControlsV2({
   showTranslation,
   onShowTranslation,
   setShowAutoPausePlayer,
+  setScrollLyricIntoView,
   type = "standard",
 }: AudioControlsProps) {
+  function handleHideAutoPausePlayer() {
+    setShowAutoPausePlayer(false);
+    setScrollLyricIntoView((prev) => !prev);
+  }
+
   return (
     <div>
       <AnimatePresence>
@@ -40,7 +47,9 @@ export default function AudioControlsV2({
           <div className="opacity-95 z-50">
             {type === "standard" && <CloseButton route="/upload-audio" />}
             {type === "auto-pause" && (
-              <HideButton setShowAutoPausePlayer={setShowAutoPausePlayer} />
+              <HideButton
+                handleHideAutoPausePlayer={handleHideAutoPausePlayer}
+              />
             )}
             <motion.div
               initial={{ y: 100, opacity: 0 }}

@@ -22,6 +22,7 @@ type AutoPausePlayerProps = {
   setIsReplaying: Dispatch<SetStateAction<boolean>>;
   clearReplayTimeout: () => void;
   setShowAutoPausePlayer: Dispatch<SetStateAction<boolean>>;
+  setScrollLyricIntoView: Dispatch<SetStateAction<boolean>>;
 };
 
 export default function AutoPausePlayer({
@@ -36,6 +37,7 @@ export default function AutoPausePlayer({
   setIsReplaying,
   clearReplayTimeout,
   setShowAutoPausePlayer,
+  setScrollLyricIntoView,
 }: AutoPausePlayerProps) {
   const [currentIndex, setCurrentIndex] = useState(
     activeLyricIndex > -1 ? activeLyricIndex : 0
@@ -91,6 +93,7 @@ export default function AutoPausePlayer({
         onReplay={replaySingleLyric}
         onNext={handleNextLyric}
         setShowAutoPausePlayer={setShowAutoPausePlayer}
+        setScrollLyricIntoView={setScrollLyricIntoView}
       />
     </div>
   );
