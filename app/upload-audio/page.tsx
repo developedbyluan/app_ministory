@@ -19,6 +19,8 @@ import { set, createStore } from "idb-keyval";
 // TODO: Load lessonsData (list of available lessons) from a database instead of dummy data
 import { lessonsList as lessonsData } from "@/data/msa--english/lessons-list";
 
+import TabNavigation from "@/components/TabNavigation";
+
 export default function UploadAudioPage() {
   const [showLessons, setShowLessons] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -67,7 +69,7 @@ export default function UploadAudioPage() {
   }
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 pb-20">
       <motion.div
         initial={false}
         animate={showLessons ? { y: "3vh" } : { y: "40vh" }}
@@ -97,6 +99,7 @@ export default function UploadAudioPage() {
         </Button>
         {showLessons && <LessonsList lessonsData={lessonsData} />}
       </motion.div>
+      <TabNavigation currentTab="/upload-audio" />
     </div>
   );
 }
