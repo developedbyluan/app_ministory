@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import useAllLyricsPlayer from "@/hooks/use-all-lyrics-player";
 import ProgressBar from "@/components/AllLyricsPlayer/ProgressBar";
 import StandardPlayer from "@/components/StandardPlayer";
@@ -14,6 +14,11 @@ const AUDIO_URL = "./The Race MS.mp3";
 
 export default function FreeSamplePage() {
   const [showAutoPausePlayer, setShowAutoPausePlayer] = useState(false);
+
+  const [totalPlayTime, setTotalPlayTime] = useState(0);
+  const lastPlayedTimeRef = useRef(0);
+  const totalPlayTimeRef = useRef(0);
+
   const {
     audioRef,
     isPlaying,
@@ -44,30 +49,53 @@ export default function FreeSamplePage() {
     const currentDate = new Date().toISOString().split("T")[0]; // Format: YYYY-MM-DD
 
     get(currentDate, userStore)
-      .then((value) => {
-        console.log("Total training time:", value);
-
-        if (typeof value === "number") {
-          return;
+      .then((storedTime) => {
+        if (storedTime) {
+          setTotalPlayTime(storedTime);
+          totalPlayTimeRef.current = storedTime;
         }
-
-        set(currentDate, 0, userStore)
-          .then(() => {
-            console.log("Total training time set for today");
-          })
-          .catch((error) => {
-            console.error("Error setting total training time:", error);
-          });
       })
       .catch((error) => {
         console.error("Error getting total training time:", error);
       });
   }, []);
 
+  useEffect(() => {
+    if (isPlaying) {
+      lastPlayedTimeRef.current = Date.now();
+      return;
+    }
+
+    if (lastPlayedTimeRef.current > 0) {
+      const recentTotalPlayTime =
+        (Date.now() - lastPlayedTimeRef.current) / 1000;
+      totalPlayTimeRef.current += recentTotalPlayTime;
+
+      const newTotalPlayTime = totalPlayTimeRef.current;
+      setTotalPlayTime(newTotalPlayTime);
+
+      const userStore = createStore(
+        "msa--user",
+        "the-race-ms--total-training-time"
+      );
+      const currentDate = new Date().toISOString().split("T")[0]; // Format: YYYY-MM-DD
+
+      set(currentDate, newTotalPlayTime, userStore)
+        .then(() => {
+          console.log("Total training time set for today");
+        })
+        .catch((error) => {
+          console.error("Error setting total training time:", error);
+        });
+    }
+  }, [isPlaying]);
+
   return (
     <div>
       <ProgressBar progress={progress} />
       <audio ref={audioRef} src={AUDIO_URL} />
+
+      <div>Total play time: {totalPlayTime}</div>
 
       {showAutoPausePlayer ? (
         <AutoPausePlayer
