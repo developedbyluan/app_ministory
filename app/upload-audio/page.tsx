@@ -14,7 +14,9 @@ import { useToast } from "@/hooks/use-toast";
 import { useDataContext } from "@/contexts/DataContext";
 import { useRouter } from "next/navigation";
 
-import { set, createStore } from "idb-keyval";
+// import { set, createStore } from "idb-keyval";
+import { openDB } from "idb";
+import { currentDate } from "@/helpers/current-date";
 
 // TODO: Load lessonsData (list of available lessons) from a database instead of dummy data
 import { lessonsList as lessonsData } from "@/data/msa--english/lessons-list";
@@ -47,12 +49,69 @@ export default function UploadAudioPage() {
       .replace(/\s+/g, "-")
       .toLowerCase();
 
-    const customStore = createStore("msa--english", "mp3");
-    set(fileNameAsUrl, file, customStore)
+    // IndexedDB implementation: English Lessons Data
+    const englishDbName = "msa--english";
+    const mp3StoreName = "mp3";
+    const version = 1;
+
+    openDB(englishDbName, version, {
+      upgrade(db) {
+        if (db.objectStoreNames.contains(mp3StoreName)) return;
+
+        db.createObjectStore(mp3StoreName);
+      },
+    })
+      .then((db) => {
+        const tx = db.transaction(mp3StoreName, "readwrite");
+        const store = tx.objectStore(mp3StoreName);
+        store.put(file, fileNameAsUrl);
+      })
       .then(() => {
         setAudioFile(file);
-        // TODO: Add lessonId to user's imported lessons list (key: lessonId, value: lastTrained date)
-        router.push(`/all-lyrics-player?audio=${fileNameAsUrl}`);
+
+        // IndexedDB implementation: User Data
+        const userDbName = "msa--user";
+        const importedLessonsListStoreName = "imported-lessons-list";
+        const totalTrainingTimeStoreName = `${fileNameAsUrl}--total-training-time`;
+
+        openDB(userDbName, version, {
+          upgrade(db) {
+            if (db.objectStoreNames.contains(importedLessonsListStoreName))
+              return;
+
+            db.createObjectStore(importedLessonsListStoreName);
+
+            if (db.objectStoreNames.contains(totalTrainingTimeStoreName))
+              return;
+
+            db.createObjectStore(totalTrainingTimeStoreName);
+          },
+        })
+          .then((db) => {
+            const importedLessonsListTx = db.transaction(
+              importedLessonsListStoreName,
+              "readwrite"
+            );
+            const importedLessonsListStore = importedLessonsListTx.objectStore(
+              importedLessonsListStoreName
+            );
+
+            const totalTrainingTimeTx = db.transaction(
+              totalTrainingTimeStoreName,
+              "readwrite"
+            );
+            const totalTrainingTimeStore = totalTrainingTimeTx.objectStore(
+              totalTrainingTimeStoreName
+            );
+
+            return Promise.all([
+              importedLessonsListStore.put(currentDate, fileNameAsUrl),
+              totalTrainingTimeStore.put(0, currentDate),
+            ]);
+          })
+          .then(() => {
+            router.push(`/all-lyrics-player?audio=${fileNameAsUrl}`);
+          });
       })
       .catch((error) => {
         toast({
