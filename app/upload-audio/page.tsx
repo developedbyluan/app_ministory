@@ -72,19 +72,18 @@ export default function UploadAudioPage() {
         // IndexedDB implementation: User Data
         const userDbName = "msa--user";
         const importedLessonsListStoreName = "imported-lessons-list";
-        const totalTrainingTimeStoreName = `${fileNameAsUrl}--total-training-time`;
+        const totalTrainingTimeStoreName = "total-training-time";
+        const version = 1;
 
         openDB(userDbName, version, {
           upgrade(db) {
-            if (db.objectStoreNames.contains(importedLessonsListStoreName))
-              return;
+            if (!db.objectStoreNames.contains(importedLessonsListStoreName)) {
+              db.createObjectStore(importedLessonsListStoreName);
+            }
 
-            db.createObjectStore(importedLessonsListStoreName);
-
-            if (db.objectStoreNames.contains(totalTrainingTimeStoreName))
-              return;
-
-            db.createObjectStore(totalTrainingTimeStoreName);
+            if (!db.objectStoreNames.contains(totalTrainingTimeStoreName)) {
+              db.createObjectStore(totalTrainingTimeStoreName);
+            }
           },
         })
           .then((db) => {
@@ -104,9 +103,19 @@ export default function UploadAudioPage() {
               totalTrainingTimeStoreName
             );
 
+            // Get existing data from IndexedDB
             return Promise.all([
               importedLessonsListStore.put(currentDate, fileNameAsUrl),
-              totalTrainingTimeStore.put(0, currentDate),
+              totalTrainingTimeStore.get(fileNameAsUrl).then((existingData) => {
+                const updatedSessions = existingData
+                  ? { ...existingData }
+                  : { [currentDate]: 0 };
+
+                return totalTrainingTimeStore.put(
+                  updatedSessions,
+                  fileNameAsUrl
+                );
+              }),
             ]);
           })
           .then(() => {
