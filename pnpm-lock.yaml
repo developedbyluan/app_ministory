@@ -41,6 +41,9 @@ importers:
       framer-motion:
         specifier: ^11.11.10
         version: 11.11.10(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021)
+      idb:
+        specifier: ^8.0.0
+        version: 8.0.0
       idb-keyval:
         specifier: ^6.2.1
         version: 6.2.1
@@ -1341,6 +1344,9 @@ packages:
 
   idb-keyval@6.2.1:
     resolution: {integrity: sha512-8Sb3veuYCyrZL+VBt9LJfZjLUPWVvqn8tG28VqYNFCo43KHcKuq+b4EiXGeuaLAQWL2YmyDgMp2aSpH9JHsEQg==}
+
+  idb@8.0.0:
+    resolution: {integrity: sha512-l//qvlAKGmQO31Qn7xdzagVPPaHTxXx199MhrAFuVBTPqydcPYBWjkrbv4Y0ktB+GmWOiwHl237UUOrLmQxLvw==}
 
   ignore@5.3.2:
     resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
@@ -3537,6 +3543,8 @@ snapshots:
       function-bind: 1.1.2
 
   idb-keyval@6.2.1: {}
+
+  idb@8.0.0: {}
 
   ignore@5.3.2: {}
 
