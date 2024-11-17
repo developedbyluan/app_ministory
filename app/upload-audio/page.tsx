@@ -51,7 +51,7 @@ export default function UploadAudioPage() {
     set(fileNameAsUrl, file, customStore)
       .then(() => {
         setAudioFile(file);
-
+        // TODO: Add lessonId to user's imported lessons list (key: lessonId, value: lastTrained date)
         router.push(`/all-lyrics-player?audio=${fileNameAsUrl}`);
       })
       .catch((error) => {
