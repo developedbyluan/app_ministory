@@ -12,6 +12,8 @@ import { lyrics } from "./lyrics";
 
 const AUDIO_URL = "./The Race MS.mp3";
 
+import { currentDate } from "@/helpers/current-date";
+
 export default function FreeSamplePage() {
   const [showAutoPausePlayer, setShowAutoPausePlayer] = useState(false);
 
@@ -46,7 +48,6 @@ export default function FreeSamplePage() {
       "msa--user",
       "the-race-ms--total-training-time"
     );
-    const currentDate = new Date().toISOString().split("T")[0]; // Format: YYYY-MM-DD
 
     get(currentDate, userStore)
       .then((storedTime) => {
@@ -78,7 +79,6 @@ export default function FreeSamplePage() {
         "msa--user",
         "the-race-ms--total-training-time"
       );
-      const currentDate = new Date().toISOString().split("T")[0]; // Format: YYYY-MM-DD
 
       set(currentDate, newTotalPlayTime, userStore)
         .then(() => {
