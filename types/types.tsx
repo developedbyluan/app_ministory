@@ -22,3 +22,6 @@ export type Phrase = {
   meaning: string;
   explanation: string;
 };
+
+// Training time record for each lesson card's stats
+export type TrainingTimeRecord = { [key: string]: number };
