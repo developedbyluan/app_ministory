@@ -13,6 +13,7 @@ import { lyrics } from "./lyrics";
 const AUDIO_URL = "./The Race MS.mp3";
 
 import { currentDate } from "@/helpers/current-date";
+// const currentDate = "2024-11-29";
 
 export default function FreeSamplePage() {
   const [showAutoPausePlayer, setShowAutoPausePlayer] = useState(false);
@@ -20,6 +21,7 @@ export default function FreeSamplePage() {
   const [totalPlayTime, setTotalPlayTime] = useState(0);
   const lastPlayedTimeRef = useRef(0);
   const totalPlayTimeRef = useRef(0);
+  const lessonDataRef = useRef({});
 
   const {
     audioRef,
@@ -44,16 +46,16 @@ export default function FreeSamplePage() {
 
   useEffect(() => {
     // Check if the user has a total training time for the day
-    const userStore = createStore(
-      "msa--user",
-      "the-race-ms--total-training-time"
-    );
+    const userStore = createStore("msa--user", "total-training-time");
 
-    get(currentDate, userStore)
+    get("the-race-ms", userStore)
       .then((storedTime) => {
         if (storedTime) {
-          setTotalPlayTime(storedTime);
-          totalPlayTimeRef.current = storedTime;
+          console.log("storedTime", storedTime);
+          const totalPlayTime = storedTime[currentDate] || 0;
+          setTotalPlayTime(totalPlayTime);
+          totalPlayTimeRef.current = totalPlayTime;
+          lessonDataRef.current = storedTime;
         }
       })
       .catch((error) => {
@@ -62,6 +64,7 @@ export default function FreeSamplePage() {
   }, []);
 
   useEffect(() => {
+    console.log("lessonDataRef", lessonDataRef.current);
     if (isPlaying) {
       lastPlayedTimeRef.current = Date.now();
       return;
@@ -75,14 +78,16 @@ export default function FreeSamplePage() {
       const newTotalPlayTime = totalPlayTimeRef.current;
       setTotalPlayTime(newTotalPlayTime);
 
-      const userStore = createStore(
-        "msa--user",
-        "the-race-ms--total-training-time"
-      );
+      const userStore = createStore("msa--user", "total-training-time");
+      const updatedLessonData = {
+        ...lessonDataRef.current,
+        [currentDate]: newTotalPlayTime,
+      };
 
-      set(currentDate, newTotalPlayTime, userStore)
+      set("the-race-ms", updatedLessonData, userStore)
         .then(() => {
           console.log("Total training time set for today");
+          lessonDataRef.current = updatedLessonData;
         })
         .catch((error) => {
           console.error("Error setting total training time:", error);
