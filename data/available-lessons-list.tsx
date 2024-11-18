@@ -1,4 +1,13 @@
-export const availableLessonsList = new Map<string, object>();
+type Lesson = {
+  order: number;
+  lessonId: string;
+  title: string;
+  courseTitle: string;
+  duration: number;
+  fileMetadata: { fileName: string };
+};
+
+export const availableLessonsList = new Map<string, Lesson>();
 
 availableLessonsList.set("the-race-ms", {
   order: 0,
