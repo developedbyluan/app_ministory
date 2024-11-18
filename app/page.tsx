@@ -9,17 +9,23 @@ import TabNavigation from "@/components/TabNavigation";
 import LessonCard from "@/components/ContinueTraining/LessonCard";
 
 import { useEffect, useState } from "react";
-import { createStore, entries } from "idb-keyval";
+import { createStore, entries, set } from "idb-keyval";
 
 import { availableLessonsList } from "@/data/available-lessons-list";
 import { TrainingTimeRecord } from "@/types/types";
 
 import { cn } from "@/lib/utils";
 
+const AUDIO_URL = "./The Race MS.mp3";
+const AUDIO_KEY = "the-race-ms";
+
 const userStore =
   typeof window !== "undefined"
     ? createStore("msa--user", "total-training-time")
     : null;
+
+const mp3Store =
+  typeof window !== "undefined" ? createStore("msa--english", "mp3") : null;
 
 export default function HomePage() {
   const [importedLessonsList, setImportedLessonsList] = useState<
@@ -34,7 +40,15 @@ export default function HomePage() {
   >([]);
 
   useEffect(() => {
-    if (!userStore) return;
+    if (!userStore || !mp3Store) return;
+
+    fetch(AUDIO_URL)
+      .then((res) => res.arrayBuffer())
+      .then((audioBuffer) => {
+        set(AUDIO_KEY, audioBuffer, mp3Store).then(() => {
+          console.log("mp3 set");
+        });
+      });
 
     // use entries to query all data in total-training-time store
     entries(userStore).then((entries: [IDBValidKey, TrainingTimeRecord][]) => {

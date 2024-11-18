@@ -94,7 +94,17 @@ export default function useAllLyricsPlayer({
       if (!file) {
         throw new Error("No audio file found in local database");
       }
-      setAudioUrl(URL.createObjectURL(file));
+      try {
+        setAudioUrl(URL.createObjectURL(file));
+      } catch (error) {
+        // if the file is not a blob, create a blob
+        if (!(file instanceof Blob)) {
+          const blob = new Blob([file], { type: "audio/mp3" });
+          setAudioUrl(URL.createObjectURL(blob));
+        } else {
+          console.error("Error creating object URL", error);
+        }
+      }
     });
   }, [audioFile, audioKey]);
 
