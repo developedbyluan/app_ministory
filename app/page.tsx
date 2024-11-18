@@ -6,17 +6,20 @@ import { PlayCircle } from "lucide-react";
 import Link from "next/link";
 import TabNavigation from "@/components/TabNavigation";
 
+import LessonCard from "@/components/ContinueTraining/LessonCard";
+
 import { useEffect, useState } from "react";
 import { createStore, entries } from "idb-keyval";
 
 import { availableLessonsList } from "@/data/available-lessons-list";
+import { TrainingTimeRecord } from "@/types/types";
+
+import { cn } from "@/lib/utils";
 
 const userStore =
   typeof window !== "undefined"
     ? createStore("msa--user", "total-training-time")
     : null;
-
-type TrainingTimeRecord = { [key: string]: number };
 
 export default function HomePage() {
   const [importedLessonsList, setImportedLessonsList] = useState<
@@ -26,6 +29,7 @@ export default function HomePage() {
       lastTrained: string;
       order: number;
       lessonId: string;
+      trainingTimeRecord: TrainingTimeRecord;
     }[]
   >([]);
 
@@ -55,6 +59,7 @@ export default function HomePage() {
           lastTrained: lastTrained,
           order: Date.parse(lastTrained),
           lessonId: lessonId.toString(),
+          trainingTimeRecord: trainingTimeRecord,
         };
         setImportedLessonsList((prev) =>
           [...prev, data].sort((a, b) => b.order - a.order)
@@ -64,44 +69,74 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center h-svh container mx-auto p-4">
-      <Card className="w-full max-w-sm">
-        <CardContent className="pt-6">
-          <div className="space-y-4">
-            <div>
-              <p className="text-xs text-muted-foreground">
-                Effortless English Book
-              </p>
-              <h3 className="text-2xl font-bold">The Race MS</h3>
+    <div
+      className={cn(
+        "flex flex-col items-center h-svh container mx-auto p-4",
+        importedLessonsList.length > 0 ? "justify-start" : "justify-center"
+      )}
+    >
+      {importedLessonsList.length > 0 ? (
+        <div className="w-full flex flex-col gap-4 items-center mx-auto">
+          {importedLessonsList.length > 0 && (
+            <>
+              {importedLessonsList.map((lesson, index) => (
+                <div
+                  key={lesson.lessonId}
+                  className="w-full flex flex-col items-center"
+                >
+                  <LessonCard
+                    courseTitle={lesson.courseTitle}
+                    lessonTitle={lesson.lessonTitle}
+                    lessonId={lesson.lessonId}
+                    lastTrained={lesson.lastTrained}
+                    trainingTimeRecord={lesson.trainingTimeRecord}
+                    ctaButtonText={
+                      index === 0
+                        ? "Continue Training"
+                        : "Switch To This Lesson"
+                    }
+                    className={
+                      index === importedLessonsList.length - 1 ? "mb-20" : ""
+                    }
+                  />
+                  {index === 0 && importedLessonsList.length > 1 && (
+                    <div className="w-full text-center text-2xl font-bold text-muted-foreground mt-12">
+                      Your Library
+                    </div>
+                  )}
+                </div>
+              ))}
+            </>
+          )}
+        </div>
+      ) : (
+        <Card className="w-full max-w-sm">
+          <CardContent className="pt-6">
+            <div className="space-y-4">
+              <div>
+                <p className="text-xs text-muted-foreground">
+                  Effortless English Book
+                </p>
+                <h3 className="text-2xl font-bold">The Race MS</h3>
+              </div>
             </div>
-          </div>
-        </CardContent>
-        <CardFooter>
-          <Button
-            className="w-full"
-            aria-label={`Start 1 minute training session for The Race MS`}
-            asChild
-          >
-            <Link
-              href="/free-sample"
-              className="flex justify-center items-center"
+          </CardContent>
+          <CardFooter>
+            <Button
+              className="w-full"
+              aria-label={`Start 1 minute training session for The Race MS`}
+              asChild
             >
-              <PlayCircle size={24} aria-hidden="true" />
-              Start Training
-            </Link>
-          </Button>
-        </CardFooter>
-      </Card>
-      {importedLessonsList.length > 0 && (
-        <>
-          <ul>
-            {importedLessonsList.map((lesson) => (
-              <li key={lesson.lessonId}>
-                {lesson.lessonTitle}, {lesson.lastTrained}
-              </li>
-            ))}
-          </ul>
-        </>
+              <Link
+                href="/free-sample"
+                className="flex justify-center items-center"
+              >
+                <PlayCircle size={24} aria-hidden="true" />
+                Start Training
+              </Link>
+            </Button>
+          </CardFooter>
+        </Card>
       )}
       <TabNavigation currentTab="/" />
     </div>
