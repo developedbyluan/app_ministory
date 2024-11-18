@@ -4,25 +4,34 @@ import { PlayCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
+import { TrainingTimeRecord } from "@/types/types";
+
 type LessonCardProps = {
   courseTitle: string;
   lessonTitle: string;
   lessonId: string;
-  trainingTotalTime: number;
+  lastTrained: string;
+  trainingTimeRecord: TrainingTimeRecord;
+  ctaButtonText?: string;
+  className?: string;
 };
 
 export default function LessonCard({
   courseTitle,
   lessonTitle,
   lessonId,
-  trainingTotalTime,
+  lastTrained,
+  trainingTimeRecord,
+  ctaButtonText,
+  className,
 }: LessonCardProps) {
   return (
     <Card
-      className="w-full max-w-sm cursor-pointer"
+      className={`w-full max-w-sm cursor-pointer ${className}`}
       role="button"
       onClick={() => {
         console.log("Toggle Stat Table");
+        console.log(trainingTimeRecord);
       }}
       aria-label={`View stats for ${lessonTitle} from ${courseTitle}`}
     >
@@ -33,7 +42,7 @@ export default function LessonCard({
             <h3 className="text-2xl font-bold">{lessonTitle}</h3>
           </div>
           <Badge variant="secondary" className="px-3 py-1">
-            Training {trainingTotalTime} minutes
+            Last trained: {lastTrained}
           </Badge>
         </div>
       </CardContent>
@@ -44,10 +53,10 @@ export default function LessonCard({
             e.stopPropagation();
             console.log(lessonId);
           }}
-          aria-label={`Start ${trainingTotalTime} minute training session for ${lessonTitle}`}
+          aria-label={`Start training session for ${lessonTitle}`}
         >
           <PlayCircle className="mr-2" size={24} aria-hidden="true" />
-          Train for 1 Minute
+          {ctaButtonText}
         </Button>
       </CardFooter>
     </Card>
