@@ -247,7 +247,7 @@ export default function HomePage() {
           </CardFooter>
         </Card>
       )}
-      <TabNavigation currentTab="/" />
+      {isStandalone && <TabNavigation currentTab="/" />}
     </div>
   );
 }

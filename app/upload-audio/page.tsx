@@ -35,6 +35,8 @@ export default function UploadAudioPage() {
 
   const { setAudioFile } = useDataContext();
 
+  const isStandalone = false;
+
   useEffect(() => {
     if (error) {
       toast({
@@ -113,7 +115,7 @@ export default function UploadAudioPage() {
         </Button>
         {showLessons && <LessonsList lessonsData={lessonsData} />}
       </motion.div>
-      <TabNavigation currentTab="/upload-audio" />
+      {isStandalone && <TabNavigation currentTab="/upload-audio" />}
     </div>
   );
 }
