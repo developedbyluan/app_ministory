@@ -194,7 +194,7 @@ export default function HomePage() {
             <>
               {importedLessonsList.map((lesson, index) => (
                 <div
-                  key={lesson.lessonId}
+                  key={crypto.randomUUID()}
                   className="w-full flex flex-col items-center"
                 >
                   <LessonCard
