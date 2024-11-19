@@ -1,8 +1,5 @@
 "use client";
 
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { PlayCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import TabNavigation from "@/components/TabNavigation";
@@ -14,8 +11,6 @@ import { openDB } from "idb";
 
 import { availableLessonsList } from "@/data/available-lessons-list";
 import { TrainingTimeRecord } from "@/types/types";
-
-import { cn } from "@/lib/utils";
 
 const AUDIO_URL = "./The Race MS.mp3";
 const AUDIO_KEY = "the-race-ms";
@@ -34,16 +29,11 @@ export default function HomePage() {
       trainingTimeRecord: TrainingTimeRecord;
     }[]
   >([]);
-  const [isAppReady, setIsAppReady] = useState(false);
-
-  const isStandalone = false;
 
   const router = useRouter();
   const { toast } = useToast();
 
   useEffect(() => {
-    // if (!isStandalone) return;
-
     // IndexedDB implementation: English Lessons (json and mp3) and User Data
     const englishDbName = "msa--english";
     const mp3StoreName = "mp3";
@@ -99,8 +89,6 @@ export default function HomePage() {
       })
       .then(() => {
         // IndexedDB implementation: User Data
-        setIsAppReady(true);
-
         openDB(userDbName, version, {
           upgrade(db) {
             if (!db.objectStoreNames.contains(totalTrainingTimeStoreName)) {
@@ -179,75 +167,42 @@ export default function HomePage() {
           description: `Error saving file to IndexedDB: ${error}`,
         });
       });
-  }, [router, toast, isStandalone]);
+  }, [router, toast]);
 
   return (
-    <div
-      className={cn(
-        "flex flex-col items-center h-svh container mx-auto p-4",
-        isStandalone ? "justify-start" : "justify-center"
-      )}
-    >
-      {importedLessonsList.length > 0 && isStandalone ? (
+    <div className="flex flex-col justify-start items-center h-svh container mx-auto p-4">
+      {importedLessonsList.length > 0 ? (
         <div className="w-full flex flex-col gap-4 items-center mx-auto">
-          {importedLessonsList.length > 0 && (
-            <>
-              {importedLessonsList.map((lesson, index) => (
-                <div
-                  key={crypto.randomUUID()}
-                  className="w-full flex flex-col items-center"
-                >
-                  <LessonCard
-                    courseTitle={lesson.courseTitle}
-                    lessonTitle={lesson.lessonTitle}
-                    lessonId={lesson.lessonId}
-                    lastTrained={lesson.lastTrained}
-                    trainingTimeRecord={lesson.trainingTimeRecord}
-                    ctaButtonText={
-                      index === 0
-                        ? "Continue Training"
-                        : "Switch To This Lesson"
-                    }
-                    className={
-                      index === importedLessonsList.length - 1 ? "mb-20" : ""
-                    }
-                  />
-                  {index === 0 && importedLessonsList.length > 1 && (
-                    <div className="w-full text-center text-2xl font-bold text-muted-foreground mt-12">
-                      Your Library
-                    </div>
-                  )}
+          {importedLessonsList.map((lesson, index) => (
+            <div
+              key={crypto.randomUUID()}
+              className="w-full flex flex-col items-center"
+            >
+              <LessonCard
+                courseTitle={lesson.courseTitle}
+                lessonTitle={lesson.lessonTitle}
+                lessonId={lesson.lessonId}
+                lastTrained={lesson.lastTrained}
+                trainingTimeRecord={lesson.trainingTimeRecord}
+                ctaButtonText={
+                  index === 0 ? "Continue Training" : "Switch To This Lesson"
+                }
+                className={
+                  index === importedLessonsList.length - 1 ? "mb-20" : ""
+                }
+              />
+              {index === 0 && importedLessonsList.length > 1 && (
+                <div className="w-full text-center text-2xl font-bold text-muted-foreground mt-12">
+                  Your Library
                 </div>
-              ))}
-            </>
-          )}
+              )}
+            </div>
+          ))}
         </div>
       ) : (
-        <Card className="w-full max-w-sm">
-          <CardContent className="pt-6">
-            <div className="space-y-4">
-              <div>
-                <p className="text-xs text-muted-foreground">
-                  Effortless English Book
-                </p>
-                <h3 className="text-2xl font-bold">The Race MS</h3>
-              </div>
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button
-              disabled={!isAppReady}
-              className="w-full"
-              aria-label={`Start 1 minute training session for The Race MS`}
-              onClick={() => router.push("/free-sample")}
-            >
-              <PlayCircle size={24} aria-hidden="true" />
-              {isAppReady ? "Start Training" : "Loading..."}
-            </Button>
-          </CardFooter>
-        </Card>
+        <p>Loading...</p>
       )}
-      {isStandalone && <TabNavigation currentTab="/" />}
+      <TabNavigation currentTab="/" />
     </div>
   );
 }
