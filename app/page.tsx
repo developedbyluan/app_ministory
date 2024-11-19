@@ -190,7 +190,9 @@ export default function HomePage() {
     <div
       className={cn(
         "flex flex-col items-center h-svh container mx-auto p-4",
-        importedLessonsList.length > 1 ? "justify-start" : "justify-center"
+        importedLessonsList.length > 1
+          ? "justify-start pt-10"
+          : "justify-center"
       )}
     >
       {importedLessonsList.length > 0 ? (
@@ -204,6 +206,7 @@ export default function HomePage() {
                 courseTitle={lesson.courseTitle}
                 lessonTitle={lesson.lessonTitle}
                 lessonId={lesson.lessonId}
+                lessonIndex={index}
                 lastTrained={lesson.lastTrained}
                 trainingTimeRecord={lesson.trainingTimeRecord}
                 ctaButtonText={

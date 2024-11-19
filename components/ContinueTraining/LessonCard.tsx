@@ -19,6 +19,7 @@ type LessonCardProps = {
   trainingTimeRecord: TrainingTimeRecord;
   ctaButtonText?: string;
   className?: string;
+  lessonIndex?: number;
 };
 
 export default function LessonCard({
@@ -29,6 +30,7 @@ export default function LessonCard({
   trainingTimeRecord,
   ctaButtonText,
   className,
+  lessonIndex,
 }: LessonCardProps) {
   const router = useRouter();
 
@@ -40,8 +42,7 @@ export default function LessonCard({
         className={`w-full max-w-sm cursor-pointer ${className}`}
         role="button"
         onClick={() => {
-          console.log("Toggle Stat Table");
-          console.log(trainingTimeRecord);
+          console.log(lessonIndex);
           setIsTableVisible((prev) => !prev);
         }}
         aria-label={`View stats for ${lessonTitle} from ${courseTitle}`}
@@ -59,6 +60,7 @@ export default function LessonCard({
         </CardContent>
         <CardFooter>
           <Button
+            variant={lessonIndex === 0 ? "default" : "secondary"}
             className="w-full"
             onClick={(e) => {
               e.stopPropagation();
