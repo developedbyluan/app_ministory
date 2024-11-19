@@ -6,6 +6,8 @@ import { Badge } from "@/components/ui/badge";
 
 import { TrainingTimeRecord } from "@/types/types";
 
+import { useRouter } from "next/navigation";
+
 type LessonCardProps = {
   courseTitle: string;
   lessonTitle: string;
@@ -25,6 +27,8 @@ export default function LessonCard({
   ctaButtonText,
   className,
 }: LessonCardProps) {
+  const router = useRouter();
+
   return (
     <Card
       className={`w-full max-w-sm cursor-pointer ${className}`}
@@ -51,7 +55,7 @@ export default function LessonCard({
           className="w-full"
           onClick={(e) => {
             e.stopPropagation();
-            console.log(lessonId);
+            router.push(`/english?id=${lessonId}`);
           }}
           aria-label={`Start training session for ${lessonTitle}`}
         >
