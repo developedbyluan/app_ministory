@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Lyric } from "@/types/types";
 
-import { useDataContext } from "@/contexts/DataContext";
 import { createStore, get } from "idb-keyval";
 
 type UseAllLyricsPlayerProps = {
@@ -29,7 +28,6 @@ export default function useAllLyricsPlayer({
   const [scrollLyricIntoView, setScrollLyricIntoView] = useState(false);
 
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
-  const { audioFile } = useDataContext();
 
   const replayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -83,11 +81,6 @@ export default function useAllLyricsPlayer({
   useEffect(() => {
     if (!audioKey) return;
 
-    if (audioFile) {
-      setAudioUrl(URL.createObjectURL(audioFile));
-      return;
-    }
-
     const customStore = createStore("msa--english", "mp3");
 
     get(audioKey, customStore).then((file) => {
@@ -106,7 +99,7 @@ export default function useAllLyricsPlayer({
         }
       }
     });
-  }, [audioFile, audioKey]);
+  }, [audioKey]);
 
   function handleLyricClick(clickedLyricIndex: number, startTime: number) {
     if (isPlaying) return;
