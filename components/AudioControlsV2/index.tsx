@@ -47,7 +47,7 @@ export default function AudioControlsV2({
       <AnimatePresence>
         {!isReplaying && !isPlaying && (
           <div className="opacity-95 z-50">
-            {type === "standard" && <CloseButton route="/upload-audio" />}
+            {type === "standard" && <CloseButton route="/" />}
             {type === "auto-pause" && (
               <HideButton
                 handleHideAutoPausePlayer={handleHideAutoPausePlayer}
