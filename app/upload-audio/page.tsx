@@ -11,7 +11,6 @@ import LessonsList from "@/components/UploadAudio/LessonsList";
 
 import { useFileUpload } from "@/hooks/useFileUpload";
 import { useToast } from "@/hooks/use-toast";
-import { useDataContext } from "@/contexts/DataContext";
 import { useRouter } from "next/navigation";
 
 import { set, createStore } from "idb-keyval";
@@ -32,8 +31,6 @@ export default function UploadAudioPage() {
   const { error, success, handleFileChange, file } = useFileUpload();
 
   const { toast } = useToast();
-
-  const { setAudioFile } = useDataContext();
 
   const isStandalone = false;
 
@@ -76,7 +73,7 @@ export default function UploadAudioPage() {
       .catch((err) => {
         console.log(err);
       });
-  }, [error, success, file, toast, setAudioFile, router]);
+  }, [error, success, file, toast, router]);
 
   function handleUploadAudioButtonClick() {
     const fileInput = fileInputRef.current;
