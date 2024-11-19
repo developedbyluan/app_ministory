@@ -14,9 +14,10 @@ import { useToast } from "@/hooks/use-toast";
 import { useDataContext } from "@/contexts/DataContext";
 import { useRouter } from "next/navigation";
 
-// import { set, createStore } from "idb-keyval";
-import { openDB } from "idb";
+import { set, createStore } from "idb-keyval";
 import { currentDate } from "@/helpers/current-date";
+
+import { database } from "@/data/msa--english/database";
 
 // TODO: Load lessonsData (list of available lessons) from a database instead of dummy data
 import { lessonsList as lessonsData } from "@/data/msa--english/lessons-list";
@@ -50,83 +51,28 @@ export default function UploadAudioPage() {
       .toLowerCase();
 
     // IndexedDB implementation: English Lessons Data
-    const englishDbName = "msa--english";
-    const mp3StoreName = "mp3";
-    const version = 1;
+    const mp3Store = createStore("msa--english", "mp3");
+    const lyricsStore = createStore("msa--english", "lyrics");
+    const dictionaryStore = createStore("msa--english", "dictionary");
 
-    openDB(englishDbName, version, {
-      upgrade(db) {
-        if (db.objectStoreNames.contains(mp3StoreName)) return;
+    const userStore = createStore("msa--user", "total-training-time");
 
-        db.createObjectStore(mp3StoreName);
-      },
-    })
-      .then((db) => {
-        const tx = db.transaction(mp3StoreName, "readwrite");
-        const store = tx.objectStore(mp3StoreName);
-        store.put(file, fileNameAsUrl);
-      })
+    Promise.all([
+      set(fileNameAsUrl, file, mp3Store),
+      set(fileNameAsUrl, database.get(fileNameAsUrl)?.lyrics, lyricsStore),
+      set(
+        fileNameAsUrl,
+        database.get(fileNameAsUrl)?.dictionary,
+        dictionaryStore
+      ),
+      set(fileNameAsUrl, { [currentDate]: 0 }, userStore),
+    ])
       .then(() => {
-        setAudioFile(file);
-
-        // IndexedDB implementation: User Data
-        const userDbName = "msa--user";
-        const importedLessonsListStoreName = "imported-lessons-list";
-        const totalTrainingTimeStoreName = "total-training-time";
-        const version = 1;
-
-        openDB(userDbName, version, {
-          upgrade(db) {
-            if (!db.objectStoreNames.contains(importedLessonsListStoreName)) {
-              db.createObjectStore(importedLessonsListStoreName);
-            }
-
-            if (!db.objectStoreNames.contains(totalTrainingTimeStoreName)) {
-              db.createObjectStore(totalTrainingTimeStoreName);
-            }
-          },
-        })
-          .then((db) => {
-            const importedLessonsListTx = db.transaction(
-              importedLessonsListStoreName,
-              "readwrite"
-            );
-            const importedLessonsListStore = importedLessonsListTx.objectStore(
-              importedLessonsListStoreName
-            );
-
-            const totalTrainingTimeTx = db.transaction(
-              totalTrainingTimeStoreName,
-              "readwrite"
-            );
-            const totalTrainingTimeStore = totalTrainingTimeTx.objectStore(
-              totalTrainingTimeStoreName
-            );
-
-            // Get existing data from IndexedDB
-            return Promise.all([
-              importedLessonsListStore.put(currentDate, fileNameAsUrl),
-              totalTrainingTimeStore.get(fileNameAsUrl).then((existingData) => {
-                const updatedSessions = existingData
-                  ? { ...existingData }
-                  : { [currentDate]: 0 };
-
-                return totalTrainingTimeStore.put(
-                  updatedSessions,
-                  fileNameAsUrl
-                );
-              }),
-            ]);
-          })
-          .then(() => {
-            router.push(`/all-lyrics-player?audio=${fileNameAsUrl}`);
-          });
+        // router.push(`/english?id=${fileNameAsUrl}`);
+        console.log("done");
       })
-      .catch((error) => {
-        toast({
-          variant: "destructive",
-          description: `Error saving file to IndexedDB: ${error}`,
-        });
+      .catch((err) => {
+        console.log(err);
       });
   }, [error, success, file, toast, setAudioFile, router]);
 
