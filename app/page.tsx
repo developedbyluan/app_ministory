@@ -18,6 +18,8 @@ const AUDIO_KEY = "the-race-ms";
 import { currentDate } from "@/helpers/current-date";
 import { database } from "@/data/msa--english/database";
 
+import { cn } from "@/lib/utils";
+
 export default function HomePage() {
   const [importedLessonsList, setImportedLessonsList] = useState<
     {
@@ -185,7 +187,12 @@ export default function HomePage() {
   }, [router, toast]);
 
   return (
-    <div className="flex flex-col justify-start items-center h-svh container mx-auto p-4">
+    <div
+      className={cn(
+        "flex flex-col items-center h-svh container mx-auto p-4",
+        importedLessonsList.length > 1 ? "justify-start" : "justify-center"
+      )}
+    >
       {importedLessonsList.length > 0 ? (
         <div className="w-full flex flex-col gap-4 items-center mx-auto">
           {importedLessonsList.map((lesson, index) => (
