@@ -11,6 +11,8 @@ import { createStore, set, get } from "idb-keyval";
 import { currentDate } from "@/helpers/current-date";
 import { database } from "@/data/msa--english/database";
 
+import { Phrases, Lyric } from "@/types/types";
+
 const AUDIO_URL = "./The Race MS.mp3";
 
 export default function FreeSamplePage() {
@@ -20,6 +22,14 @@ export default function FreeSamplePage() {
   const lastPlayedTimeRef = useRef(0);
   const totalPlayTimeRef = useRef(0);
   const lessonDataRef = useRef({});
+
+  const [indexedDBData, setIndexedDBData] = useState<{
+    dictionary: Phrases[];
+    lyrics: Lyric[];
+  }>({
+    dictionary: [],
+    lyrics: [],
+  });
 
   const {
     audioRef,
@@ -40,8 +50,20 @@ export default function FreeSamplePage() {
     setScrollLyricIntoView,
   } = useAllLyricsPlayer({
     audioKey: "the-race-ms",
-    lyrics: database.get("the-race-ms")?.lyrics || [],
+    lyrics: database.get("the-race-ms")?.lyrics || indexedDBData.lyrics || [],
   });
+
+  useEffect(() => {
+    const dictionaryStore = createStore("msa--english", "dictionary");
+    const lyricsStore = createStore("msa--english", "lyrics");
+
+    Promise.all([
+      get("the-race-ms", dictionaryStore),
+      get("the-race-ms", lyricsStore),
+    ]).then(([dictionary, lyrics]) => {
+      setIndexedDBData({ dictionary, lyrics });
+    });
+  }, []);
 
   useEffect(() => {
     // Check if the user has a total training time for the day
@@ -103,8 +125,10 @@ export default function FreeSamplePage() {
 
       {showAutoPausePlayer ? (
         <AutoPausePlayer
-          lyrics={database.get("the-race-ms")?.lyrics || []}
-          phrasesCollection={database.get("the-race-ms")?.dictionary || []}
+          lyrics={indexedDBData.lyrics || database.get("the-race-ms")?.lyrics}
+          phrasesCollection={
+            indexedDBData.dictionary || database.get("the-race-ms")?.dictionary
+          }
           activeLyricIndex={activeLyricIndex}
           isPlaying={isPlaying}
           setIsPlaying={setIsPlaying}
@@ -119,7 +143,7 @@ export default function FreeSamplePage() {
         />
       ) : (
         <StandardPlayer
-          lyrics={database.get("the-race-ms")?.lyrics || []}
+          lyrics={indexedDBData.lyrics || database.get("the-race-ms")?.lyrics}
           handleLyricClick={handleLyricClick}
           activeLyricIndex={activeLyricIndex}
           lyricRefsArray={lyricRefsArray}
