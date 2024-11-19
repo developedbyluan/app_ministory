@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useSearchParams } from "next/navigation";
+
 import useAllLyricsPlayer from "@/hooks/use-all-lyrics-player";
 import ProgressBar from "@/components/AllLyricsPlayer/ProgressBar";
 import StandardPlayer from "@/components/StandardPlayer";
@@ -31,6 +33,9 @@ export default function FreeSamplePage() {
     lyrics: [],
   });
 
+  const searchParams = useSearchParams();
+  const lessonId: IDBValidKey = searchParams.get("id") as IDBValidKey;
+
   const {
     audioRef,
     audioUrl,
@@ -49,8 +54,8 @@ export default function FreeSamplePage() {
     clearReplayTimeout,
     setScrollLyricIntoView,
   } = useAllLyricsPlayer({
-    audioKey: "the-race-ms",
-    lyrics: database.get("the-race-ms")?.lyrics || indexedDBData.lyrics || [],
+    audioKey: lessonId as string,
+    lyrics: database.get(lessonId as string)?.lyrics || indexedDBData.lyrics,
   });
 
   useEffect(() => {
@@ -58,21 +63,20 @@ export default function FreeSamplePage() {
     const lyricsStore = createStore("msa--english", "lyrics");
 
     Promise.all([
-      get("the-race-ms", dictionaryStore),
-      get("the-race-ms", lyricsStore),
+      get(lessonId, dictionaryStore),
+      get(lessonId, lyricsStore),
     ]).then(([dictionary, lyrics]) => {
       setIndexedDBData({ dictionary, lyrics });
     });
-  }, []);
+  }, [lessonId]);
 
   useEffect(() => {
     // Check if the user has a total training time for the day
     const userStore = createStore("msa--user", "total-training-time");
 
-    get("the-race-ms", userStore)
+    get(lessonId, userStore)
       .then((storedTime) => {
         if (storedTime) {
-          console.log("storedTime", storedTime);
           const totalPlayTime = storedTime[currentDate] || 0;
           setTotalPlayTime(totalPlayTime);
           totalPlayTimeRef.current = totalPlayTime;
@@ -82,10 +86,9 @@ export default function FreeSamplePage() {
       .catch((error) => {
         console.error("Error getting total training time:", error);
       });
-  }, []);
+  }, [lessonId]);
 
   useEffect(() => {
-    console.log("lessonDataRef", lessonDataRef.current);
     if (isPlaying) {
       lastPlayedTimeRef.current = Date.now();
       return;
@@ -105,16 +108,15 @@ export default function FreeSamplePage() {
         [currentDate]: newTotalPlayTime,
       };
 
-      set("the-race-ms", updatedLessonData, userStore)
+      set(lessonId, updatedLessonData, userStore)
         .then(() => {
-          console.log("Total training time set for today");
           lessonDataRef.current = updatedLessonData;
         })
         .catch((error) => {
           console.error("Error setting total training time:", error);
         });
     }
-  }, [isPlaying]);
+  }, [isPlaying, lessonId]);
 
   return (
     <div>
@@ -125,9 +127,12 @@ export default function FreeSamplePage() {
 
       {showAutoPausePlayer ? (
         <AutoPausePlayer
-          lyrics={indexedDBData.lyrics || database.get("the-race-ms")?.lyrics}
+          lyrics={
+            indexedDBData.lyrics || database.get(lessonId as string)?.lyrics
+          }
           phrasesCollection={
-            indexedDBData.dictionary || database.get("the-race-ms")?.dictionary
+            indexedDBData.dictionary ||
+            database.get(lessonId as string)?.dictionary
           }
           activeLyricIndex={activeLyricIndex}
           isPlaying={isPlaying}
@@ -143,7 +148,9 @@ export default function FreeSamplePage() {
         />
       ) : (
         <StandardPlayer
-          lyrics={indexedDBData.lyrics || database.get("the-race-ms")?.lyrics}
+          lyrics={
+            indexedDBData.lyrics || database.get(lessonId as string)?.lyrics
+          }
           handleLyricClick={handleLyricClick}
           activeLyricIndex={activeLyricIndex}
           lyricRefsArray={lyricRefsArray}
