@@ -6,16 +6,17 @@ import { PlayCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import TabNavigation from "@/components/TabNavigation";
+import Link from "next/link";
 
-// import LessonCard from "@/components/ContinueTraining/LessonCard";
+import LessonCard from "@/components/ContinueTraining/LessonCard";
 import { useEffect, useState } from "react";
-// import { createStore, entries, set } from "idb-keyval";
+import { createStore, entries } from "idb-keyval";
 import { openDB } from "idb";
 
-// import { availableLessonsList } from "@/data/available-lessons-list";
-// import { TrainingTimeRecord } from "@/types/types";
+import { availableLessonsList } from "@/data/available-lessons-list";
+import { TrainingTimeRecord } from "@/types/types";
 
-// import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 const AUDIO_URL = "./The Race MS.mp3";
 const AUDIO_KEY = "the-race-ms";
@@ -25,33 +26,27 @@ import { phrasesCollection as dictionary } from "@/app/free-sample/phrases-colle
 
 import { currentDate } from "@/helpers/current-date";
 
-// const userStore =
-//   typeof window !== "undefined"
-//     ? createStore("msa--user", "total-training-time")
-//     : null;
-
-// const mp3Store =
-//   typeof window !== "undefined" ? createStore("msa--english", "mp3") : null;
-
 export default function HomePage() {
-  // const [importedLessonsList, setImportedLessonsList] = useState<
-  //   {
-  //     courseTitle: string;
-  //     lessonTitle: string;
-  //     lastTrained: string;
-  //     order: number;
-  //     lessonId: string;
-  //     trainingTimeRecord: TrainingTimeRecord;
-  //   }[]
-  // >([]);
+  const [importedLessonsList, setImportedLessonsList] = useState<
+    {
+      courseTitle: string;
+      lessonTitle: string;
+      lastTrained: string;
+      order: number;
+      lessonId: string;
+      trainingTimeRecord: TrainingTimeRecord;
+    }[]
+  >([]);
 
-  const [isAppReady, setIsAppReady] = useState(false);
+  const isStandalone = false;
 
   const router = useRouter();
   const { toast } = useToast();
 
   useEffect(() => {
-    // IndexedDB implementation: English Lessons Data
+    if (!isStandalone) return;
+
+    // IndexedDB implementation: English Lessons (json and mp3) and User Data
     const englishDbName = "msa--english";
     const mp3StoreName = "mp3";
     const lyricsStoreName = "lyrics";
@@ -96,8 +91,8 @@ export default function HomePage() {
               dictionaryTx.objectStore(dictionaryStoreName);
             return Promise.all([
               mp3Store.put(audioBuffer, AUDIO_KEY),
-              lyricsStore.put(JSON.stringify(lyrics), AUDIO_KEY),
-              dictionaryStore.put(JSON.stringify(dictionary), AUDIO_KEY),
+              lyricsStore.put(lyrics, AUDIO_KEY),
+              dictionaryStore.put(dictionary, AUDIO_KEY),
             ]);
           });
       })
@@ -138,14 +133,42 @@ export default function HomePage() {
               totalTrainingTimeStore.get(AUDIO_KEY).then((existingData) => {
                 const updatedSessions = existingData
                   ? { ...existingData }
-                  : JSON.stringify({ [currentDate]: 0 });
+                  : { [currentDate]: 0 };
 
                 return totalTrainingTimeStore.put(updatedSessions, AUDIO_KEY);
               }),
             ]);
           })
           .then(() => {
-            setIsAppReady(true);
+            const userStore = createStore("msa--user", "total-training-time");
+            //    use entries to query all data in total-training-time store
+            entries(userStore).then(
+              (entries: [IDBValidKey, TrainingTimeRecord][]) => {
+                if (entries.length === 0) {
+                  console.log("no entries, setting up English lessons data");
+                  // setupEnglishLessonsData();
+                  return;
+                }
+
+                entries.forEach(([lessonId, trainingTimeRecord]) => {
+                  const lesson = availableLessonsList.get(lessonId.toString());
+                  if (!lesson) return;
+                  const lastTrained =
+                    Object.entries(trainingTimeRecord).at(-1)?.[0] || "";
+                  const data = {
+                    courseTitle: lesson.courseTitle,
+                    lessonTitle: lesson.title,
+                    lastTrained: lastTrained,
+                    order: Date.parse(lastTrained),
+                    lessonId: lessonId.toString(),
+                    trainingTimeRecord: trainingTimeRecord,
+                  };
+                  setImportedLessonsList((prev) =>
+                    [...prev, data].sort((a, b) => b.order - a.order)
+                  );
+                });
+              }
+            );
           });
       })
       .catch((error) => {
@@ -154,153 +177,79 @@ export default function HomePage() {
           description: `Error saving file to IndexedDB: ${error}`,
         });
       });
-  }, [router, toast]);
-
-  // useEffect(() => {
-  //   if (!userStore || !mp3Store) return;
-
-  //   fetch(AUDIO_URL)
-  //     .then((res) => res.arrayBuffer())
-  //     .then((audioBuffer) => {
-  //       set(AUDIO_KEY, audioBuffer, mp3Store).then(() => {
-  //         console.log("mp3 set");
-  //       });
-  //     });
-
-  //   // use entries to query all data in total-training-time store
-  //   entries(userStore).then((entries: [IDBValidKey, TrainingTimeRecord][]) => {
-  //     console.log("entries", entries);
-
-  //     if (entries.length === 0) return;
-
-  //     console.log(
-  //       "lesson",
-  //       availableLessonsList.get(entries[0][0].toString())?.title
-  //     );
-
-  //     entries.forEach(([lessonId, trainingTimeRecord]) => {
-  //       const lesson = availableLessonsList.get(lessonId.toString());
-  //       if (!lesson) return;
-
-  //       const lastTrained =
-  //         Object.entries(trainingTimeRecord).at(-1)?.[0] || "";
-  //       const data = {
-  //         courseTitle: lesson.courseTitle,
-  //         lessonTitle: lesson.title,
-  //         lastTrained: lastTrained,
-  //         order: Date.parse(lastTrained),
-  //         lessonId: lessonId.toString(),
-  //         trainingTimeRecord: trainingTimeRecord,
-  //       };
-  //       setImportedLessonsList((prev) =>
-  //         [...prev, data].sort((a, b) => b.order - a.order)
-  //       );
-  //     });
-  //   });
-  // }, []);
+  }, [router, toast, isStandalone]);
 
   return (
-    <div>
-      <Card className="w-full max-w-sm">
-        <CardContent className="pt-6">
-          <div className="space-y-4">
-            <div>
-              <p className="text-xs text-muted-foreground">
-                Effortless English Book
-              </p>
-              <h3 className="text-2xl font-bold">The Race MS</h3>
+    <div
+      className={cn(
+        "flex flex-col items-center h-svh container mx-auto p-4",
+        isStandalone ? "justify-start" : "justify-center"
+      )}
+    >
+      {importedLessonsList.length > 0 && isStandalone ? (
+        <div className="w-full flex flex-col gap-4 items-center mx-auto">
+          {importedLessonsList.length > 0 && (
+            <>
+              {importedLessonsList.map((lesson, index) => (
+                <div
+                  key={lesson.lessonId}
+                  className="w-full flex flex-col items-center"
+                >
+                  <LessonCard
+                    courseTitle={lesson.courseTitle}
+                    lessonTitle={lesson.lessonTitle}
+                    lessonId={lesson.lessonId}
+                    lastTrained={lesson.lastTrained}
+                    trainingTimeRecord={lesson.trainingTimeRecord}
+                    ctaButtonText={
+                      index === 0
+                        ? "Continue Training"
+                        : "Switch To This Lesson"
+                    }
+                    className={
+                      index === importedLessonsList.length - 1 ? "mb-20" : ""
+                    }
+                  />
+                  {index === 0 && importedLessonsList.length > 1 && (
+                    <div className="w-full text-center text-2xl font-bold text-muted-foreground mt-12">
+                      Your Library
+                    </div>
+                  )}
+                </div>
+              ))}
+            </>
+          )}
+        </div>
+      ) : (
+        <Card className="w-full max-w-sm">
+          <CardContent className="pt-6">
+            <div className="space-y-4">
+              <div>
+                <p className="text-xs text-muted-foreground">
+                  Effortless English Book
+                </p>
+                <h3 className="text-2xl font-bold">The Race MS</h3>
+              </div>
             </div>
-          </div>
-        </CardContent>
-        <CardFooter>
-          <Button
-            disabled={!isAppReady}
-            className="w-full"
-            aria-label={`Start 1 minute training session for The Race MS`}
-            onClick={() => {
-              router.push("/free-sample");
-            }}
-          >
-            <PlayCircle size={24} aria-hidden="true" />
-            {isAppReady ? "Start Training" : "Loading..."}
-          </Button>
-        </CardFooter>
-      </Card>
+          </CardContent>
+          <CardFooter>
+            <Button
+              className="w-full"
+              aria-label={`Start 1 minute training session for The Race MS`}
+              asChild
+            >
+              <Link
+                href="/free-sample"
+                className="flex justify-center items-center"
+              >
+                <PlayCircle size={24} aria-hidden="true" />
+                Start Training
+              </Link>
+            </Button>
+          </CardFooter>
+        </Card>
+      )}
       <TabNavigation currentTab="/" />
     </div>
   );
-
-  // return (
-  //   <div
-  //     className={cn(
-  //       "flex flex-col items-center h-svh container mx-auto p-4",
-  //       importedLessonsList.length > 0 ? "justify-start" : "justify-center"
-  //     )}
-  //   >
-  //     {importedLessonsList.length > 0 ? (
-  //       <div className="w-full flex flex-col gap-4 items-center mx-auto">
-  //         {importedLessonsList.length > 0 && (
-  //           <>
-  //             {importedLessonsList.map((lesson, index) => (
-  //               <div
-  //                 key={lesson.lessonId}
-  //                 className="w-full flex flex-col items-center"
-  //               >
-  //                 <LessonCard
-  //                   courseTitle={lesson.courseTitle}
-  //                   lessonTitle={lesson.lessonTitle}
-  //                   lessonId={lesson.lessonId}
-  //                   lastTrained={lesson.lastTrained}
-  //                   trainingTimeRecord={lesson.trainingTimeRecord}
-  //                   ctaButtonText={
-  //                     index === 0
-  //                       ? "Continue Training"
-  //                       : "Switch To This Lesson"
-  //                   }
-  //                   className={
-  //                     index === importedLessonsList.length - 1 ? "mb-20" : ""
-  //                   }
-  //                 />
-  //                 {index === 0 && importedLessonsList.length > 1 && (
-  //                   <div className="w-full text-center text-2xl font-bold text-muted-foreground mt-12">
-  //                     Your Library
-  //                   </div>
-  //                 )}
-  //               </div>
-  //             ))}
-  //           </>
-  //         )}
-  //       </div>
-  //     ) : (
-  //       <Card className="w-full max-w-sm">
-  //         <CardContent className="pt-6">
-  //           <div className="space-y-4">
-  //             <div>
-  //               <p className="text-xs text-muted-foreground">
-  //                 Effortless English Book
-  //               </p>
-  //               <h3 className="text-2xl font-bold">The Race MS</h3>
-  //             </div>
-  //           </div>
-  //         </CardContent>
-  //         <CardFooter>
-  //           <Button
-  //             className="w-full"
-  //             aria-label={`Start 1 minute training session for The Race MS`}
-  //             asChild
-  //           >
-  //             <Link
-  //               href="/free-sample"
-  //               className="flex justify-center items-center"
-  //             >
-  //               <PlayCircle size={24} aria-hidden="true" />
-  //               Start Training
-  //             </Link>
-  //           </Button>
-  //         </CardFooter>
-  //       </Card>
-  //     )}
-  //     <TabNavigation currentTab="/" />
-  //   </div>
-  // );
 }
