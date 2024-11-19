@@ -13,7 +13,7 @@ import { useFileUpload } from "@/hooks/useFileUpload";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 
-import { set, createStore } from "idb-keyval";
+import { set, createStore, get } from "idb-keyval";
 import { currentDate } from "@/helpers/current-date";
 
 import { database } from "@/data/msa--english/database";
@@ -75,7 +75,11 @@ export default function UploadAudioPage() {
         database.get(fileNameAsUrl)?.dictionary,
         dictionaryStore
       ),
-      set(fileNameAsUrl, { [currentDate]: 0 }, userStore),
+      get(fileNameAsUrl, userStore).then((userTrainingTime) => {
+        if (!userTrainingTime) {
+          set(fileNameAsUrl, { [currentDate]: 0 }, userStore);
+        }
+      }),
     ])
       .then(() => {
         router.push(`/english?id=${fileNameAsUrl}`);
