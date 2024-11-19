@@ -32,8 +32,6 @@ export default function UploadAudioPage() {
 
   const { toast } = useToast();
 
-  const isStandalone = false;
-
   useEffect(() => {
     if (error) {
       toast({
@@ -67,8 +65,7 @@ export default function UploadAudioPage() {
       set(fileNameAsUrl, { [currentDate]: 0 }, userStore),
     ])
       .then(() => {
-        // router.push(`/english?id=${fileNameAsUrl}`);
-        console.log("done");
+        router.push(`/english?id=${fileNameAsUrl}`);
       })
       .catch((err) => {
         console.log(err);
@@ -112,7 +109,7 @@ export default function UploadAudioPage() {
         </Button>
         {showLessons && <LessonsList lessonsData={lessonsData} />}
       </motion.div>
-      {isStandalone && <TabNavigation currentTab="/upload-audio" />}
+      <TabNavigation currentTab="/upload-audio" />
     </div>
   );
 }
