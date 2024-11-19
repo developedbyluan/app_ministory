@@ -13,6 +13,8 @@ import { createStore, set, get } from "idb-keyval";
 import { currentDate } from "@/helpers/current-date";
 import { database } from "@/data/msa--english/database";
 
+import { availableLessonsList } from "@/data/available-lessons-list";
+
 import { Phrases, Lyric } from "@/types/types";
 
 const AUDIO_URL = "./The Race MS.mp3";
@@ -119,11 +121,16 @@ export default function FreeSamplePage() {
   }, [isPlaying, lessonId]);
 
   return (
-    <div>
+    <div className="flex flex-col items-center py-4">
       <ProgressBar progress={progress} />
       <audio ref={audioRef} src={audioUrl || AUDIO_URL} />
 
-      <div>Total play time: {totalPlayTime}</div>
+      <div className="hidden">Total play time: {totalPlayTime}</div>
+      <div className="flex justify-center items-center">
+        <h1 className="text-3xl font-bold">
+          {availableLessonsList.get(lessonId as string)?.title}
+        </h1>
+      </div>
 
       {showAutoPausePlayer ? (
         <AutoPausePlayer
