@@ -11,6 +11,8 @@ import { createStore, set, get } from "idb-keyval";
 import { currentDate } from "@/helpers/current-date";
 import { database } from "@/data/msa--english/database";
 
+const AUDIO_URL = "./The Race MS.mp3";
+
 export default function FreeSamplePage() {
   const [showAutoPausePlayer, setShowAutoPausePlayer] = useState(false);
 
@@ -95,7 +97,7 @@ export default function FreeSamplePage() {
   return (
     <div>
       <ProgressBar progress={progress} />
-      <audio ref={audioRef} src={audioUrl || undefined} />
+      <audio ref={audioRef} src={audioUrl || AUDIO_URL} />
 
       <div>Total play time: {totalPlayTime}</div>
 
