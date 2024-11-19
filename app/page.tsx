@@ -207,7 +207,11 @@ export default function HomePage() {
                 lastTrained={lesson.lastTrained}
                 trainingTimeRecord={lesson.trainingTimeRecord}
                 ctaButtonText={
-                  index === 0 ? "Continue Training" : "Switch To This Lesson"
+                  importedLessonsList.length > 1
+                    ? index === 0
+                      ? "Continue Training"
+                      : "Switch To This Lesson"
+                    : "Start Lesson"
                 }
                 className={
                   index === importedLessonsList.length - 1 ? "mb-20" : ""
