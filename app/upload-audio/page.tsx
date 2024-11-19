@@ -47,6 +47,19 @@ export default function UploadAudioPage() {
       .replace(/\s+/g, "-")
       .toLowerCase();
 
+    const isLessonAvailable = lessonsData.some(
+      (lesson) => lesson.lessonId === fileNameAsUrl
+    );
+
+    if (!isLessonAvailable) {
+      toast({
+        variant: "destructive",
+        description:
+          "This lesson does not exist. Check the Available Lessons list for lessons you can use.",
+      });
+      return;
+    }
+
     // IndexedDB implementation: English Lessons Data
     const mp3Store = createStore("msa--english", "mp3");
     const lyricsStore = createStore("msa--english", "lyrics");
