@@ -1,6 +1,6 @@
 import { Phrases } from "@/types/types";
 
-export const phrasesCollection: Phrases[] = [
+export const theRaceMsDictionary: Phrases[] = [
   {
     id: 0,
     phrases: [

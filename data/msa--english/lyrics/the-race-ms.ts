@@ -1,6 +1,6 @@
 import { Lyric } from "@/types/types";
 
-export const lyrics: Lyric[] = [
+export const theRaceMsLyrics: Lyric[] = [
   {
     id: 0,
     text: "Hello, welcome to the mini-story for The Race. Let’s get started.",

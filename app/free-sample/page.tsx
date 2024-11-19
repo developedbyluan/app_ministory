@@ -8,13 +8,10 @@ import AutoPausePlayer from "@/components/AutoPausePlayer";
 
 import { createStore, set, get } from "idb-keyval";
 
-import { lyrics } from "./lyrics";
-import { phrasesCollection } from "@/app/free-sample/phrases-collection";
-
 const AUDIO_URL = "./The Race MS.mp3";
 
 import { currentDate } from "@/helpers/current-date";
-// const currentDate = "2024-11-29";
+import { database } from "@/data/msa--english/database";
 
 export default function FreeSamplePage() {
   const [showAutoPausePlayer, setShowAutoPausePlayer] = useState(false);
@@ -42,7 +39,7 @@ export default function FreeSamplePage() {
     setScrollLyricIntoView,
   } = useAllLyricsPlayer({
     audioKey: "the-race-ms",
-    lyrics: lyrics,
+    lyrics: database.get("the-race-ms")?.lyrics || [],
   });
 
   useEffect(() => {
@@ -105,8 +102,8 @@ export default function FreeSamplePage() {
 
       {showAutoPausePlayer ? (
         <AutoPausePlayer
-          lyrics={lyrics}
-          phrasesCollection={phrasesCollection}
+          lyrics={database.get("the-race-ms")?.lyrics || []}
+          phrasesCollection={database.get("the-race-ms")?.dictionary || []}
           activeLyricIndex={activeLyricIndex}
           isPlaying={isPlaying}
           setIsPlaying={setIsPlaying}
@@ -121,7 +118,7 @@ export default function FreeSamplePage() {
         />
       ) : (
         <StandardPlayer
-          lyrics={lyrics}
+          lyrics={database.get("the-race-ms")?.lyrics || []}
           handleLyricClick={handleLyricClick}
           activeLyricIndex={activeLyricIndex}
           lyricRefsArray={lyricRefsArray}

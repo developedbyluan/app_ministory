@@ -21,10 +21,8 @@ import { cn } from "@/lib/utils";
 const AUDIO_URL = "./The Race MS.mp3";
 const AUDIO_KEY = "the-race-ms";
 
-import { lyrics } from "@/app/free-sample/lyrics";
-import { phrasesCollection as dictionary } from "@/app/free-sample/phrases-collection";
-
 import { currentDate } from "@/helpers/current-date";
+import { database } from "@/data/msa--english/database";
 
 export default function HomePage() {
   const [importedLessonsList, setImportedLessonsList] = useState<
@@ -91,8 +89,11 @@ export default function HomePage() {
               dictionaryTx.objectStore(dictionaryStoreName);
             return Promise.all([
               mp3Store.put(audioBuffer, AUDIO_KEY),
-              lyricsStore.put(lyrics, AUDIO_KEY),
-              dictionaryStore.put(dictionary, AUDIO_KEY),
+              lyricsStore.put(database.get(AUDIO_KEY)?.lyrics || [], AUDIO_KEY),
+              dictionaryStore.put(
+                database.get(AUDIO_KEY)?.dictionary || [],
+                AUDIO_KEY
+              ),
             ]);
           });
       })
