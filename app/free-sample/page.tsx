@@ -9,6 +9,7 @@ import AutoPausePlayer from "@/components/AutoPausePlayer";
 import { createStore, set, get } from "idb-keyval";
 
 import { lyrics } from "./lyrics";
+import { phrasesCollection } from "@/app/free-sample/phrases-collection";
 
 const AUDIO_URL = "./The Race MS.mp3";
 
@@ -105,6 +106,7 @@ export default function FreeSamplePage() {
       {showAutoPausePlayer ? (
         <AutoPausePlayer
           lyrics={lyrics}
+          phrasesCollection={phrasesCollection}
           activeLyricIndex={activeLyricIndex}
           isPlaying={isPlaying}
           setIsPlaying={setIsPlaying}

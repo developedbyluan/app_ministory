@@ -2,15 +2,15 @@
 
 import { Dispatch, SetStateAction, useState } from "react";
 import PhrasePopovers from "./PhrasePopovers";
-import { phrasesCollection } from "@/app/free-sample/phrases-collection";
 import AudioControlsV2 from "@/components/AudioControlsV2";
-import { Lyric } from "@/types/types";
+import { Lyric, Phrases } from "@/types/types";
 import WordList from "@/components/AutoPauseMode/WordList";
 import { useSpeech } from "@/hooks/useSpeech";
 import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 
 type AutoPausePlayerProps = {
   lyrics: Lyric[];
+  phrasesCollection: Phrases[];
   activeLyricIndex: number;
   handleReplay: (
     lyricIndex: number,
@@ -30,6 +30,7 @@ type AutoPausePlayerProps = {
 
 export default function AutoPausePlayer({
   lyrics,
+  phrasesCollection,
   activeLyricIndex,
   handleReplay,
   showTranslation,
