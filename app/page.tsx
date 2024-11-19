@@ -6,7 +6,6 @@ import { PlayCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import TabNavigation from "@/components/TabNavigation";
-import Link from "next/link";
 
 import LessonCard from "@/components/ContinueTraining/LessonCard";
 import { useEffect, useState } from "react";
@@ -35,6 +34,7 @@ export default function HomePage() {
       trainingTimeRecord: TrainingTimeRecord;
     }[]
   >([]);
+  const [isAppReady, setIsAppReady] = useState(false);
 
   const isStandalone = false;
 
@@ -42,7 +42,7 @@ export default function HomePage() {
   const { toast } = useToast();
 
   useEffect(() => {
-    if (!isStandalone) return;
+    // if (!isStandalone) return;
 
     // IndexedDB implementation: English Lessons (json and mp3) and User Data
     const englishDbName = "msa--english";
@@ -99,6 +99,7 @@ export default function HomePage() {
       })
       .then(() => {
         // IndexedDB implementation: User Data
+        setIsAppReady(true);
 
         openDB(userDbName, version, {
           upgrade(db) {
@@ -235,17 +236,13 @@ export default function HomePage() {
           </CardContent>
           <CardFooter>
             <Button
+              disabled={!isAppReady}
               className="w-full"
               aria-label={`Start 1 minute training session for The Race MS`}
-              asChild
+              onClick={() => router.push("/free-sample")}
             >
-              <Link
-                href="/free-sample"
-                className="flex justify-center items-center"
-              >
-                <PlayCircle size={24} aria-hidden="true" />
-                Start Training
-              </Link>
+              <PlayCircle size={24} aria-hidden="true" />
+              {isAppReady ? "Start Training" : "Loading..."}
             </Button>
           </CardFooter>
         </Card>

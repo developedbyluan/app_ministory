@@ -8,8 +8,6 @@ import AutoPausePlayer from "@/components/AutoPausePlayer";
 
 import { createStore, set, get } from "idb-keyval";
 
-const AUDIO_URL = "./The Race MS.mp3";
-
 import { currentDate } from "@/helpers/current-date";
 import { database } from "@/data/msa--english/database";
 
@@ -23,6 +21,7 @@ export default function FreeSamplePage() {
 
   const {
     audioRef,
+    audioUrl,
     isPlaying,
     setIsPlaying,
     isReplaying,
@@ -96,7 +95,7 @@ export default function FreeSamplePage() {
   return (
     <div>
       <ProgressBar progress={progress} />
-      <audio ref={audioRef} src={AUDIO_URL} />
+      <audio ref={audioRef} src={audioUrl || undefined} />
 
       <div>Total play time: {totalPlayTime}</div>
 
