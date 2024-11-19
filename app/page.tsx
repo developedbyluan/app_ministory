@@ -136,27 +136,42 @@ export default function HomePage() {
               (entries: [IDBValidKey, TrainingTimeRecord][]) => {
                 if (entries.length === 0) {
                   console.log("no entries, setting up English lessons data");
-                  // setupEnglishLessonsData();
                   return;
                 }
 
-                entries.forEach(([lessonId, trainingTimeRecord]) => {
-                  const lesson = availableLessonsList.get(lessonId.toString());
-                  if (!lesson) return;
-                  const lastTrained =
-                    Object.entries(trainingTimeRecord).at(-1)?.[0] || "";
-                  const data = {
-                    courseTitle: lesson.courseTitle,
-                    lessonTitle: lesson.title,
-                    lastTrained: lastTrained,
-                    order: Date.parse(lastTrained),
-                    lessonId: lessonId.toString(),
-                    trainingTimeRecord: trainingTimeRecord,
-                  };
-                  setImportedLessonsList((prev) =>
-                    [...prev, data].sort((a, b) => b.order - a.order)
-                  );
-                });
+                const newLessonsList = entries
+                  .reduce(
+                    (
+                      acc: typeof importedLessonsList,
+                      [lessonId, trainingTimeRecord]
+                    ) => {
+                      const lesson = availableLessonsList.get(
+                        lessonId.toString()
+                      );
+                      if (!lesson) return acc;
+
+                      const lastTrained =
+                        Object.entries(trainingTimeRecord).at(-1)?.[0] || "";
+
+                      const totalTrainingTime = Object.values(
+                        trainingTimeRecord
+                      ).reduce((acc, curr) => acc + curr, 0);
+
+                      const data = {
+                        courseTitle: lesson.courseTitle,
+                        lessonTitle: lesson.title,
+                        lastTrained: lastTrained,
+                        order: Date.parse(lastTrained) + totalTrainingTime,
+                        lessonId: lessonId.toString(),
+                        trainingTimeRecord: trainingTimeRecord,
+                      };
+                      return [...acc, data];
+                    },
+                    []
+                  )
+                  .sort((a, b) => b.order - a.order);
+
+                setImportedLessonsList(newLessonsList);
               }
             );
           });
@@ -175,7 +190,7 @@ export default function HomePage() {
         <div className="w-full flex flex-col gap-4 items-center mx-auto">
           {importedLessonsList.map((lesson, index) => (
             <div
-              key={crypto.randomUUID()}
+              key={lesson.lessonId}
               className="w-full flex flex-col items-center"
             >
               <LessonCard
