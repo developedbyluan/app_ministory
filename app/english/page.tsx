@@ -120,8 +120,12 @@ export default function FreeSamplePage() {
         });
 
       localStorage.setItem(`${lessonId}--currentTime`, currentTime.toString());
+      localStorage.setItem(
+        `${lessonId}--activeLyricIndex`,
+        activeLyricIndex.toString()
+      );
     }
-  }, [isPlaying, lessonId, currentTime]);
+  }, [isPlaying, lessonId, currentTime, activeLyricIndex]);
 
   return (
     <div className="flex flex-col items-center py-4">

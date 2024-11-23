@@ -18,7 +18,11 @@ export default function useAllLyricsPlayer({
       : 0
   );
   const [isPlaying, setIsPlaying] = useState(false);
-  const [activeLyricIndex, setActiveLyricIndex] = useState<number>(-1);
+  const [activeLyricIndex, setActiveLyricIndex] = useState<number>(
+    localStorage.getItem(`${audioKey}--activeLyricIndex`)
+      ? parseInt(localStorage.getItem(`${audioKey}--activeLyricIndex`) || "-1")
+      : -1
+  );
   const audioRef = useRef<HTMLAudioElement>(null);
   const lyricRefsArray = useRef<HTMLParagraphElement[]>([]);
 
