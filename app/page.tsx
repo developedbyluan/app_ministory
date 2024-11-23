@@ -155,14 +155,16 @@ export default function HomePage() {
                       const lastTrained =
                         Object.entries(trainingTimeRecord).at(-1)?.[0] || "";
 
-                      const lastTotalTrainingTime =
-                        Object.values(trainingTimeRecord).at(-1) || 0;
+                      const lastTrainedLesson =
+                        localStorage.getItem("lastTrainedLesson");
 
                       const data = {
                         courseTitle: lesson.courseTitle,
                         lessonTitle: lesson.title,
                         lastTrained: lastTrained,
-                        order: Date.parse(lastTrained) + lastTotalTrainingTime,
+                        order:
+                          Date.parse(lastTrained) *
+                          (lastTrainedLesson === lessonId ? 10000000 : 1),
                         lessonId: lessonId.toString(),
                         trainingTimeRecord: trainingTimeRecord,
                       };

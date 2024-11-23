@@ -65,6 +65,7 @@ export default function LessonCard({
             onClick={(e) => {
               e.stopPropagation();
               router.push(`/english?id=${lessonId}`);
+              localStorage.setItem("lastTrainedLesson", lessonId);
             }}
             aria-label={`Start training session for ${lessonTitle}`}
           >
