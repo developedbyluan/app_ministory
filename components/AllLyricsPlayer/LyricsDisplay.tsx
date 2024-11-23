@@ -20,7 +20,7 @@ export default function LyricsDisplay({
   const lyricsElements = lyrics
     ? lyrics.map((lyric, index) => (
         <p
-          key={crypto.randomUUID()}
+          key={lyric.id}
           ref={(el) => {
             if (!lyricRefsArray.current) return;
             lyricRefsArray.current[index] = el as HTMLParagraphElement;
