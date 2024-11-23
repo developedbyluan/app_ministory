@@ -12,7 +12,11 @@ export default function useAllLyricsPlayer({
   audioKey,
   lyrics,
 }: UseAllLyricsPlayerProps) {
-  const [currentTime, setCurrentTime] = useState<number>(0);
+  const [currentTime, setCurrentTime] = useState<number>(
+    localStorage.getItem("currentTime")
+      ? parseInt(localStorage.getItem("currentTime") || "0")
+      : 0
+  );
   const [isPlaying, setIsPlaying] = useState(false);
   const [activeLyricIndex, setActiveLyricIndex] = useState<number>(-1);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -40,6 +44,19 @@ export default function useAllLyricsPlayer({
 
     return () => audio.removeEventListener("timeupdate", updateTime);
   }, [audioUrl]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.addEventListener("loadedmetadata", () => {
+      const localStorageCurrentTime = localStorage.getItem("currentTime")
+        ? parseInt(localStorage.getItem("currentTime") || "0")
+        : 0;
+
+      audio.currentTime = localStorageCurrentTime;
+    });
+  }, []);
 
   useEffect(() => {
     if (!lyrics) return;
