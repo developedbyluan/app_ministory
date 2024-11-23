@@ -119,7 +119,7 @@ export default function FreeSamplePage() {
           console.error("Error setting total training time:", error);
         });
 
-      localStorage.setItem("currentTime", currentTime.toString());
+      localStorage.setItem(`${lessonId}--currentTime`, currentTime.toString());
     }
   }, [isPlaying, lessonId, currentTime]);
 

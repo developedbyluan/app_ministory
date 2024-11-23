@@ -13,8 +13,8 @@ export default function useAllLyricsPlayer({
   lyrics,
 }: UseAllLyricsPlayerProps) {
   const [currentTime, setCurrentTime] = useState<number>(
-    localStorage.getItem("currentTime")
-      ? parseInt(localStorage.getItem("currentTime") || "0")
+    localStorage.getItem(`${audioKey}--currentTime`)
+      ? parseInt(localStorage.getItem(`${audioKey}--currentTime`) || "0")
       : 0
   );
   const [isPlaying, setIsPlaying] = useState(false);
@@ -50,13 +50,15 @@ export default function useAllLyricsPlayer({
     if (!audio) return;
 
     audio.addEventListener("loadedmetadata", () => {
-      const localStorageCurrentTime = localStorage.getItem("currentTime")
-        ? parseInt(localStorage.getItem("currentTime") || "0")
+      const localStorageCurrentTime = localStorage.getItem(
+        `${audioKey}--currentTime`
+      )
+        ? parseInt(localStorage.getItem(`${audioKey}--currentTime`) || "0")
         : 0;
 
       audio.currentTime = localStorageCurrentTime;
     });
-  }, []);
+  }, [audioKey]);
 
   useEffect(() => {
     if (!lyrics) return;
