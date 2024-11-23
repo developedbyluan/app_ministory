@@ -21,8 +21,8 @@ export default function EnglishIPADisplay({
       ipa: ipaArray[index],
     };
   });
-  const englishIPAElements = englishIPA.map((item) => (
-    <div key={crypto.randomUUID()} className="flex flex-col items-center mx-1">
+  const englishIPAElements = englishIPA.map((item, index) => (
+    <div key={index} className="flex flex-col items-center mx-1">
       {showIpa && <span className="text-sm text-gray-600">{item.ipa}</span>}
       <span className="text-xl font-semibold">{item.english}</span>
     </div>

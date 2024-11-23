@@ -12,11 +12,11 @@ export default function WordList({
   speakPhrase,
   isReplaying,
 }: WordListProps) {
-  const phraseElements = phrases?.map((phraseItem) => {
+  const phraseElements = phrases?.map((phraseItem, index) => {
     const { phrase, ipa, meaning } = phraseItem;
     return (
       <div
-        key={crypto.randomUUID()}
+        key={index}
         className="flex flex-col border-t first:border-t-0 py-4 px-4"
       >
         <div className="flex justify-between gap-x-2">

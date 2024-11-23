@@ -14,12 +14,12 @@ export default function PhrasePopovers({
   sentenceAsPhrases: Phrases;
   showIpa?: boolean;
 }) {
-  const { id, phrases } = sentenceAsPhrases;
+  const { phrases } = sentenceAsPhrases;
 
-  const phrasePopoverElements = phrases.map((singlePhrase) => {
+  const phrasePopoverElements = phrases.map((singlePhrase, index) => {
     const { phrase, ipa, meaning, explanation } = singlePhrase;
     return (
-      <Popover key={id + crypto.randomUUID()}>
+      <Popover key={index}>
         <PopoverTrigger>
           <EnglishIPADisplay english={phrase} ipa={ipa} showIpa={showIpa} />
         </PopoverTrigger>

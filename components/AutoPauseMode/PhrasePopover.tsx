@@ -15,13 +15,13 @@ export default function PhrasePopover({
   phrases,
   isReplaying,
 }: PhrasePopoverProps) {
-  const phrasesElements = phrases.map((item) => {
+  const phrasesElements = phrases.map((item, index) => {
     const { phrase, ipa, meaning, explanation } = item;
 
     const ipaArray = ipa.split(" ");
     const phraseArray = phrase.split(" ");
     return (
-      <Popover key={crypto.randomUUID()}>
+      <Popover key={index}>
         <PopoverTrigger
           className={cn(
             "flex bg-yellow-100 rounded mx-1 my-1 cursor-pointer",
@@ -30,10 +30,7 @@ export default function PhrasePopover({
           disabled={isReplaying}
         >
           {ipaArray.map((ipaItem, index) => (
-            <div
-              key={crypto.randomUUID()}
-              className="flex flex-col items-center"
-            >
+            <div key={index} className="flex flex-col items-center">
               {/* <span className="block text-xs text-gray-600">{ipaItem}</span> */}
               <span className="inline-block p-1 pt-0 text-xl font-semibold">
                 {phraseArray[index]}
