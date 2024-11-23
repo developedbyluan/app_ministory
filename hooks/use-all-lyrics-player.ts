@@ -12,17 +12,10 @@ export default function useAllLyricsPlayer({
   audioKey,
   lyrics,
 }: UseAllLyricsPlayerProps) {
-  const [currentTime, setCurrentTime] = useState<number>(
-    localStorage.getItem(`${audioKey}--currentTime`)
-      ? parseInt(localStorage.getItem(`${audioKey}--currentTime`) || "0")
-      : 0
-  );
+  const [currentTime, setCurrentTime] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [activeLyricIndex, setActiveLyricIndex] = useState<number>(
-    localStorage.getItem(`${audioKey}--activeLyricIndex`)
-      ? parseInt(localStorage.getItem(`${audioKey}--activeLyricIndex`) || "-1")
-      : -1
-  );
+
+  const [activeLyricIndex, setActiveLyricIndex] = useState<number>(-1);
   const audioRef = useRef<HTMLAudioElement>(null);
   const lyricRefsArray = useRef<HTMLParagraphElement[]>([]);
 
@@ -48,21 +41,6 @@ export default function useAllLyricsPlayer({
 
     return () => audio.removeEventListener("timeupdate", updateTime);
   }, [audioUrl]);
-
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    audio.addEventListener("loadedmetadata", () => {
-      const localStorageCurrentTime = localStorage.getItem(
-        `${audioKey}--currentTime`
-      )
-        ? parseInt(localStorage.getItem(`${audioKey}--currentTime`) || "0")
-        : 0;
-
-      audio.currentTime = localStorageCurrentTime;
-    });
-  }, [audioKey]);
 
   useEffect(() => {
     if (!lyrics) return;

@@ -55,7 +55,6 @@ export default function FreeSamplePage() {
     handleReplay,
     clearReplayTimeout,
     setScrollLyricIntoView,
-    currentTime,
   } = useAllLyricsPlayer({
     audioKey: lessonId as string,
     lyrics: database.get(lessonId as string)?.lyrics || indexedDBData.lyrics,
@@ -118,14 +117,8 @@ export default function FreeSamplePage() {
         .catch((error) => {
           console.error("Error setting total training time:", error);
         });
-
-      localStorage.setItem(`${lessonId}--currentTime`, currentTime.toString());
-      localStorage.setItem(
-        `${lessonId}--activeLyricIndex`,
-        activeLyricIndex.toString()
-      );
     }
-  }, [isPlaying, lessonId, currentTime, activeLyricIndex]);
+  }, [isPlaying, lessonId]);
 
   return (
     <div className="flex flex-col items-center py-4">
